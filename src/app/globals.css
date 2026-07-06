@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* === DESIGN_TOKENS.md — Renk paleti === */
+  --color-ink:              #1A1C1E;
+  --color-surface-dark:     #2E2E30;
+  --color-surface:          #F6F7F1;
+  --color-surface-elevated: #FCFDF9;
+  --color-surface-subtle:   #F9FBFB;
+  --color-accent:           #1A9CA0;
+  --color-accent-deep:      #14797C;
+  --color-gold:             #C5A059;
+  --color-silver:           #D7DEE4;
+  --color-border:           #E2E5DE;
+  --color-border-subtle:    #E8F1F2;
+  --color-muted:            #5B6168;
+
+  /* === DESIGN_TOKENS.md — Boşluk, radius === */
+  --space-unit:        0.5rem;
+  --radius-sm:         4px;
+  --radius-md:         8px;
+  --border-hairline:   1px solid var(--color-border);
+  --border-subtle:     1px solid var(--color-border-subtle);
+  --container-max:     1200px;
+  --section-padding-y: clamp(4rem, 8vw, 8rem);
+
+  /* === DESIGN_TOKENS.md — Tip ölçeği === */
+  --text-display: clamp(2.5rem, 5vw, 4rem);
+  --text-h1:      clamp(2rem, 3.5vw, 3rem);
+  --text-h2:      clamp(1.5rem, 2.5vw, 2rem);
+  --text-h3:      1.25rem;
+  --text-body:    1.0625rem;
+  --text-small:   0.875rem;
+  --text-label:   0.6875rem;
+  --leading-body:  1.6;
+  --leading-tight: 1.15;
+
+  /* === Geriye dönük uyumluluk — dokunulmayan bileşenler için === */
+  --color-primary:               var(--color-ink);
+  --color-primary-active:        var(--color-accent-deep);
+  --color-primary-disabled:      var(--color-silver);
+  --color-body:                  #374151;
+  --color-muted-soft:            #898989;
+  --color-hairline:              var(--color-border);
+  --color-hairline-soft:         var(--color-border-subtle);
+  --color-canvas:                var(--color-surface);
+  --color-surface-soft:          var(--color-surface-subtle);
+  --color-surface-card:          var(--color-surface-elevated);
+  --color-surface-strong:        var(--color-silver);
+  --color-surface-dark-elevated: var(--color-surface-dark);
+  --color-on-primary:            #ffffff;
+  --color-on-dark:               #ffffff;
+  --color-on-dark-soft:          #a1a1aa;
+  --color-brand-accent:          var(--color-accent);
+  --color-success:               #10b981;
+  --color-warning:               #f59e0b;
+  --color-error:                 #ef4444;
+  --color-badge-orange:          #fb923c;
+  --color-badge-pink:            #ec4899;
+  --color-badge-violet:          #8b5cf6;
+  --color-badge-emerald:         #34d399;
+
+  /* Tailwind config uyumluluk */
+  --radius-xs: 4px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+
+@layer utilities {
+  /* Çok ince grain dokusu — hero ve editorial break bölümleri için */
+  .grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.025;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+    z-index: 1;
+  }
+}
+
+@layer base {
+  body {
+    color: var(--color-body);
+    background-color: var(--color-surface);
+    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 600;
+    color: var(--color-ink);
+    line-height: var(--leading-tight);
+  }
+
+  /* Newsreader override — editorial moments */
+  .font-serif h1,
+  .font-serif h2,
+  h1.font-serif,
+  h2.font-serif,
+  h3.font-serif {
+    font-family: var(--font-newsreader), Georgia, serif;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    letter-spacing: -0.04em;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 3.5vw, 3rem);
+    letter-spacing: -0.03em;
+  }
+
+  h3 {
+    font-size: clamp(1.125rem, 2.25vw, 2.25rem);
+    letter-spacing: -0.02em;
+  }
+
+  h4 {
+    font-size: 1.375rem;
+    letter-spacing: -0.02em;
+  }
+
+  h5 {
+    font-size: 1.125rem;
+  }
+
+  h6 {
+    font-size: 1rem;
+  }
+
+  a {
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.animate-marquee-left {
+  animation: marquee-left 28s linear infinite;
+}
+.animate-marquee-right {
+  animation: marquee-right 22s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .animate-marquee-left, .animate-marquee-right {
+    animation: none;
+  }
+}
