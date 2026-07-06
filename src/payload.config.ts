@@ -192,11 +192,81 @@ const SiteSettings: GlobalConfig = {
   ],
 }
 
+const Leads: CollectionConfig = {
+  slug: 'leads',
+  admin: {
+    useAsTitle: 'fullName',
+    defaultColumns: ['fullName', 'interestArea', 'sourcePage', 'status', 'createdAt'],
+  },
+  access: {
+    create: () => true, // site ziyaretçisi formu gönderebilir
+    read: ({ req }) => Boolean(req.user), // sadece admin panelden görülür
+    update: ({ req }) => Boolean(req.user),
+    delete: ({ req }) => Boolean(req.user),
+  },
+  fields: [
+    { name: 'fullName', type: 'text', required: true },
+    { name: 'email', type: 'email', required: true },
+    { name: 'phone', type: 'text' },
+    { name: 'sourcePage', type: 'select', required: true, options: [
+      { label: 'İletişim', value: 'iletisim' },
+      { label: 'Ön Görüşme', value: 'on-gorusme' },
+    ] },
+    { name: 'contactReason', type: 'select', options: [
+      { label: 'Ön görüşme talep etmek istiyorum', value: 'on-gorusme' },
+      { label: 'Hizmetler hakkında bilgi almak istiyorum', value: 'hizmet-bilgi' },
+      { label: 'Kurumsal eğitim için görüşmek istiyorum', value: 'kurumsal' },
+      { label: 'Bir uzman hakkında bilgi almak istiyorum', value: 'uzman-bilgi' },
+      { label: 'Öğrenci koçluğu hakkında bilgi almak istiyorum', value: 'ogrenci-bilgi' },
+      { label: 'Genel bilgi almak istiyorum', value: 'genel' },
+    ] },
+    { name: 'interestArea', type: 'select', required: true, options: [
+      { label: 'Bireysel Koçluk', value: 'bireysel-kocluk' },
+      { label: 'Yönetici Koçluğu', value: 'yonetici-koclugu' },
+      { label: 'Kurumsal Eğitim', value: 'kurumsal-egitim' },
+      { label: 'Öğrenci Koçluğu', value: 'ogrenci-koclugu' },
+      { label: 'Kariyer Koçluğu', value: 'kariyer-koclugu' },
+      { label: 'Takım Koçluğu', value: 'takim-koclugu' },
+      { label: 'Global Uyum ve Kariyer', value: 'global-uyum' },
+      { label: 'Emin Değilim', value: 'emin-degilim' },
+    ] },
+    { name: 'preferredLanguage', type: 'select', defaultValue: 'fark-etmez', options: [
+      { label: 'Türkçe', value: 'tr' },
+      { label: 'İngilizce', value: 'en' },
+      { label: 'Fark etmez', value: 'fark-etmez' },
+    ] },
+    { name: 'meetingPreference', type: 'select', options: [
+      { label: 'Online görüşme', value: 'online' },
+      { label: 'Telefon görüşmesi', value: 'telefon' },
+      { label: 'WhatsApp üzerinden ilk temas', value: 'whatsapp' },
+      { label: 'Yüz yüze seçenekleri hakkında bilgi almak istiyorum', value: 'yuz-yuze-bilgi' },
+    ] },
+    { name: 'selectedExpert', type: 'text' }, // uzman ismi serbest metin — Experts koleksiyonu henüz gerçek veriyle dolu değil
+    { name: 'message', type: 'textarea', required: true },
+    { name: 'kvkkConsent', type: 'checkbox', required: true, defaultValue: false },
+    { name: 'utmSource', type: 'text', admin: { position: 'sidebar' } },
+    { name: 'utmMedium', type: 'text', admin: { position: 'sidebar' } },
+    { name: 'utmCampaign', type: 'text', admin: { position: 'sidebar' } },
+    { name: 'status', type: 'select', defaultValue: 'yeni', admin: { position: 'sidebar' }, options: [
+      { label: 'Yeni', value: 'yeni' },
+      { label: 'İncelendi', value: 'incelendi' },
+      { label: 'Dönüş yapıldı', value: 'donus-yapildi' },
+      { label: 'Uygun uzman belirlendi', value: 'uzman-belirlendi' },
+      { label: 'Ön görüşme planlandı', value: 'planlandi' },
+      { label: 'Ön görüşme tamamlandı', value: 'tamamlandi' },
+      { label: 'Sürece yönlendirildi', value: 'surece-yonlendirildi' },
+      { label: 'Uygun değil', value: 'uygun-degil' },
+      { label: 'Arşivlendi', value: 'arsivlendi' },
+    ] },
+    { name: 'internalNotes', type: 'textarea', admin: { position: 'sidebar' } },
+  ],
+}
+
 // --- Config ----------------------------------------------------------------
 export default buildConfig({
   admin: { user: 'users' }, // auth için ayrı Users koleksiyonu scaffold'da eklenir
   editor: lexicalEditor(),
-  collections: [Users, Media, Experts, Services, Articles, Programs],
+  collections: [Users, Media, Experts, Services, Articles, Programs, Leads],
   globals: [SiteSettings],
   localization: {
     locales: [

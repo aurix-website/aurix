@@ -3,36 +3,7 @@ import { motion } from 'motion/react'
 import type { Variants } from 'motion/react'
 import { FadeIn } from '@/components/ui/FadeIn'
 import { LineDraw } from '@/components/ui/LineDraw'
-
-const STEPS = [
-  {
-    number: '01',
-    title: 'Dinle',
-    description:
-      'Hedeflerinizi, endişelerinizi ve bağlamınızı anlamak için zaman ayırıyoruz.',
-  },
-  {
-    number: '02',
-    title: 'Netleştir',
-    description: 'Öncelikleri ve gerçek ihtiyacı birlikte tanımlıyoruz.',
-  },
-  {
-    number: '03',
-    title: 'Yol Haritası Kur',
-    description: 'Hedefe özgü, ölçülebilir adımlardan oluşan bir çerçeve kuruyoruz.',
-  },
-  {
-    number: '04',
-    title: 'Eşlik Et',
-    description:
-      'Süreç boyunca yapılandırılmış destek ve dürüst geri bildirimle yanınızdayız.',
-  },
-  {
-    number: '05',
-    title: 'Değerlendir',
-    description: 'İlerlemeyi ölçüyor, yaklaşımı gerektiğinde güncelliyoruz.',
-  },
-]
+import { APPROACH_STEPS as STEPS } from '@/lib/approach-steps-data'
 
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1]
 
@@ -106,6 +77,14 @@ export function ApproachSteps() {
         </motion.ol>
 
         <LineDraw className="mt-12" delay={0.2} />
+
+        <FadeIn delay={0.25}>
+          <p className="mt-4 text-body-sm text-muted-soft max-w-2xl">
+            AURIX&apos;te koçluk ve danışmanlık süreçleri; psikoterapi, tıbbi tedavi veya klinik
+            müdahalenin yerine geçmez. Gerektiğinde ilgili uzmanlık alanlarına yönlendirme
+            yapılması önemsenir.
+          </p>
+        </FadeIn>
       </div>
     </section>
   )

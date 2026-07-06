@@ -4,62 +4,7 @@ import { ArrowRight } from 'lucide-react'
 import { FadeIn } from '@/components/ui/FadeIn'
 import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { getOptionalPayloadClient } from '@/lib/payload-client'
-
-type PopulatedMedia = { url?: string | null; alt?: string | null }
-
-type Expert = {
-  id: string
-  name: string
-  slug?: string | null
-  title?: string | null
-  photo?: PopulatedMedia | string | null
-  expertiseAreas?: Array<{ item?: string | null }> | null
-}
-
-const STATIC_EXPERTS: Expert[] = [
-  {
-    id: 'kaan-yazici',
-    name: 'Kaan Yazıcı',
-    slug: 'kaan-yazici',
-    title: 'Bireysel ve Takım Koçu',
-    photo: null,
-    expertiseAreas: [
-      { item: 'Bireysel koçluk' },
-      { item: 'Takım koçluğu' },
-      { item: 'Kariyer netliği' },
-    ],
-  },
-  {
-    id: 'hatice-yildirim',
-    name: 'Hatice Yıldırım',
-    slug: 'hatice-yildirim',
-    title: 'Liderlik ve Kurumsal Gelişim Koçu',
-    photo: null,
-    expertiseAreas: [
-      { item: 'Liderlik akademisi' },
-      { item: 'Kuşaklar arası uyum' },
-      { item: 'Kurumsal dönüşüm' },
-    ],
-  },
-  {
-    id: 'elif-turkmen',
-    name: 'Elif Türkmen',
-    slug: 'elif-turkmen',
-    title: 'Kariyer ve Yurtdışı Geçiş Koçu',
-    photo: null,
-    expertiseAreas: [
-      { item: 'Kariyer geçişi' },
-      { item: 'Uluslararası uyum' },
-      { item: 'Hedef belirleme' },
-    ],
-  },
-]
-
-const EXPERT_PLACEHOLDERS: Record<string, string> = {
-  'kaan-yazici': 'expert-kaan-yazici.jpg',
-  'hatice-yildirim': 'expert-hatice-yildirim.jpg',
-  'elif-turkmen': 'expert-elif-turkmen.jpg',
-}
+import { STATIC_EXPERTS, EXPERT_PLACEHOLDERS, type Expert } from '@/lib/experts-data'
 
 async function getFeaturedExperts(): Promise<Expert[]> {
   try {

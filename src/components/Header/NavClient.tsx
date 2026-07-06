@@ -3,15 +3,14 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react'
+import { SERVICES, SERVICE_DETAIL_SLUGS } from '@/lib/services-data'
 
 type LogoMedia = { url?: string | null; alt?: string | null }
 
-const NAV_SERVICES = [
-  { label: 'Bireysel Koçluk & Kariyer', href: '/hizmetler/bireysel-kocluk-kariyer' },
-  { label: 'Liderlik & Yönetici Gelişimi', href: '/hizmetler/liderlik-yonetici' },
-  { label: 'Kurumsal & Takım Koçluğu', href: '/hizmetler/kurumsal-takim' },
-  { label: 'Gençler & Küresel Uyum', href: '/hizmetler/gencler-kuresel' },
-]
+const NAV_SERVICES = SERVICES.map((service) => ({
+  label: service.title,
+  href: `/hizmetler/${SERVICE_DETAIL_SLUGS[service.id] ?? service.id}`,
+}))
 
 const NAV_LINKS = [
   { label: 'Uzmanlar', href: '/uzmanlar' },
@@ -149,7 +148,7 @@ export function NavClient({ logoDark }: { logoDark: LogoMedia | null }) {
 
         {/* Desktop CTA */}
         <Link
-          href="/iletisim"
+          href="/on-gorusme"
           className="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 bg-[#14797C] hover:bg-[#0f5f62] text-white text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2"
         >
           Ön Görüşme Talep Et
@@ -229,7 +228,7 @@ export function NavClient({ logoDark }: { logoDark: LogoMedia | null }) {
             </div>
 
             <Link
-              href="/iletisim"
+              href="/on-gorusme"
               className="mt-8 flex justify-center items-center gap-2 px-5 py-3.5 bg-[#14797C] hover:bg-[#0f5f62] text-white text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0]"
               onClick={() => setMobileOpen(false)}
             >

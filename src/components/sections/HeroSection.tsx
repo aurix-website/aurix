@@ -49,7 +49,8 @@ export function HeroSection() {
               className="font-serif text-[#1A1C1E] tracking-tight"
               style={{ fontSize: 'clamp(1.875rem, 6vw, 3rem)', lineHeight: '1.15' }}
             >
-              Profesyonel gelişim, kariyer netliği ve liderlik için çok uzmanlı danışmanlık.
+              Daha net kararlar, güçlü yönelimler ve sürdürülebilir gelişim için profesyonel
+              koçluk ve danışmanlık.
             </motion.h1>
 
             <motion.p
@@ -60,8 +61,19 @@ export function HeroSection() {
               className="font-sans text-[#5B6168] max-w-md"
               style={{ fontSize: '1.0625rem', lineHeight: '1.6' }}
             >
-              Farklı uzmanlık alanlarından bir ekip, ortak metodoloji çerçevesinde çalışır.
-              İhtiyacınıza uygun uzmanlığı tek bir çatıda bulursunuz.
+              AURIX, Kaan Yazıcı liderliğinde; bireysel gelişim, yönetici koçluğu, kurumsal
+              eğitim ve öğrenci koçluğu alanlarında uzman kadrosuyla yapılandırılmış gelişim
+              süreçleri sunar.
+            </motion.p>
+
+            <motion.p
+              initial="hidden"
+              animate="visible"
+              variants={FADE_UP}
+              transition={T(0.38)}
+              className="font-sans text-[#5B6168] max-w-md text-sm"
+            >
+              Her danışan için doğru hizmeti, doğru uzmanı ve doğru süreci birlikte belirliyoruz.
             </motion.p>
 
             <motion.div
@@ -72,7 +84,7 @@ export function HeroSection() {
               className="flex flex-col sm:flex-row gap-3"
             >
               <Link
-                href="/iletisim"
+                href="/on-gorusme"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#14797C] hover:bg-[#0f5f62] text-white text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
               >
                 Ön Görüşme Talep Et

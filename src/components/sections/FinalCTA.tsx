@@ -19,7 +19,7 @@ export function FinalCTA() {
             </h2>
             <MagneticButton>
               <Link
-                href="/iletisim"
+                href="/on-gorusme"
                 className="inline-flex items-center justify-center px-8 py-4 bg-on-dark text-surface-dark text-btn font-semibold rounded-md transition-[background-color,transform] hover:bg-on-dark-soft hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2"
               >
                 Ön Görüşme Talep Et
