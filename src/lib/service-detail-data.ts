@@ -1,4 +1,13 @@
+import type { ElementType } from 'react'
+import { Compass, Target, Eye, Scale, Signpost, Gem } from 'lucide-react'
+
 export interface ServiceDetailNeed {
+  title: string
+  description: string
+}
+
+export interface ServiceDetailAudienceItem {
+  icon: ElementType
   title: string
   description: string
 }
@@ -25,7 +34,10 @@ export interface ServiceDetail {
   secondaryCta: string
   audienceHeading: string
   audienceIntro: string
-  audience: string[]
+  audienceItems: ServiceDetailAudienceItem[]
+  audienceClosing: string
+  audienceCtaLabel: string
+  audienceSecondaryLabel: string
   needsHeading: string
   needs: ServiceDetailNeed[]
   extra?: ServiceDetailExtra
@@ -54,18 +66,44 @@ export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
       'AURIX’te bireysel koçluk, hazır cevaplar sunan bir yönlendirme süreci değildir. Kişinin kendi hedeflerini, değerlerini, güçlü yönlerini ve karar alanlarını daha berrak görmesine eşlik eden yapılandırılmış bir gelişim sürecidir.',
     primaryCta: 'Ön Görüşme Talep Et',
     secondaryCta: 'Bireysel Koçluk Sürecini Keşfet',
-    audienceHeading: 'Bireysel koçluk kimler için uygundur?',
+    audienceHeading: 'Bireysel koçluk sana uygun mu?',
     audienceIntro:
-      'Bireysel koçluk; yaşamında yeni bir yön arayan, karar süreçlerinde daha fazla netlik isteyen veya kişisel hedeflerini daha yapılandırılmış biçimde ele almak isteyen bireyler için uygundur.',
-    audience: [
-      'Kişisel hedeflerini netleştirmek isteyenler',
-      'Karar vermekte zorlananlar',
-      'Yaşamında yeni bir başlangıç arayanlar',
-      'Daha dengeli ve bilinçli ilerlemek isteyenler',
-      'Kendini daha iyi tanımak isteyenler',
-      'İç kaynaklarını ve güçlü yönlerini fark etmek isteyenler',
-      'Yaşam geçişlerinde profesyonel destek arayanlar',
+      'Bireysel koçluk; hayatında netlik, yön ve farkındalık arayan kişiler için yapılandırılmış bir gelişim sürecidir. Amacı sana hazır cevaplar vermek değil; kendi cevaplarını daha bilinçli, güçlü ve uygulanabilir şekilde bulmana eşlik etmektir.',
+    audienceItems: [
+      {
+        icon: Signpost,
+        title: 'Karar eşiğindeysen',
+        description: 'Önemli bir seçim öncesinde seçeneklerini daha sağlıklı değerlendirmek istiyorsan.',
+      },
+      {
+        icon: Compass,
+        title: 'Yeni bir başlangıç arıyorsan',
+        description: 'Kariyer, ilişki, yaşam tarzı veya kişisel gelişim alanında yön değiştirmek istiyorsan.',
+      },
+      {
+        icon: Eye,
+        title: 'Kendini daha iyi tanımak istiyorsan',
+        description: 'Güçlü yanlarını, değerlerini ve tekrar eden davranış kalıplarını fark etmek istiyorsan.',
+      },
+      {
+        icon: Target,
+        title: 'Hedeflerini netleştirmek istiyorsan',
+        description: 'Dağınık düşünceleri somut hedeflere ve uygulanabilir adımlara dönüştürmek istiyorsan.',
+      },
+      {
+        icon: Scale,
+        title: 'Daha dengeli ilerlemek istiyorsan',
+        description: 'İş, özel hayat ve kişisel ihtiyaçların arasında sürdürülebilir bir denge kurmak istiyorsan.',
+      },
+      {
+        icon: Gem,
+        title: 'İç kaynaklarını güçlendirmek istiyorsan',
+        description: 'Öz güven, motivasyon, farkındalık ve karar alma becerilerini geliştirmek istiyorsan.',
+      },
     ],
+    audienceClosing: 'Nereden başlayacağını bilmiyorsan, ilk adım netleşmektir.',
+    audienceCtaLabel: 'Ön Görüşme Planla',
+    audienceSecondaryLabel: 'Koçluk Süreci Nasıl İşler?',
     needsHeading: 'Bireysel koçluk hangi ihtiyaçlara destek olur?',
     needs: [
       {
@@ -152,19 +190,44 @@ export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
       'AURIX yönetici koçluğu, liderlerin yalnızca hedeflerine değil; karar alma biçimlerine, iletişim kalitelerine, ekipleriyle kurdukları güven ilişkisine ve değişim dönemlerindeki liderlik etkilerine odaklanır.',
     primaryCta: 'Yönetici Koçluğu İçin Görüşme Planla',
     secondaryCta: 'AURIX Yaklaşımını İncele',
-    audienceHeading: 'Yönetici koçluğu kimler için uygundur?',
+    audienceHeading: 'Yönetici koçluğu sana uygun mu?',
     audienceIntro:
-      'Yönetici koçluğu; liderlik rolünde daha bilinçli, etkili ve sürdürülebilir bir etki oluşturmak isteyen profesyoneller için uygundur.',
-    audience: [
-      'Yöneticiler',
-      'Ekip liderleri',
-      'Girişimciler',
-      'Kurucu ortaklar',
-      'Karar vericiler',
-      'Yeni liderlik rolüne geçen profesyoneller',
-      'Ekip performansını güçlendirmek isteyen liderler',
-      'Kriz veya değişim döneminde ekip yöneten profesyoneller',
+      'Yönetici koçluğu; liderlik rolünde daha bilinçli, tutarlı ve sürdürülebilir bir etki oluşturmak isteyen profesyoneller için yapılandırılmış bir gelişim sürecidir. Amacı hazır formüller sunmak değil; kendi liderlik tarzını daha net ve güçlü şekilde ortaya koymana eşlik etmektir.',
+    audienceItems: [
+      {
+        icon: Compass,
+        title: 'Yeni bir liderlik rolüne geçiyorsan',
+        description: 'Yönetici veya ekip lideri olarak yeni bir sorumluluğa hazırlanıyor, bu geçişi daha sağlam adımlarla yönetmek istiyorsan.',
+      },
+      {
+        icon: Target,
+        title: 'Karar süreçlerini güçlendirmek istiyorsan',
+        description: 'Belirsizlik ve yoğunluk altında daha net, tutarlı ve zamanında kararlar almak istiyorsan.',
+      },
+      {
+        icon: Eye,
+        title: 'Kendi liderlik tarzını fark etmek istiyorsan',
+        description: 'Güçlü yönlerini, kör noktalarını ve yönetim biçimini daha bilinçli görmek istiyorsan.',
+      },
+      {
+        icon: Scale,
+        title: 'Ekiple dengeyi yeniden kurmak istiyorsan',
+        description: 'Stratejik hedefler, günlük operasyon ve ekip ihtiyaçları arasında sürdürülebilir bir denge oluşturmak istiyorsan.',
+      },
+      {
+        icon: Signpost,
+        title: 'Değişim veya kriz dönemini yönetiyorsan',
+        description: 'Kurumsal değişim, büyüme veya belirsizlik döneminde ekibine daha net yön göstermek istiyorsan.',
+      },
+      {
+        icon: Gem,
+        title: 'Ekip güvenini güçlendirmek istiyorsan',
+        description: 'İletişim kaliteni ve ekibinle kurduğun güven ilişkisini derinleştirmek istiyorsan.',
+      },
     ],
+    audienceClosing: 'Nereden başlayacağını bilmiyorsan, ilk adım kendi liderlik tarzını netleştirmektir.',
+    audienceCtaLabel: 'Görüşme Planla',
+    audienceSecondaryLabel: 'Koçluk Süreci Nasıl İşler?',
     needsHeading: 'Yönetici koçluğu hangi alanlarda destek sağlar?',
     needs: [
       {
@@ -250,20 +313,44 @@ export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
       'AURIX kurumsal eğitimleri, hazır paketlerden oluşan standart sunumlar olarak değil; kurumun ihtiyacına, hedef kitlesine ve gelişim beklentisine göre tasarlanan yapılandırılmış öğrenme ve gelişim süreçleri olarak ele alınır.',
     primaryCta: 'Kurumsal İhtiyaç Analizi Talep Et',
     secondaryCta: 'Program Alanlarını İncele',
-    audienceHeading: 'Kurumsal eğitimler kimler için uygundur?',
+    audienceHeading: 'Kurumsal eğitim kurumunuza uygun mu?',
     audienceIntro:
-      'Kurumsal eğitimler; ekiplerinin gelişimini desteklemek, liderlik kapasitesini güçlendirmek, iletişim kalitesini artırmak ve değişim süreçlerini daha sağlıklı yönetmek isteyen kurumlar için uygundur.',
-    audience: [
-      'Şirketler',
-      'İK departmanları',
-      'Eğitim ve gelişim ekipleri',
-      'Yönetici ekipleri',
-      'Takımlar',
-      'Girişim merkezleri',
-      'Teknoparklar',
-      'Kurumsal dönüşüm sürecindeki organizasyonlar',
-      'Yeni liderlik yapısı kuran şirketler',
+      'Kurumsal eğitimler; ekiplerinin gelişimini desteklemek, liderlik kapasitesini güçlendirmek ve değişim süreçlerini daha sağlıklı yönetmek isteyen kurumlar için yapılandırılmış bir gelişim sürecidir. Amacı hazır bir eğitim paketi sunmak değil; kurumunuzun ihtiyacına özel bir çerçeve kurmaktır.',
+    audienceItems: [
+      {
+        icon: Compass,
+        title: 'Yeni bir liderlik yapısı kuruyorsanız',
+        description: 'Büyüme, yeniden yapılanma veya yönetim değişikliği sürecinde ekibinize yön kazandırmak istiyorsanız.',
+      },
+      {
+        icon: Target,
+        title: 'Ekip hedeflerini netleştirmek istiyorsanız',
+        description: 'Dağınık öncelikleri ortak ve somut hedeflere dönüştürmek istiyorsanız.',
+      },
+      {
+        icon: Eye,
+        title: 'Kurum kültürünüzü daha iyi tanımak istiyorsanız',
+        description: 'Ekiplerinizin güçlü yönlerini, iletişim kalıplarını ve gelişim alanlarını fark etmek istiyorsanız.',
+      },
+      {
+        icon: Scale,
+        title: 'Ekipler arası dengeyi güçlendirmek istiyorsanız',
+        description: 'Kuşaklar arası, departmanlar arası veya iş-yaşam dengesinde sürdürülebilir bir denge kurmak istiyorsanız.',
+      },
+      {
+        icon: Signpost,
+        title: 'Değişim sürecini yönetiyorsanız',
+        description: 'Kurumsal dönüşüm, büyüme veya belirsizlik döneminde ekiplerinizin uyum kapasitesini güçlendirmek istiyorsanız.',
+      },
+      {
+        icon: Gem,
+        title: 'Kurumunuzun iç kaynaklarını güçlendirmek istiyorsanız',
+        description: 'Çalışan bağlılığı, motivasyon ve sürdürülebilir performans alanlarında yatırım yapmak istiyorsanız.',
+      },
     ],
+    audienceClosing: 'Nereden başlayacağınızı bilmiyorsanız, ilk adım ihtiyaç analizidir.',
+    audienceCtaLabel: 'Kurumsal İhtiyaç Analizi Talep Et',
+    audienceSecondaryLabel: 'Program Süreci Nasıl İşler?',
     needsHeading: 'Kurumsal program alanları',
     needs: [
       {
@@ -361,18 +448,44 @@ export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
       'AURIX öğrenci koçluğu, öğrencinin yalnızca akademik performansına değil; hedeflerini netleştirmesine, çalışma düzenini oluşturmasına, güçlü yönlerini fark etmesine ve geleceğe dair daha bilinçli seçimler yapmasına odaklanır.',
     primaryCta: 'Öğrenci Koçluğu İçin Bilgi Al',
     secondaryCta: 'Ön Görüşme Talep Et',
-    audienceHeading: 'Öğrenci koçluğu kimler için uygundur?',
-    audienceIntro: '',
-    audience: [
-      'Lise öğrencileri',
-      'Üniversite öğrencileri',
-      'Sınav sürecindeki gençler',
-      'Hedef belirlemekte zorlanan öğrenciler',
-      'Çalışma düzeni oluşturmak isteyen öğrenciler',
-      'Kariyer yönünü belirlemek isteyen gençler',
-      'Bölüm ve meslek seçimi sürecindeki öğrenciler',
-      'Çocuğu için profesyonel destek arayan veliler',
+    audienceHeading: 'Öğrenci koçluğu sana uygun mu?',
+    audienceIntro:
+      'Öğrenci koçluğu; hedeflerini netleştirmek, çalışma düzenini oluşturmak ve güçlü yönlerini fark etmek isteyen öğrenciler için yapılandırılmış bir gelişim sürecidir. Amacı sana hazır bir çalışma formülü dayatmak değil; kendi düzenini ve yönünü bulmana eşlik etmektir.',
+    audienceItems: [
+      {
+        icon: Compass,
+        title: 'Hangi yöne ilerleyeceğinden emin değilsen',
+        description: 'Bölüm, meslek veya kariyer seçimi konusunda daha net bir yön aramak istiyorsan.',
+      },
+      {
+        icon: Target,
+        title: 'Hedeflerini netleştirmek istiyorsan',
+        description: 'Kısa ve uzun vadeli hedeflerini daha somut ve gerçekçi şekilde belirlemek istiyorsan.',
+      },
+      {
+        icon: Eye,
+        title: 'Güçlü yönlerini keşfetmek istiyorsan',
+        description: 'Yalnızca eksiklerine değil, potansiyeline ve güçlü yönlerine de odaklanmak istiyorsan.',
+      },
+      {
+        icon: Scale,
+        title: 'Çalışma ve yaşam dengeni kurmak istiyorsan',
+        description: 'Ders, sınav, sosyal yaşam ve dinlenme arasında sürdürülebilir bir düzen oluşturmak istiyorsan.',
+      },
+      {
+        icon: Signpost,
+        title: 'Sınav veya bölüm seçimi eşiğindeysen',
+        description: 'Önemli bir sınav veya seçim öncesinde stratejini daha sağlıklı kurmak istiyorsan.',
+      },
+      {
+        icon: Gem,
+        title: 'Motivasyonunu güçlendirmek istiyorsan',
+        description: 'Kendi nedenlerini ve ilerleme kaynaklarını fark ederek motivasyonunu artırmak istiyorsan.',
+      },
     ],
+    audienceClosing: 'Nereden başlayacağını bilmiyorsan, ilk adım hedefini netleştirmektir.',
+    audienceCtaLabel: 'Ön Görüşme Talep Et',
+    audienceSecondaryLabel: 'Koçluk Süreci Nasıl İşler?',
     needsHeading: 'Öğrenci koçluğu hangi alanlarda destek sağlar?',
     needs: [
       {

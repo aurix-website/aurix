@@ -3,6 +3,7 @@ import { Inter, Newsreader, JetBrains_Mono } from 'next/font/google'
 import '../globals.css'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
+import { WhatsAppFloatingButton } from '@/components/WhatsAppFloatingButton'
 import { MotionProvider } from '@/components/providers/MotionProvider'
 
 const inter = Inter({
@@ -42,6 +43,7 @@ export default function FrontendLayout({ children }: { children: React.ReactNode
         <MotionProvider>
           <Header />
           <main>{children}</main>
+          <WhatsAppFloatingButton />
           <Footer />
         </MotionProvider>
       </body>

@@ -138,7 +138,7 @@ export default async function ArticlePage({
                 görüşme ile ihtiyacınızı birlikte değerlendirebiliriz.
               </p>
               <Link
-                href="/on-gorusme"
+                href="/iletisim"
                 className="inline-flex items-center gap-2 px-5 py-3 bg-[#14797C] hover:bg-[#0f5f62] text-white text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
               >
                 Ön Görüşme Talep Et

@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react'
+import { ArrowRight, ChevronDown, Menu, MessageCircle, X } from 'lucide-react'
 import { SERVICES, SERVICE_DETAIL_SLUGS } from '@/lib/services-data'
+import { WHATSAPP_URL } from '@/lib/contact-channels'
 
 type LogoMedia = { url?: string | null; alt?: string | null }
 
@@ -147,13 +148,24 @@ export function NavClient({ logoDark }: { logoDark: LogoMedia | null }) {
         </nav>
 
         {/* Desktop CTA */}
-        <Link
-          href="/on-gorusme"
-          className="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 bg-[#14797C] hover:bg-[#0f5f62] text-white text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2"
-        >
-          Ön Görüşme Talep Et
-          <ArrowRight className="h-4 w-4 text-[#C5A059]" aria-hidden="true" />
-        </Link>
+        <div className="hidden items-center gap-2 lg:flex">
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-sm border border-[#14797C] bg-white px-4 py-2.5 text-sm font-semibold text-[#14797C] transition-colors duration-200 hover:bg-[#14797C]/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
+          >
+            <MessageCircle className="h-4 w-4" aria-hidden="true" />
+            WhatsApp
+          </a>
+          <Link
+            href="/iletisim"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#14797C] hover:bg-[#0f5f62] text-white text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2"
+          >
+            Ön Görüşme Talep Et
+            <ArrowRight className="h-4 w-4 text-[#C5A059]" aria-hidden="true" />
+          </Link>
+        </div>
 
         {/* Hamburger */}
         <button
@@ -228,13 +240,23 @@ export function NavClient({ logoDark }: { logoDark: LogoMedia | null }) {
             </div>
 
             <Link
-              href="/on-gorusme"
+              href="/iletisim"
               className="mt-8 flex justify-center items-center gap-2 px-5 py-3.5 bg-[#14797C] hover:bg-[#0f5f62] text-white text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0]"
               onClick={() => setMobileOpen(false)}
             >
               Ön Görüşme Talep Et
               <ArrowRight className="h-4 w-4 text-[#C5A059]" aria-hidden="true" />
             </Link>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 flex items-center justify-center gap-2 rounded-sm border border-[#14797C] bg-white px-5 py-3.5 text-sm font-semibold text-[#14797C] transition-colors duration-200 hover:bg-[#14797C]/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0]"
+              onClick={() => setMobileOpen(false)}
+            >
+              <MessageCircle className="h-4 w-4" aria-hidden="true" />
+              WhatsApp ile Yaz
+            </a>
           </nav>
         </div>
       )}

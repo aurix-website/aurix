@@ -63,7 +63,7 @@ export function ExpertDetailTemplate({ expert, detail }: { expert: Expert; detai
               <FadeIn delay={0.1}>
                 <div className="flex flex-col sm:flex-row gap-3 mt-2">
                   <Link
-                    href={`/on-gorusme?expert=${detail.slug}`}
+                    href={`/iletisim?expert=${detail.slug}`}
                     className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#14797C] hover:bg-[#0f5f62] text-white text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
                   >
                     {detail.primaryCtaLabel}

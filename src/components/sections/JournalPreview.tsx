@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 import { FadeIn } from '@/components/ui/FadeIn'
 import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { getOptionalPayloadClient } from '@/lib/payload-client'
@@ -62,44 +63,48 @@ export async function JournalPreview() {
   const articles = await getLatestArticles()
 
   return (
-    <section aria-labelledby="journal-heading" className="py-section bg-canvas">
-      <div className="max-w-container mx-auto px-6">
+    <section aria-labelledby="journal-heading" className="py-24 bg-[#F6F7F1]">
+      <div className="mx-auto px-4 sm:px-6" style={{ maxWidth: '1200px' }}>
         <FadeIn>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
             <div>
+              <span className="text-[11px] font-mono tracking-widest text-[#C5A059] font-bold uppercase block mb-3">
+                GÜNCEL YAZILAR
+              </span>
               <h2
                 id="journal-heading"
-                className="text-display-lg font-semibold text-ink"
+                className="font-serif text-[#1A1C1E] tracking-tight"
+                style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', lineHeight: '1.2' }}
               >
                 Journal
               </h2>
-              <p className="mt-3 text-body-md text-muted max-w-xl">
+              <p className="mt-3 font-sans text-[#5B6168] leading-relaxed max-w-lg" style={{ fontSize: '1.0625rem' }}>
                 Koçluk, kariyer ve liderlik üzerine derinlemesine yazılar.
               </p>
             </div>
             <Link
               href="/journal"
-              className="shrink-0 text-btn font-semibold text-ink inline-flex items-center gap-1 transition-colors hover:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
+              className="shrink-0 text-sm font-sans font-semibold text-[#14797C] hover:text-[#1A1C1E] inline-flex items-center gap-2 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2 rounded-sm"
             >
-              Tüm yazılar <span aria-hidden="true">→</span>
+              Tüm yazılar <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
         </FadeIn>
 
-        <FadeIn delay={0.1}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {articles.map((article) => {
-              const cover =
-                article.coverImage != null && typeof article.coverImage === 'object'
-                  ? article.coverImage
-                  : null
-              const categoryLabel = article.category
-                ? (CATEGORY_LABELS[article.category as keyof typeof CATEGORY_LABELS] ?? null)
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {articles.map((article, i) => {
+            const cover =
+              article.coverImage != null && typeof article.coverImage === 'object'
+                ? article.coverImage
                 : null
+            const categoryLabel = article.category
+              ? (CATEGORY_LABELS[article.category as keyof typeof CATEGORY_LABELS] ?? null)
+              : null
 
-              return (
-                <article key={article.id} className="group flex flex-col gap-4">
-                  <div className="aspect-[3/2] relative w-full overflow-hidden rounded-lg">
+            return (
+              <FadeIn key={article.id} delay={0.08 + i * 0.08}>
+                <article className="group flex flex-col gap-4">
+                  <div className="aspect-[3/2] relative w-full overflow-hidden rounded-sm">
                     {cover?.url ? (
                       <Image
                         src={cover.url}
@@ -123,40 +128,40 @@ export async function JournalPreview() {
 
                   <div className="flex flex-col gap-2.5">
                     {categoryLabel && (
-                      <span className="text-caption font-medium px-3 py-1 bg-surface-card border border-hairline rounded-pill text-muted self-start">
+                      <span className="text-[10px] font-mono font-bold tracking-widest uppercase px-2.5 py-1 bg-[#F9FBFB] border border-[#E8F1F2] rounded-sm text-[#5B6168] self-start">
                         {categoryLabel}
                       </span>
                     )}
-                    <h3 className="text-title-md font-semibold text-ink leading-snug group-hover:text-primary-active transition-colors">
+                    <h3 className="font-serif text-xl text-[#1A1C1E] leading-snug group-hover:text-[#14797C] transition-colors">
                       {article.title}
                     </h3>
                     {article.excerpt && (
-                      <p className="text-body-sm text-body line-clamp-2 leading-relaxed">
+                      <p className="font-sans text-sm text-[#5B6168] line-clamp-2 leading-relaxed">
                         {article.excerpt}
                       </p>
                     )}
                     <div className="flex items-center justify-between mt-1 gap-2 flex-wrap">
                       {article.publishedDate && (
-                        <span className="text-caption text-muted">
+                        <span className="text-[11px] font-mono text-[#5B6168] uppercase tracking-wide">
                           {formatDate(article.publishedDate)}
                         </span>
                       )}
                       {article.slug && (
                         <Link
                           href={`/journal/${article.slug}`}
-                          className="text-body-sm font-semibold text-ink inline-flex items-center gap-1 transition-colors hover:text-muted focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
+                          className="text-xs font-sans font-bold text-[#14797C] hover:text-[#C5A059] inline-flex items-center gap-1.5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2 rounded-sm"
                           aria-label={`${article.title ?? 'Yazı'} — devamını oku`}
                         >
-                          Devamını oku <span aria-hidden="true">→</span>
+                          Devamını oku <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                         </Link>
                       )}
                     </div>
                   </div>
                 </article>
-              )
-            })}
-          </div>
-        </FadeIn>
+              </FadeIn>
+            )
+          })}
+        </div>
       </div>
     </section>
   )

@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { FadeIn } from '@/components/ui/FadeIn'
-import { LineDraw } from '@/components/ui/LineDraw'
 import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 
 const PROMISE_CARDS = [
@@ -26,76 +25,77 @@ export function ManifestoSection() {
   return (
     <section
       aria-labelledby="manifesto-heading"
-      className="grain relative overflow-hidden py-section bg-surface-dark"
+      className="grain relative overflow-hidden py-24 lg:py-32 bg-[#2E2E30]"
     >
-      {/* Atmosphere image — upload manifesto-bg.jpg (1920×800) */}
-      <div className="absolute inset-0">
-        <ImagePlaceholder
-          filename="manifesto-bg.jpg"
-          width={1920}
-          height={800}
-          fill
-          label="Manifesto arka plan fotoğrafı"
-        />
-        <div className="absolute inset-0 bg-surface-dark/80" />
-      </div>
+      <div className="relative z-10 mx-auto px-4 sm:px-6" style={{ maxWidth: '1200px' }}>
 
-      <div className="relative z-10 max-w-container mx-auto px-6">
-        <LineDraw className="mb-14 opacity-20" />
+        <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-16 items-center">
 
-        <FadeIn>
-          <div className="max-w-3xl mx-auto text-center flex flex-col gap-7">
-            <span className="text-caption font-medium tracking-[0.18em] uppercase text-on-dark-soft">
-              AURIX Felsefesi
-            </span>
+          {/* Atmosfer fotoğrafı — upload manifesto-portrait.jpg (720×900) */}
+          <FadeIn>
+            <div className="bg-white/5 border border-white/10 rounded-sm p-3 max-w-sm mx-auto lg:mx-0">
+              <div className="aspect-[4/5] relative overflow-hidden rounded-sm">
+                <ImagePlaceholder
+                  filename="manifesto-portrait.jpg"
+                  width={720}
+                  height={900}
+                  fill
+                  label="AURIX seans anı — atmosfer fotoğrafı"
+                />
+              </div>
+            </div>
+          </FadeIn>
 
-            <h2
-              id="manifesto-heading"
-              className="font-serif italic text-display-serif-lg text-on-dark leading-tight"
-            >
-              AURIX, gelişim yolculuğunuzu{' '}
-              <span className="not-italic text-brand-accent">tesadüfe bırakmaz.</span>
-            </h2>
+          {/* Metin içeriği */}
+          <FadeIn delay={0.08}>
+            <div className="flex flex-col gap-6 max-w-xl">
+              <span className="text-[11px] font-mono tracking-widest text-[#C5A059] font-bold uppercase block">
+                AURIX Felsefesi
+              </span>
 
-            <p className="text-body-md text-on-dark-soft leading-relaxed max-w-xl mx-auto">
-              Koçluk ve danışmanlık sürecini yalnızca bir görüşme deneyimi olarak değil; ihtiyaç
-              analizi, uzman eşleşmesi, hedef netliği ve sürdürülebilir aksiyon adımlarından
-              oluşan yapılandırılmış bir gelişim süreci olarak ele alır.
-            </p>
-          </div>
-        </FadeIn>
+              <h2
+                id="manifesto-heading"
+                className="font-serif text-[#F6F7F1] tracking-tight"
+                style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', lineHeight: '1.2' }}
+              >
+                AURIX, gelişim yolculuğunuzu{' '}
+                <span className="text-[#1A9CA0]">tesadüfe bırakmaz.</span>
+              </h2>
 
-        <FadeIn delay={0.1}>
-          <div className="mt-14 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              <p className="font-sans text-[#D7DEE4] leading-relaxed" style={{ fontSize: '1.0625rem' }}>
+                Koçluk ve danışmanlık sürecini yalnızca bir görüşme deneyimi olarak değil; ihtiyaç
+                analizi, uzman eşleşmesi, hedef netliği ve sürdürülebilir aksiyon adımlarından
+                oluşan yapılandırılmış bir gelişim süreci olarak ele alır.
+              </p>
+
+              <Link
+                href="#approach-heading"
+                className="inline-flex items-center gap-1.5 text-sm font-bold text-[#F6F7F1] hover:text-[#C5A059] transition-colors self-start focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C5A059] focus-visible:outline-offset-2 rounded-sm"
+              >
+                AURIX Yaklaşımını İncele
+                <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+              </Link>
+            </div>
+          </FadeIn>
+        </div>
+
+        <FadeIn delay={0.16}>
+          <div className="mt-16 lg:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6">
             {PROMISE_CARDS.map((card) => (
               <div
                 key={card.title}
-                className="bg-white/5 border border-white/10 rounded-sm p-6 flex flex-col gap-2 text-left"
+                className="bg-white/5 border border-white/10 rounded-sm p-6 flex flex-col gap-2"
               >
-                <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-brand-accent">
+                <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-[#C5A059]">
                   {card.title}
                 </span>
-                <p className="text-body-sm text-on-dark-soft leading-relaxed">
+                <p className="font-sans text-sm text-[#D7DEE4] leading-relaxed">
                   {card.description}
                 </p>
               </div>
             ))}
           </div>
         </FadeIn>
-
-        <FadeIn delay={0.16}>
-          <div className="mt-10 flex justify-center">
-            <Link
-              href="#approach-heading"
-              className="inline-flex items-center gap-1.5 text-sm font-bold text-on-dark hover:text-brand-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
-            >
-              AURIX Yaklaşımını İncele
-              <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-            </Link>
-          </div>
-        </FadeIn>
-
-        <LineDraw className="mt-14 opacity-20" delay={0.3} />
       </div>
     </section>
   )

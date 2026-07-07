@@ -18,28 +18,28 @@ const GUIDE_CARDS = [
     question: 'Yaşamımda yön, denge veya netlik arıyorum.',
     description:
       'Kişisel hedeflerinizi netleştirmek, karar süreçlerinizi daha bilinçli yönetmek veya yaşamınızda yeni bir yön oluşturmak istiyorsanız bireysel koçluk süreci sizin için uygun olabilir.',
-    href: '#bireysel',
+    href: '/hizmetler/bireysel-kocluk',
     cta: 'Bireysel Koçluğu İncele',
   },
   {
     question: 'Liderlik rolümde daha etkili olmak istiyorum.',
     description:
       'Ekip yönetimi, karar alma, iletişim, önceliklendirme ve liderlik kapasitenizi güçlendirmek istiyorsanız liderlik ve yönetici koçluğu doğru bir başlangıç olabilir.',
-    href: '#liderlik',
+    href: '/hizmetler/yonetici-koclugu',
     cta: 'Yönetici Koçluğunu İncele',
   },
   {
     question: 'Kurumumuz için eğitim veya gelişim programı arıyoruz.',
     description:
       'Liderlik, takım gelişimi, iletişim veya değişim yönetimi alanlarında kuruma özel bir gelişim programı arıyorsanız kurumsal eğitim ve takım koçluğu sürecini birlikte tasarlayabiliriz.',
-    href: '#kurumsal',
+    href: '/hizmetler/kurumsal-egitim',
     cta: 'Kurumsal İhtiyaç Analizi Talep Et',
   },
   {
     question: 'Öğrenci veya veli olarak destek arıyorum.',
     description:
       'Hedef belirleme, sınav stratejisi, motivasyon, zaman yönetimi veya küresel kariyer uyumu konularında destek arıyorsanız bu alan sizin için uygun olabilir.',
-    href: '#gencler',
+    href: '/hizmetler/ogrenci-koclugu',
     cta: 'Öğrenci Koçluğunu İncele',
   },
 ]
@@ -123,7 +123,7 @@ export default function HizmetlerPage() {
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
                 <Link
-                  href="/on-gorusme"
+                  href="/iletisim"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-transparent border border-[#14797C] text-[#14797C] hover:bg-[#14797C]/5 text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
                 >
                   Ön Görüşme Talep Et
@@ -186,7 +186,7 @@ export default function HizmetlerPage() {
                   ile ihtiyacınızı birlikte değerlendirebiliriz.
                 </p>
                 <Link
-                  href="/on-gorusme?interest=emin-degilim"
+                  href="/iletisim?interest=emin-degilim"
                   className="inline-flex items-center gap-1.5 text-sm font-bold text-on-dark hover:text-brand-accent transition-colors self-start focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
                 >
                   Bana Uygun Süreci Belirleyelim

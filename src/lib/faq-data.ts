@@ -1,3 +1,6 @@
+import type { ElementType } from 'react'
+import { Building2, CalendarClock, HelpCircle, LayoutGrid, Users } from 'lucide-react'
+
 export interface FaqItem {
   question: string
   answer: string
@@ -6,6 +9,7 @@ export interface FaqItem {
 export interface FaqCategory {
   id: string
   title: string
+  icon: ElementType
   items: FaqItem[]
 }
 
@@ -13,6 +17,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
   {
     id: 'genel',
     title: 'Genel',
+    icon: HelpCircle,
     items: [
       {
         question: 'Koçluk süreci terapi yerine geçer mi?',
@@ -39,6 +44,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
   {
     id: 'hizmetler',
     title: 'Hizmetler',
+    icon: LayoutGrid,
     items: [
       {
         question: 'Kurumsal eğitimler hazır paket mi?',
@@ -60,6 +66,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
   {
     id: 'uzmanlar',
     title: 'Uzmanlar',
+    icon: Users,
     items: [
       {
         question: 'Doğrudan bir uzman seçebilir miyim?',
@@ -81,6 +88,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
   {
     id: 'on-gorusme',
     title: 'Ön Görüşme ve İletişim',
+    icon: CalendarClock,
     items: [
       {
         question: 'Ön görüşme ücretli mi?',
@@ -102,6 +110,7 @@ export const FAQ_CATEGORIES: FaqCategory[] = [
   {
     id: 'kurumsal',
     title: 'Kurumsal',
+    icon: Building2,
     items: [
       {
         question: 'Kurumsal eğitimler için nasıl iletişime geçmeliyim?',

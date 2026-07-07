@@ -61,32 +61,32 @@ const INTEREST_BUTTONS = [
   {
     label: 'Bireysel Koçluk',
     description: 'Yaşamımda yön, denge, netlik veya kişisel gelişim alanında destek arıyorum.',
-    href: '/on-gorusme?interest=bireysel-kocluk#form',
+    href: '/iletisim?interest=bireysel-kocluk',
   },
   {
     label: 'Yönetici Koçluğu',
     description: 'Liderlik rolümde daha etkili olmak, karar alma ve ekip yönetimi becerilerimi geliştirmek istiyorum.',
-    href: '/on-gorusme?interest=yonetici-koclugu#form',
+    href: '/iletisim?interest=yonetici-koclugu',
   },
   {
     label: 'Kurumsal Eğitim',
     description: 'Kurumumuz için liderlik, takım gelişimi, iletişim veya değişim yönetimi alanlarında eğitim / gelişim programı arıyoruz.',
-    href: '/on-gorusme?interest=kurumsal-egitim#form',
+    href: '/iletisim?interest=kurumsal-egitim',
   },
   {
     label: 'Öğrenci Koçluğu',
     description: 'Öğrenci / veli olarak hedef belirleme, sınav stratejisi, motivasyon veya kariyer farkındalığı konularında destek arıyorum.',
-    href: '/on-gorusme?interest=ogrenci-koclugu#form',
+    href: '/iletisim?interest=ogrenci-koclugu',
   },
   {
     label: 'Kariyer ve Global Uyum',
     description: 'Kariyer yönümü, yurtdışı sürecimi veya yeni bir ülke / yeni çalışma düzenine uyum sürecimi netleştirmek istiyorum.',
-    href: '/on-gorusme?interest=kariyer-koclugu#form',
+    href: '/iletisim?interest=kariyer-koclugu',
   },
   {
     label: 'Emin Değilim',
     description: 'Hangi hizmetin bana uygun olduğunu bilmiyorum; ihtiyacımı birlikte değerlendirmek istiyorum.',
-    href: '/on-gorusme?interest=emin-degilim#form',
+    href: '/iletisim?interest=emin-degilim',
   },
 ]
 
@@ -206,7 +206,7 @@ export default function OnGorusmePage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link
-                  href="#form"
+                  href="/iletisim"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#14797C] hover:bg-[#0f5f62] text-white text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
                 >
                   Ön Görüşme Formunu Doldur

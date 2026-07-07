@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { getOptionalPayloadClient } from '@/lib/payload-client'
+import { CONTACT_EMAIL, WHATSAPP_DISPLAY, WHATSAPP_NUMBER } from '@/lib/contact-channels'
 
 type PopulatedMedia = { url?: string | null; alt?: string | null }
 
@@ -13,8 +14,8 @@ type SiteSettingsData = {
 }
 
 const FALLBACK: SiteSettingsData = {
-  contactEmail: 'info@aurixdanismanlik.com',
-  whatsappNumber: null,
+  contactEmail: CONTACT_EMAIL,
+  whatsappNumber: WHATSAPP_NUMBER,
   socialLinks: [],
   kvkkUrl: '/kvkk',
 }
@@ -121,7 +122,7 @@ export async function Footer() {
                     rel="noopener noreferrer"
                     className="text-on-dark-soft hover:text-on-dark transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
                   >
-                    WhatsApp
+                    WhatsApp: {WHATSAPP_DISPLAY}
                   </a>
                 </li>
               )}
