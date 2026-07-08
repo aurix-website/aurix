@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Check } from 'lucide-react'
 import { FadeIn } from '@/components/ui/FadeIn'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { FinalCTA } from '@/components/sections/FinalCTA'
 import { STATIC_EXPERTS, EXPERT_PLACEHOLDERS, type Expert } from '@/lib/experts-data'
 import type { ExpertDetail } from '@/lib/expert-detail-data'
@@ -32,12 +31,13 @@ export function ExpertDetailTemplate({ expert, detail }: { expert: Expert; detai
                       priority
                     />
                   ) : (
-                    <ImagePlaceholder
-                      filename={placeholder}
-                      width={480}
-                      height={600}
+                    <Image
+                      src={`/media/${placeholder}`}
+                      alt={`${expert.name} uzman gorseli`}
                       fill
-                      label={`${expert.name} portre fotoğrafı`}
+                      sizes="(max-width: 1024px) 80vw, 30vw"
+                      className="object-cover object-top grayscale-[15%]"
+                      priority
                     />
                   )}
                 </div>

@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { FadeIn } from '@/components/ui/FadeIn'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { getOptionalPayloadClient } from '@/lib/payload-client'
 import { STATIC_EXPERTS, EXPERT_PLACEHOLDERS, type Expert } from '@/lib/experts-data'
 
@@ -51,12 +50,13 @@ function FounderCard({ expert }: { expert: Expert }) {
                 priority
               />
             ) : (
-              <ImagePlaceholder
-                filename={placeholder}
-                width={480}
-                height={640}
+              <Image
+                src={`/media/${placeholder}`}
+                alt={`${expert.name} uzman gorseli`}
                 fill
-                label={`${expert.name} portre fotoğrafı — 480×640 px`}
+                sizes="(max-width: 1024px) 80vw, 40vw"
+                className="object-cover object-top grayscale-[25%] hover:grayscale-0 transition-all duration-300"
+                priority
               />
             )}
           </div>
@@ -149,15 +149,13 @@ function SecondaryExpertCard({ expert }: { expert: Expert }) {
               className="object-cover object-top grayscale-[15%] group-hover:grayscale-0 transition-all duration-300"
             />
           ) : (
-            <div className="w-full h-full">
-              <ImagePlaceholder
-                filename={placeholder}
-                width={480}
-                height={640}
-                fill
-                label={`${expert.name} portre fotoğrafı`}
-              />
-            </div>
+            <Image
+              src={`/media/${placeholder}`}
+              alt={`${expert.name} uzman gorseli`}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover object-top grayscale-[15%] group-hover:grayscale-0 transition-all duration-300"
+            />
           )}
         </div>
       </Link>

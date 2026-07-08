@@ -14,7 +14,6 @@ import {
   User,
   Users,
 } from 'lucide-react'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { STATIC_EXPERTS, EXPERT_PLACEHOLDERS, EXPERT_FILTER_CATEGORIES } from '@/lib/experts-data'
 
 const ALL = 'Tümü'
@@ -166,13 +165,12 @@ export function ExpertsGrid() {
                           className="object-cover object-top grayscale-[12%] transition-all duration-300 group-hover:scale-[1.03] group-hover:grayscale-0"
                         />
                       ) : (
-                        <ImagePlaceholder
-                          filename={placeholder}
-                          width={360}
-                          height={440}
+                        <Image
+                          src={`/media/${placeholder}`}
+                          alt={`${expert.name} uzman gorseli`}
                           fill
-                          label={`${expert.name} portre placeholder`}
-                          className="border-0"
+                          sizes="(max-width: 768px) 42vw, 240px"
+                          className="object-cover object-top grayscale-[12%] transition-all duration-300 group-hover:scale-[1.03] group-hover:grayscale-0"
                         />
                       )}
                     </div>

@@ -1,12 +1,19 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { FadeIn } from '@/components/ui/FadeIn'
 import { LineDraw } from '@/components/ui/LineDraw'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { FinalCTA } from '@/components/sections/FinalCTA'
 import { getExpertBySlug } from '@/lib/experts-data'
 import { SERVICES } from '@/lib/services-data'
 import type { ServiceDetail } from '@/lib/service-detail-data'
+
+const SERVICE_IMAGE_SLUGS = new Set([
+  'bireysel-kocluk',
+  'yonetici-koclugu',
+  'kurumsal-egitim',
+  'ogrenci-koclugu',
+])
 
 export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
   const experts = detail.expertSlugs
@@ -16,6 +23,7 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
   const category = SERVICES.find((service) => service.id === detail.serviceId)
   const CategoryIcon = category?.icon
   const accent = category?.accent ?? '#14797C'
+  const hasServiceImage = SERVICE_IMAGE_SLUGS.has(detail.slug)
 
   return (
     <>
@@ -66,14 +74,15 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
                 <div className="absolute -inset-5 border border-[#C5A059]/25 rounded-sm translate-x-4 translate-y-4" aria-hidden="true" />
                 <div className="relative bg-[#FCFDF9] border border-[#E2E5DE] rounded-sm p-3 shadow-[0_24px_70px_rgba(26,28,30,0.08)]">
                   <div className="aspect-[5/4] relative overflow-hidden rounded-sm">
-                    <ImagePlaceholder
-                      filename={`service-${detail.slug}.jpg`}
-                      width={960}
-                      height={720}
-                      fill
-                      label={`${detail.h1} hizmet gorseli`}
-                      className="transition-transform duration-300 group-hover:scale-[1.03]"
-                    />
+                    {hasServiceImage && (
+                      <Image
+                        src={`/media/service-${detail.slug}.jpg`}
+                        alt={`${detail.h1} hizmet gorseli`}
+                        fill
+                        sizes="(min-width: 1024px) 520px, 100vw"
+                        className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                      />
+                    )}
                   </div>
                   {category && CategoryIcon && (
                     <div
@@ -219,19 +228,32 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
               {detail.needs.map((need, i) => {
                 const isLead = i === 0
                 const isWide = i === 1 || i === 4
+                const showNeedImage = detail.slug === 'bireysel-kocluk' && isLead
 
                 return (
                   <article
                     key={need.title}
                     className={[
-                      'min-h-[220px] rounded-sm border p-6 transition-colors duration-200',
+                      'relative min-h-[220px] overflow-hidden rounded-sm border p-6 transition-colors duration-200',
                       isLead
                         ? 'bg-[#1A1C1E] text-white border-[#1A1C1E] md:col-span-3 md:row-span-2 md:min-h-[360px] md:p-8'
                         : 'bg-[#FCFDF9] border-[#E2E5DE] md:col-span-3',
                       isWide && !isLead ? 'lg:col-span-3' : '',
                     ].join(' ')}
                   >
-                    <div className="flex h-full flex-col justify-between gap-8">
+                    {showNeedImage && (
+                      <>
+                        <Image
+                          src="/media/service-bireysel-kocluk-hedef-netligi.jpg"
+                          alt=""
+                          fill
+                          sizes="(min-width: 768px) 50vw, 100vw"
+                          className="object-cover opacity-55"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#1A1C1E]/95 via-[#1A1C1E]/82 to-[#1A1C1E]/50" aria-hidden="true" />
+                      </>
+                    )}
+                    <div className="relative z-10 flex h-full flex-col justify-between gap-8">
                       <span
                         className={[
                           'font-mono text-xs font-bold tracking-widest',

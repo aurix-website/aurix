@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { ARTICLES, CATEGORY_LABELS, type ArticleCategory } from '@/lib/articles-data'
 
 const ALL = 'Tüm Yazılar'
@@ -70,12 +70,12 @@ export function JournalGrid() {
             >
               <div className="relative aspect-[3/2] w-full overflow-hidden rounded-sm">
                 <div className="absolute inset-0 transition-transform duration-500 motion-safe:group-hover:scale-[1.04] motion-reduce:transition-none">
-                  <ImagePlaceholder
-                    filename={`journal-${article.slug}.jpg`}
-                    width={800}
-                    height={533}
+                  <Image
+                    src={`/media/journal-${article.slug}.jpg`}
+                    alt={`${article.title} kapak gorseli`}
                     fill
-                    label={`${article.title} kapak görseli`}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover"
                   />
                 </div>
               </div>

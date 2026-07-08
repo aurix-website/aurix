@@ -15,7 +15,6 @@ import {
   Users,
 } from 'lucide-react'
 import { FadeIn } from '@/components/ui/FadeIn'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { FinalCTA } from '@/components/sections/FinalCTA'
 import { APPROACH_STEPS } from '@/lib/approach-steps-data'
 import { EXPERT_PLACEHOLDERS, STATIC_EXPERTS } from '@/lib/experts-data'
@@ -116,13 +115,12 @@ function ExpertPortrait({
           className="object-cover object-top grayscale-[12%]"
         />
       ) : (
-        <ImagePlaceholder
-          filename={placeholder}
-          width={480}
-          height={600}
+        <Image
+          src={`/media/${placeholder}`}
+          alt={`${expert.name} uzman gorseli`}
           fill
-          label={`${expert.name} portre placeholder`}
-          className="border-0"
+          sizes="(max-width: 768px) 90vw, 420px"
+          className="object-cover object-top grayscale-[12%]"
         />
       )}
     </div>

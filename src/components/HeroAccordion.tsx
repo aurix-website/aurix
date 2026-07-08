@@ -4,23 +4,23 @@ import { useState } from 'react'
 
 const PANELS = [
   {
-    src: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800&auto=format&fit=crop',
+    src: '/media/aurix-hero-bireysel-kocluk.png',
     label: 'Bireysel Koçluk',
   },
   {
-    src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop',
+    src: '/media/aurix-hero-liderlik.png',
     label: 'Liderlik',
   },
   {
-    src: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=800&auto=format&fit=crop',
+    src: '/media/aurix-hero-kurumsal.png',
     label: 'Kurumsal',
   },
   {
-    src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=800&auto=format&fit=crop',
+    src: '/media/aurix-hero-gencler.png',
     label: 'Gençler',
   },
   {
-    src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=800&auto=format&fit=crop',
+    src: '/media/aurix-hero-global-uyum.png',
     label: 'Global Uyum',
   },
 ]

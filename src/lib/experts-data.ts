@@ -33,7 +33,7 @@ export const STATIC_EXPERTS: Expert[] = [
     name: 'Kaan Yazıcı',
     slug: 'kaan-yazici',
     title: 'Kurucu, Profesyonel Koç & Takım Koçu',
-    photo: null,
+    photo: { url: '/media/kaan-yazici.png', alt: 'Kaan Yazıcı portresi' },
     expertiseAreas: [
       { item: 'Bireysel koçluk' },
       { item: 'Takım koçluğu' },
@@ -84,7 +84,7 @@ export const STATIC_EXPERTS: Expert[] = [
     name: 'Çiğdem Karavelioğlu',
     slug: 'cigdem-karavelioglu',
     title: 'Profesyonel Koç, Takım Koçu & Eğitmen',
-    photo: null,
+    photo: { url: '/media/cigdem-karavelioglu.png', alt: 'Çiğdem Karavelioğlu portresi' },
     expertiseAreas: [
       { item: 'Bireysel koçluk' },
       { item: 'Takım koçluğu' },

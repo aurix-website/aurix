@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { BookOpen, Check, Feather, Layers } from 'lucide-react'
 import { FadeIn } from '@/components/ui/FadeIn'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { JournalGrid } from '@/components/JournalGrid'
 import { FinalCTA } from '@/components/sections/FinalCTA'
 
@@ -48,12 +48,11 @@ export default function JournalPage() {
               <div className="relative overflow-hidden rounded-md border border-[#E2E5DE] bg-[#FCFDF9] p-4 shadow-[0_28px_80px_rgba(26,28,30,0.08)] transition-all duration-300 hover:shadow-[0_34px_90px_rgba(26,28,30,0.12)] motion-safe:hover:scale-[1.015] motion-reduce:transition-none">
                 <div className="grid gap-4 sm:grid-cols-[1.1fr_0.9fr]">
                   <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-[#F4F0E7]">
-                    <ImagePlaceholder
-                      filename="journal-hero-insights.jpg"
-                      width={720}
-                      height={540}
+                    <Image
+                      src="/media/journal-hero-insights.jpg"
+                      alt="AURIX journal icgoru gorseli"
                       fill
-                      label="AURIX journal görsel alanı"
+                      sizes="(max-width: 640px) 100vw, 360px"
                       className="border-0 transition-transform duration-500 motion-safe:group-hover:scale-[1.03]"
                     />
                     <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(20,121,124,0.18),transparent_48%,rgba(197,160,89,0.2))]" aria-hidden="true" />

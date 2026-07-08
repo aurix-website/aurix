@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { FadeIn } from '@/components/ui/FadeIn'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { FinalCTA } from '@/components/sections/FinalCTA'
 import {
   ARTICLES,
@@ -97,12 +97,12 @@ export default async function ArticlePage({
       <section aria-hidden="true" className="pb-section bg-canvas">
         <div className="max-w-container mx-auto px-6">
           <div className="aspect-[16/7] relative w-full overflow-hidden rounded-sm">
-            <ImagePlaceholder
-              filename={`journal-${article.slug}.jpg`}
-              width={1600}
-              height={700}
+            <Image
+              src={`/media/journal-${article.slug}.jpg`}
+              alt={`${article.title} kapak gorseli`}
               fill
-              label={`${article.title} kapak görseli`}
+              sizes="100vw"
+              className="object-cover"
             />
           </div>
         </div>

@@ -1,7 +1,7 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { FadeIn } from '@/components/ui/FadeIn'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 
 const PROMISE_CARDS = [
   {
@@ -35,12 +35,12 @@ export function ManifestoSection() {
           <FadeIn>
             <div className="bg-white/5 border border-white/10 rounded-sm p-3 max-w-sm mx-auto lg:mx-0">
               <div className="aspect-[4/5] relative overflow-hidden rounded-sm">
-                <ImagePlaceholder
-                  filename="manifesto-portrait.jpg"
-                  width={720}
-                  height={900}
+                <Image
+                  src="/media/manifesto-portrait.jpg"
+                  alt="AURIX yaklasimini temsil eden yon ve netlik odakli masa kompozisyonu"
                   fill
-                  label="AURIX seans anı — atmosfer fotoğrafı"
+                  sizes="(min-width: 1024px) 360px, 100vw"
+                  className="object-cover"
                 />
               </div>
             </div>

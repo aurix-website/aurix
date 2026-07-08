@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { FadeIn } from '@/components/ui/FadeIn'
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder'
 import { getOptionalPayloadClient } from '@/lib/payload-client'
 import { ARTICLES, CATEGORY_LABELS } from '@/lib/articles-data'
 
@@ -115,12 +114,12 @@ export async function JournalPreview() {
                       />
                     ) : (
                       <div className="w-full h-full transition-transform duration-500 group-hover:scale-[1.03]">
-                        <ImagePlaceholder
-                          filename={`journal-${article.slug ?? article.id}.jpg`}
-                          width={800}
-                          height={533}
+                        <Image
+                          src={`/media/journal-${article.slug ?? article.id}.jpg`}
+                          alt={`${article.title ?? 'Journal'} kapak gorseli`}
                           fill
-                          label={article.title ?? 'Journal kapak'}
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          className="object-cover"
                         />
                       </div>
                     )}
