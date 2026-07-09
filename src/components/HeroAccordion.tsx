@@ -1,32 +1,24 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
+import type { Locale } from '@/lib/i18n/types'
+import { dictionary } from '@/lib/i18n/dictionary'
 
-const PANELS = [
-  {
-    src: '/media/aurix-hero-bireysel-kocluk.png',
-    label: 'Bireysel Koçluk',
-  },
-  {
-    src: '/media/aurix-hero-liderlik.png',
-    label: 'Liderlik',
-  },
-  {
-    src: '/media/aurix-hero-kurumsal.png',
-    label: 'Kurumsal',
-  },
-  {
-    src: '/media/aurix-hero-gencler.png',
-    label: 'Gençler',
-  },
-  {
-    src: '/media/aurix-hero-global-uyum.png',
-    label: 'Global Uyum',
-  },
+const PANEL_IMAGES = [
+  '/media/aurix-hero-bireysel-kocluk.png',
+  '/media/aurix-hero-liderlik.png',
+  '/media/aurix-hero-kurumsal.png',
+  '/media/aurix-hero-gencler.png',
+  '/media/aurix-hero-global-uyum.png',
 ]
 
-export default function HeroAccordion() {
+export default function HeroAccordion({ locale }: { locale: Locale }) {
   const [active, setActive] = useState(0)
+  const PANELS = dictionary[locale].hero.accordionPanels.map((label, i) => ({
+    src: PANEL_IMAGES[i],
+    label,
+  }))
 
   return (
     <div
@@ -38,7 +30,7 @@ export default function HeroAccordion() {
         width: '100%',
       }}
       role="region"
-      aria-label="Hizmet görseli galerisi"
+      aria-label={dictionary[locale].hero.accordionAriaLabel}
     >
       {PANELS.map((panel, idx) => (
         <div
@@ -56,16 +48,14 @@ export default function HeroAccordion() {
           aria-label={panel.label}
         >
           {/* Görsel */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={panel.src}
             alt={panel.label}
-            loading={idx === 0 ? 'eager' : 'lazy'}
+            fill
+            sizes={active === idx ? '(max-width: 768px) 90vw, 55vw' : '(max-width: 768px) 20vw, 10vw'}
+            priority={idx === 0}
+            quality={70}
             style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
               objectFit: 'cover',
               objectPosition: 'center',
             }}

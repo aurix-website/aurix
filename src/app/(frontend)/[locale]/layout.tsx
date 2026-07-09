@@ -5,6 +5,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { WhatsAppFloatingButton } from '@/components/WhatsAppFloatingButton'
 import { MotionProvider } from '@/components/providers/MotionProvider'
+import { EnglishRuntime } from '@/components/EnglishRuntime'
 
 const inter = Inter({
   subsets: ['latin', 'latin-ext'],
@@ -43,6 +44,7 @@ export default function FrontendLayout({ children }: { children: React.ReactNode
         <MotionProvider>
           <Header />
           <main>{children}</main>
+          <EnglishRuntime />
           <WhatsAppFloatingButton />
           <Footer />
         </MotionProvider>
