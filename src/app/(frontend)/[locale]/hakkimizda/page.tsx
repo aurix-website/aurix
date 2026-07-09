@@ -18,85 +18,166 @@ import { FadeIn } from '@/components/ui/FadeIn'
 import { FinalCTA } from '@/components/sections/FinalCTA'
 import { APPROACH_STEPS } from '@/lib/approach-steps-data'
 import { EXPERT_PLACEHOLDERS, STATIC_EXPERTS } from '@/lib/experts-data'
+import { pick, localeHref } from '@/lib/i18n/pick'
+import type { Locale } from '@/lib/i18n/types'
 
-export const metadata: Metadata = {
-  title: 'Hakkımızda',
-  description:
-    'AURIX; farklı uzmanlık alanlarından gelen profesyonellerin deneyimini tek bir gelişim çatısı altında buluşturan koçluk ve danışmanlık platformudur.',
+const COPY = {
+  tr: {
+    heroEyebrow: 'Hakkımızda',
+    heroHeading: 'İhtiyacı anlayan, doğru uzmanla buluşturan çok disiplinli gelişim çatısı.',
+    heroBody:
+      'AURIX, Kaan Yazıcı liderliğinde bireyler, yöneticiler, kurumlar ve öğrenciler için güvenilir, yapılandırılmış ve insan odaklı koçluk süreçleri tasarlar.',
+    ctaPrimary: 'Ön Görüşme Talep Et',
+    ctaSecondary: 'Uzman Kadromuzu Tanıyın',
+    founderCardEyebrow: 'Kurucu Liderlik',
+    founderCardTitle: 'Kaan Yazıcı ve AURIX yaklaşımı',
+    founderCardBody: 'İnsan odağı, etik çerçeve ve doğru uzman eşleşmesi aynı masada buluşur.',
+    heroPillars: ['Netlik', 'Eşleşme', 'Gelişim'],
+    founderStoryEyebrow: 'Founder Story',
+    founderStoryHeading: 'Kurucumuz Kaan Yazıcı’nın yolculuğu',
+    founderStoryParagraphs: [
+      'AURIX’in kurucu hikâyesi, insanı yalnızca mesleki başarılarıyla değil; zihinsel, duygusal ve sosyal bütünlüğüyle ele alma fikrine dayanır.',
+      'Kaan Yazıcı, sağlık alanındaki deneyimini kamu yönetimi perspektifi ve profesyonel koçluk yaklaşımıyla birleştirerek bireylerin ve takımların potansiyellerini daha bilinçli şekilde ortaya çıkarmalarına eşlik eder.',
+    ],
+    founderHighlights: [
+      { icon: Heart, title: 'Sağlık alanından insan odaklı deneyim' },
+      { icon: LayoutGrid, title: 'Kamu yönetimi perspektifi' },
+      { icon: Users, title: 'Profesyonel koçluk ve takım gelişimi' },
+    ],
+    founderCta: 'Kaan Yazıcı’yı Tanıyın',
+    whyEyebrow: 'Neden AURIX?',
+    whyHeading: 'Tek tip cevaplar yerine doğru bağlam.',
+    whyItems: [
+      {
+        icon: LayoutGrid,
+        title: 'Çok Disiplinli Bakış',
+        description: 'Farklı mesleki deneyimleri tek bir gelişim çatısı altında birleştirir.',
+      },
+      {
+        icon: UserCheck,
+        title: 'Doğru Uzman Eşleşmesi',
+        description: 'İhtiyacı anlayıp danışanı uygun hizmet alanı ve uzmanla buluşturur.',
+      },
+      {
+        icon: Map,
+        title: 'Yapılandırılmış Süreç',
+        description: 'Hedef netliği, süreç tasarımı ve takip adımlarını birlikte kurar.',
+      },
+    ],
+    approachEyebrow: 'AURIX Yaklaşımı',
+    approachHeading: 'Doğru ihtiyaç, doğru uzman, doğru süreç.',
+    approachBody:
+      'Süreç doğrudan hizmet önermekle başlamaz; önce ihtiyaç anlaşılır, sonra uygun uzman ve çalışma çerçevesi kurulur.',
+    valuesEyebrow: 'Değerler',
+    valuesHeading: 'AURIX değerleri',
+    values: [
+      { icon: Target, title: 'Netlik', description: 'Gerçek ihtiyaç ve hedef görünür olur.' },
+      { icon: ShieldCheck, title: 'Güven', description: 'Gizlilik ve etik sınırlar korunur.' },
+      { icon: UserCheck, title: 'Uygun Eşleşme', description: 'Danışan doğru uzmanla buluşur.' },
+      { icon: Leaf, title: 'Sürdürülebilir Gelişim', description: 'Uygulanabilir gelişim adımları kurulur.' },
+      { icon: BriefcaseBusiness, title: 'Profesyonel Sorumluluk', description: 'Süreç açık ve yapılandırılmış ilerler.' },
+    ],
+    ethicsHeading: 'Etik ve profesyonel sınırlar',
+    ethicsParagraphs: [
+      'AURIX’te koçluk ve danışmanlık süreçleri; bireyin veya kurumun gelişim hedeflerine eşlik eden profesyonel süreçlerdir. Psikoterapi, tıbbi tedavi veya klinik müdahalenin yerine geçmez.',
+      'İhtiyaç farklı bir uzmanlık alanına yönlendirme gerektirdiğinde, bu sınırlar açık ve sorumlu biçimde gözetilir.',
+    ],
+    ethicsCta: 'Etik çerçeve hakkında sık sorulanları inceleyin',
+    expertPhotoAlt: (name: string) => `${name} uzman görseli`,
+    metaTitle: 'Hakkımızda',
+    metaDescription:
+      'AURIX; farklı uzmanlık alanlarından gelen profesyonellerin deneyimini tek bir gelişim çatısı altında buluşturan koçluk ve danışmanlık platformudur.',
+  },
+  en: {
+    heroEyebrow: 'About',
+    heroHeading: 'A multi-disciplinary development framework that understands the need and matches the right expert.',
+    heroBody:
+      'Led by Kaan Yazıcı, AURIX designs reliable, structured, and human-centered coaching processes for individuals, executives, organizations, and students.',
+    ctaPrimary: 'Request an Introductory Call',
+    ctaSecondary: 'Meet Our Expert Team',
+    founderCardEyebrow: 'Founding Leadership',
+    founderCardTitle: 'Kaan Yazıcı and the AURIX Approach',
+    founderCardBody: 'A human-centered focus, ethical framework, and right expert match come together at the same table.',
+    heroPillars: ['Clarity', 'Match', 'Growth'],
+    founderStoryEyebrow: 'Founder Story',
+    founderStoryHeading: 'Founder Kaan Yazıcı’s Journey',
+    founderStoryParagraphs: [
+      'AURIX’s founding story rests on the idea of approaching a person not only through professional achievement, but through mental, emotional, and social wholeness.',
+      'Kaan Yazıcı combines experience from the healthcare field with a public administration perspective and a professional coaching approach, accompanying individuals and teams as they bring out their potential more consciously.',
+    ],
+    founderHighlights: [
+      { icon: Heart, title: 'Human-centered experience from healthcare' },
+      { icon: LayoutGrid, title: 'A public administration perspective' },
+      { icon: Users, title: 'Professional coaching and team development' },
+    ],
+    founderCta: 'Meet Kaan Yazıcı',
+    whyEyebrow: 'Why AURIX?',
+    whyHeading: 'The right context, instead of one-size-fits-all answers.',
+    whyItems: [
+      {
+        icon: LayoutGrid,
+        title: 'A Multi-Disciplinary View',
+        description: 'Brings together different professional backgrounds under one development framework.',
+      },
+      {
+        icon: UserCheck,
+        title: 'The Right Expert Match',
+        description: 'Understands the need and matches the client with the right service area and expert.',
+      },
+      {
+        icon: Map,
+        title: 'A Structured Process',
+        description: 'Builds goal clarity, process design, and follow-up steps together.',
+      },
+    ],
+    approachEyebrow: 'AURIX Approach',
+    approachHeading: 'The right need, the right expert, the right process.',
+    approachBody:
+      'The process doesn’t begin by proposing a service directly — the need is understood first, then the right expert and working framework are put in place.',
+    valuesEyebrow: 'Values',
+    valuesHeading: 'AURIX Values',
+    values: [
+      { icon: Target, title: 'Clarity', description: 'The real need and goal become visible.' },
+      { icon: ShieldCheck, title: 'Trust', description: 'Confidentiality and ethical boundaries are upheld.' },
+      { icon: UserCheck, title: 'Right Match', description: 'The client is matched with the right expert.' },
+      { icon: Leaf, title: 'Sustainable Growth', description: 'Actionable development steps are put in place.' },
+      { icon: BriefcaseBusiness, title: 'Professional Responsibility', description: 'The process moves forward openly and in a structured way.' },
+    ],
+    ethicsHeading: 'Ethics and professional boundaries',
+    ethicsParagraphs: [
+      'At AURIX, coaching and consulting processes support the development goals of an individual or organization. They do not replace psychotherapy, medical treatment, or clinical intervention.',
+      'When a need calls for a different area of expertise, these boundaries are respected openly and responsibly.',
+    ],
+    ethicsCta: 'Review frequently asked questions about our ethical framework',
+    expertPhotoAlt: (name: string) => `${name} expert photo`,
+    metaTitle: 'About',
+    metaDescription:
+      'AURIX is a coaching and consulting platform that brings together professionals from different fields of expertise under a single development framework.',
+  },
+} as const
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const copy = COPY[locale]
+  return {
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    alternates: { languages: { tr: '/hakkimizda', en: '/en/hakkimizda' } },
+  }
 }
-
-const FOUNDER_HIGHLIGHTS = [
-  {
-    icon: Heart,
-    title: 'Sağlık alanından insan odaklı deneyim',
-  },
-  {
-    icon: LayoutGrid,
-    title: 'Kamu yönetimi perspektifi',
-  },
-  {
-    icon: Users,
-    title: 'Profesyonel koçluk ve takım gelişimi',
-  },
-]
-
-const WHY_AURIX = [
-  {
-    icon: LayoutGrid,
-    title: 'Çok Disiplinli Bakış',
-    description:
-      'Farklı mesleki deneyimleri tek bir gelişim çatısı altında birleştirir.',
-  },
-  {
-    icon: UserCheck,
-    title: 'Doğru Uzman Eşleşmesi',
-    description:
-      'İhtiyacı anlayıp danışanı uygun hizmet alanı ve uzmanla buluşturur.',
-  },
-  {
-    icon: Map,
-    title: 'Yapılandırılmış Süreç',
-    description:
-      'Hedef netliği, süreç tasarımı ve takip adımlarını birlikte kurar.',
-  },
-]
-
-const VALUES = [
-  {
-    icon: Target,
-    title: 'Netlik',
-    description: 'Gerçek ihtiyaç ve hedef görünür olur.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Güven',
-    description: 'Gizlilik ve etik sınırlar korunur.',
-  },
-  {
-    icon: UserCheck,
-    title: 'Uygun Eşleşme',
-    description: 'Danışan doğru uzmanla buluşur.',
-  },
-  {
-    icon: Leaf,
-    title: 'Sürdürülebilir Gelişim',
-    description: 'Uygulanabilir gelişim adımları kurulur.',
-  },
-  {
-    icon: BriefcaseBusiness,
-    title: 'Profesyonel Sorumluluk',
-    description: 'Süreç açık ve yapılandırılmış ilerler.',
-  },
-]
-
-const HERO_PILLARS = ['Netlik', 'Eşleşme', 'Gelişim']
 
 function ExpertPortrait({
   expert,
+  altText,
   className = '',
   priority = false,
 }: {
   expert: (typeof STATIC_EXPERTS)[number]
+  altText: string
   className?: string
   priority?: boolean
 }) {
@@ -117,7 +198,7 @@ function ExpertPortrait({
       ) : (
         <Image
           src={`/media/${placeholder}`}
-          alt={`${expert.name} uzman gorseli`}
+          alt={altText}
           fill
           sizes="(max-width: 768px) 90vw, 420px"
           className="object-cover object-top grayscale-[12%]"
@@ -127,7 +208,13 @@ function ExpertPortrait({
   )
 }
 
-export default function HakkimizdaPage() {
+export default async function HakkimizdaPage({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>
+}) {
+  const { locale } = await params
+  const copy = COPY[locale]
   const founder = STATIC_EXPERTS.find((expert) => expert.slug === 'kaan-yazici') ?? STATIC_EXPERTS[0]
   return (
     <>
@@ -139,31 +226,30 @@ export default function HakkimizdaPage() {
           <FadeIn>
             <div>
               <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#C5A059]">
-                Hakkımızda
+                {copy.heroEyebrow}
               </span>
               <h1
                 id="hakkimizda-hero-heading"
                 className="mt-4 max-w-3xl font-serif text-display-serif-lg tracking-tight text-[#1A1C1E]"
               >
-                İhtiyacı anlayan, doğru uzmanla buluşturan çok disiplinli gelişim çatısı.
+                {copy.heroHeading}
               </h1>
               <p className="mt-6 max-w-xl text-body-md leading-relaxed text-[#5B6168]">
-                AURIX, Kaan Yazıcı liderliğinde bireyler, yöneticiler, kurumlar ve öğrenciler için
-                güvenilir, yapılandırılmış ve insan odaklı koçluk süreçleri tasarlar.
+                {copy.heroBody}
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link
-                  href="/iletisim"
+                  href={localeHref('/iletisim', locale)}
                   className="inline-flex items-center justify-center gap-2 rounded-sm bg-[#14797C] px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#0f5f62] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
                 >
-                  Ön Görüşme Talep Et
+                  {copy.ctaPrimary}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
                 <Link
-                  href="/uzmanlar"
+                  href={localeHref('/uzmanlar', locale)}
                   className="inline-flex items-center justify-center gap-2 rounded-sm border border-[#14797C] px-6 py-3.5 text-sm font-semibold text-[#14797C] transition-colors duration-200 hover:bg-[#14797C]/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
                 >
-                  Uzman Kadromuzu Tanıyın
+                  {copy.ctaSecondary}
                 </Link>
               </div>
             </div>
@@ -175,6 +261,7 @@ export default function HakkimizdaPage() {
                 <div className="grid gap-4 sm:grid-cols-[0.95fr_1.05fr]">
                   <ExpertPortrait
                     expert={founder}
+                    altText={copy.expertPhotoAlt(founder.name)}
                     priority
                     className="aspect-[4/5] rounded-sm shadow-[0_18px_42px_rgba(26,28,30,0.08)] transition-transform duration-500 motion-safe:group-hover:scale-[1.015]"
                   />
@@ -184,18 +271,18 @@ export default function HakkimizdaPage() {
                     </div>
                     <div className="pr-14">
                       <span className="text-[10px] font-mono font-bold uppercase tracking-[0.22em] text-[#C5A059]">
-                        Kurucu Liderlik
+                        {copy.founderCardEyebrow}
                       </span>
                       <p className="mt-3 font-serif text-2xl leading-tight text-[#1A1C1E]">
-                        Kaan Yazıcı ve AURIX yaklaşımı
+                        {copy.founderCardTitle}
                       </p>
                       <p className="mt-4 text-sm leading-relaxed text-[#5B6168]">
-                        İnsan odağı, etik çerçeve ve doğru uzman eşleşmesi aynı masada buluşur.
+                        {copy.founderCardBody}
                       </p>
                     </div>
 
                     <div className="grid grid-cols-3 gap-2">
-                      {HERO_PILLARS.map((pillar) => (
+                      {copy.heroPillars.map((pillar) => (
                         <div key={pillar} className="rounded-sm border border-[#E2E5DE] bg-white px-3 py-3 text-center transition-transform duration-300 motion-safe:hover:scale-[1.04] motion-reduce:transition-none">
                           <Check className="mx-auto h-4 w-4 text-[#14797C]" aria-hidden="true" />
                           <span className="mt-2 block text-[11px] font-bold text-[#1A1C1E]">{pillar}</span>
@@ -214,32 +301,26 @@ export default function HakkimizdaPage() {
         <div className="mx-auto grid max-w-container grid-cols-1 gap-10 px-6 lg:grid-cols-[0.42fr_0.58fr] lg:items-center">
           <FadeIn>
             <div className="rounded-md border border-[#E2E5DE] bg-[#FCFDF9] p-3 shadow-[0_18px_54px_rgba(26,28,30,0.08)] transition-all duration-300 hover:shadow-[0_24px_64px_rgba(26,28,30,0.12)] motion-safe:hover:scale-[1.015] motion-reduce:transition-none">
-              <ExpertPortrait expert={founder} className="aspect-[4/5] rounded-sm" />
+              <ExpertPortrait expert={founder} altText={copy.expertPhotoAlt(founder.name)} className="aspect-[4/5] rounded-sm" />
             </div>
           </FadeIn>
 
           <FadeIn delay={0.08}>
             <div>
               <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#C5A059]">
-                Founder Story
+                {copy.founderStoryEyebrow}
               </span>
               <h2 id="founder-heading" className="mt-3 font-serif text-display-serif-md text-[#1A1C1E]">
-                Kurucumuz Kaan Yazıcı’nın yolculuğu
+                {copy.founderStoryHeading}
               </h2>
               <div className="mt-6 space-y-4 text-body-md leading-relaxed text-[#5B6168]">
-                <p>
-                  AURIX’in kurucu hikâyesi, insanı yalnızca mesleki başarılarıyla değil; zihinsel,
-                  duygusal ve sosyal bütünlüğüyle ele alma fikrine dayanır.
-                </p>
-                <p>
-                  Kaan Yazıcı, sağlık alanındaki deneyimini kamu yönetimi perspektifi ve
-                  profesyonel koçluk yaklaşımıyla birleştirerek bireylerin ve takımların
-                  potansiyellerini daha bilinçli şekilde ortaya çıkarmalarına eşlik eder.
-                </p>
+                {copy.founderStoryParagraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
               </div>
 
               <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-3">
-                {FOUNDER_HIGHLIGHTS.map((item) => {
+                {copy.founderHighlights.map((item) => {
                   const Icon = item.icon
                   return (
                     <div key={item.title} className="rounded-md border border-[#E2E5DE] bg-[#FCFDF9] p-4 transition-all duration-300 hover:border-[#14797C]/45 hover:shadow-[0_16px_36px_rgba(26,28,30,0.08)] motion-safe:hover:scale-[1.025] motion-reduce:transition-none">
@@ -251,10 +332,10 @@ export default function HakkimizdaPage() {
               </div>
 
               <Link
-                href="/uzmanlar/kaan-yazici"
+                href={localeHref('/uzmanlar/kaan-yazici', locale)}
                 className="mt-7 inline-flex items-center gap-1.5 rounded-sm text-sm font-bold text-[#14797C] transition-colors hover:text-[#C5A059] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
               >
-                Kaan Yazıcı’yı Tanıyın
+                {copy.founderCta}
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
               </Link>
             </div>
@@ -267,17 +348,17 @@ export default function HakkimizdaPage() {
           <FadeIn>
             <div className="mb-10 max-w-2xl">
               <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#C5A059]">
-                Neden AURIX?
+                {copy.whyEyebrow}
               </span>
               <h2 id="why-heading" className="mt-3 font-serif text-display-serif-md text-[#1A1C1E]">
-                Tek tip cevaplar yerine doğru bağlam.
+                {copy.whyHeading}
               </h2>
             </div>
           </FadeIn>
 
           <FadeIn delay={0.08}>
             <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-              {WHY_AURIX.map((item) => {
+              {copy.whyItems.map((item) => {
                 const Icon = item.icon
                 return (
                   <article
@@ -302,14 +383,13 @@ export default function HakkimizdaPage() {
           <FadeIn>
             <div className="mb-10 max-w-2xl">
               <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#C5A059]">
-                AURIX Yaklaşımı
+                {copy.approachEyebrow}
               </span>
               <h2 id="approach-heading-title" className="mt-3 font-serif text-display-serif-md text-[#1A1C1E]">
-                Doğru ihtiyaç, doğru uzman, doğru süreç.
+                {copy.approachHeading}
               </h2>
               <p className="mt-4 text-body-md leading-relaxed text-[#5B6168]">
-                Süreç doğrudan hizmet önermekle başlamaz; önce ihtiyaç anlaşılır, sonra uygun uzman
-                ve çalışma çerçevesi kurulur.
+                {copy.approachBody}
               </p>
             </div>
           </FadeIn>
@@ -329,8 +409,8 @@ export default function HakkimizdaPage() {
                         <Icon className="h-5 w-5" aria-hidden="true" />
                       </span>
                     </div>
-                    <h3 className="font-serif text-lg text-[#1A1C1E]">{step.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-[#5B6168]">{step.description}</p>
+                    <h3 className="font-serif text-lg text-[#1A1C1E]">{pick(step.title, locale)}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-[#5B6168]">{pick(step.description, locale)}</p>
                   </article>
                 </FadeIn>
               )
@@ -344,17 +424,17 @@ export default function HakkimizdaPage() {
           <FadeIn>
             <div className="mb-10 max-w-2xl">
               <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#C5A059]">
-                Değerler
+                {copy.valuesEyebrow}
               </span>
               <h2 id="values-heading" className="mt-3 font-serif text-display-serif-md text-[#1A1C1E]">
-                AURIX değerleri
+                {copy.valuesHeading}
               </h2>
             </div>
           </FadeIn>
 
           <FadeIn delay={0.08}>
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {VALUES.map((value) => {
+              {copy.values.map((value) => {
                 const Icon = value.icon
                 return (
                   <article
@@ -382,22 +462,18 @@ export default function HakkimizdaPage() {
                   <ShieldCheck className="h-6 w-6" aria-hidden="true" />
                 </div>
                 <h2 id="ethics-heading" className="font-serif text-3xl text-[#F6F7F1]">
-                  Etik ve profesyonel sınırlar
+                  {copy.ethicsHeading}
                 </h2>
-                <p className="mt-5 text-base leading-8 text-[#D9DDD4]">
-                  AURIX’te koçluk ve danışmanlık süreçleri; bireyin veya kurumun gelişim
-                  hedeflerine eşlik eden profesyonel süreçlerdir. Psikoterapi, tıbbi tedavi veya
-                  klinik müdahalenin yerine geçmez.
-                </p>
-                <p className="mt-4 text-base leading-8 text-[#D9DDD4]">
-                  İhtiyaç farklı bir uzmanlık alanına yönlendirme gerektirdiğinde, bu sınırlar açık
-                  ve sorumlu biçimde gözetilir.
-                </p>
+                {copy.ethicsParagraphs.map((paragraph) => (
+                  <p key={paragraph} className="mt-5 text-base leading-8 text-[#D9DDD4]">
+                    {paragraph}
+                  </p>
+                ))}
                 <Link
-                  href="/sss"
+                  href={localeHref('/sss', locale)}
                   className="mt-7 inline-flex items-center gap-2 rounded-sm text-sm font-bold text-[#8ED7D4] transition-colors hover:text-[#C5A059] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C5A059]"
                 >
-                  Etik çerçeve hakkında sık sorulanları inceleyin
+                  {copy.ethicsCta}
                   <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </Link>
               </div>
@@ -406,7 +482,7 @@ export default function HakkimizdaPage() {
         </div>
       </section>
 
-      <FinalCTA />
+      <FinalCTA locale={locale} />
     </>
   )
 }

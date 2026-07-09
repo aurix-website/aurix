@@ -4,12 +4,44 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { ArrowRight, Compass, X } from 'lucide-react'
 import { SERVICES, SERVICE_DETAIL_SLUGS, type ServiceCategory } from '@/lib/services-data'
+import { pick, localeHref } from '@/lib/i18n/pick'
+import { DEFAULT_LOCALE, type Locale } from '@/lib/i18n/types'
 
-function getServiceHref(service: ServiceCategory) {
-  return `/hizmetler/${SERVICE_DETAIL_SLUGS[service.id] ?? service.id}`
+const COPY = {
+  tr: {
+    eyebrow: 'Uzmanlığımız, etkiniz.',
+    heading: 'Uzmanlık Alanlarımız',
+    body: 'Her kategoriye tıklayarak kapsadığı hizmetleri keşfedin.',
+    viewAll: 'Tümünü gör',
+    cardAria: 'hizmetlerini incele',
+    serviceAreaCount: (count: number) => `${count} hizmet alanı`,
+    explore: 'İncele',
+    tagline: 'Doğru rehberlik. Güçlü dönüşüm. Sürdürülebilir etki.',
+    close: 'Kapat',
+    detailCta: 'Bu Alan Hakkında Detay Al',
+    categoryServices: 'Bu kategorideki hizmetler',
+  },
+  en: {
+    eyebrow: 'Our expertise, your impact.',
+    heading: 'Our Areas of Expertise',
+    body: 'Click each category to explore the services it includes.',
+    viewAll: 'View all',
+    cardAria: 'services',
+    serviceAreaCount: (count: number) => `${count} service areas`,
+    explore: 'Explore',
+    tagline: 'Right guidance. Strong transformation. Sustainable impact.',
+    close: 'Close',
+    detailCta: 'Get Details About This Area',
+    categoryServices: 'Services in this category',
+  },
+} as const
+
+function getServiceHref(service: ServiceCategory, locale: Locale) {
+  return localeHref(`/hizmetler/${SERVICE_DETAIL_SLUGS[service.id] ?? service.id}`, locale)
 }
 
-export function ServicesSection() {
+export function ServicesSection({ locale = DEFAULT_LOCALE }: { locale?: Locale }) {
+  const copy = COPY[locale]
   const [active, setActive] = useState<ServiceCategory | null>(null)
   const [selectedSub, setSelectedSub] = useState<number>(0)
 
@@ -40,24 +72,24 @@ export function ServicesSection() {
             <div className="mb-3 flex items-center gap-3">
               <span className="h-7 w-px bg-[#C5A059]" aria-hidden="true" />
               <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#C5A059]">
-                Uzmanlığımız, etkiniz.
+                {copy.eyebrow}
               </span>
             </div>
             <h2 className="font-serif text-display-serif-md text-[#1A1C1E]">
-              Uzmanlık Alanlarımız
+              {copy.heading}
             </h2>
             <div className="mt-4 flex items-center gap-4">
               <span className="h-px w-12 bg-[#C5A059]" aria-hidden="true" />
               <p className="font-sans text-sm text-[#5B6168] leading-relaxed">
-                Her kategoriye tıklayarak kapsadığı hizmetleri keşfedin.
+                {copy.body}
               </p>
             </div>
           </div>
           <Link
-            href="/hizmetler"
+            href={localeHref('/hizmetler', locale)}
             className="group inline-flex items-center gap-2 self-start border-b border-[#14797C]/35 pb-1 text-sm font-sans font-semibold text-[#14797C] transition-colors hover:text-[#1A1C1E] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-4 rounded-sm sm:self-auto"
           >
-            Tümünü gör
+            {copy.viewAll}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
           </Link>
         </div>
@@ -75,7 +107,7 @@ export function ServicesSection() {
                 key={service.id}
                 onClick={() => setActive(service)}
                 className="group relative min-h-[265px] overflow-hidden rounded-md border border-[#E2E5DE] bg-[#FCFDF9] text-left shadow-[0_18px_45px_rgba(26,28,30,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_70px_rgba(26,28,30,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#14797C] focus-visible:ring-offset-2"
-                aria-label={`${service.title} hizmetlerini incele`}
+                aria-label={`${pick(service.title, locale)} ${copy.cardAria}`}
               >
                 <div
                   className="absolute bottom-0 left-0 top-0 w-16 sm:w-[92px]"
@@ -132,10 +164,10 @@ export function ServicesSection() {
                       className="block text-[10px] font-mono font-bold uppercase tracking-[0.24em]"
                       style={{ color: accentDeep }}
                     >
-                      {service.category}
+                      {pick(service.category, locale)}
                     </span>
                     <h3 className="mt-3 max-w-[430px] font-serif text-2xl leading-tight text-[#1A1C1E] transition-colors group-hover:text-[#14797C] sm:text-[1.65rem]">
-                      {service.title}
+                      {pick(service.title, locale)}
                     </h3>
                     <span
                       className="mt-3 block h-px w-16"
@@ -143,7 +175,7 @@ export function ServicesSection() {
                       aria-hidden="true"
                     />
                     <p className="mt-4 max-w-[430px] font-sans text-sm leading-relaxed text-[#5B6168]">
-                      {service.description}
+                      {pick(service.description, locale)}
                     </p>
                   </div>
 
@@ -156,13 +188,13 @@ export function ServicesSection() {
                       >
                         <Icon className="h-4 w-4" />
                       </span>
-                      {service.subServices.length} hizmet alanı
+                      {copy.serviceAreaCount(service.subServices.length)}
                     </span>
                     <span
                       className="inline-flex items-center gap-2 text-xs font-semibold transition-all duration-300 group-hover:gap-3"
                       style={{ color: accentDeep }}
                     >
-                      İncele <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                      {copy.explore} <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                     </span>
                   </div>
                 </div>
@@ -177,7 +209,7 @@ export function ServicesSection() {
             <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#C5A059]/40 text-[#C5A059]">
               <Compass className="h-4 w-4" aria-hidden="true" />
             </span>
-            Doğru rehberlik. Güçlü dönüşüm. Sürdürülebilir etki.
+            {copy.tagline}
           </span>
           <span className="hidden h-px w-20 bg-[#C5A059]/30 sm:block" aria-hidden="true" />
         </div>
@@ -197,12 +229,12 @@ export function ServicesSection() {
               className="relative bg-[#F6F7F1] rounded-sm w-full max-w-3xl max-h-[88vh] overflow-hidden shadow-2xl flex flex-col md:flex-row"
               role="dialog"
               aria-modal="true"
-              aria-label={active.title}
+              aria-label={pick(active.title, locale)}
             >
               <button
                 onClick={() => setActive(null)}
                 className="absolute top-4 right-4 z-20 w-9 h-9 rounded-sm bg-white/15 hover:bg-white/30 md:bg-[#E2E5DE]/50 md:hover:bg-[#E2E5DE] flex items-center justify-center transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white md:focus-visible:outline-[#1A9CA0]"
-                aria-label="Kapat"
+                aria-label={copy.close}
               >
                 <X className="h-4 w-4 text-white md:text-[#1A1C1E]" aria-hidden="true" />
               </button>
@@ -221,21 +253,21 @@ export function ServicesSection() {
                     <ActiveIcon className="h-7 w-7 text-white" aria-hidden="true" />
                   </div>
                   <span className="text-[10px] font-mono tracking-widest font-bold uppercase block text-white/70">
-                    {active.number} / {active.category}
+                    {active.number} / {pick(active.category, locale)}
                   </span>
                   <h3 className="font-serif text-2xl text-white leading-tight">
-                    {active.title}
+                    {pick(active.title, locale)}
                   </h3>
                   <p className="font-sans text-sm leading-relaxed text-white/85">
-                    {active.description}
+                    {pick(active.description, locale)}
                   </p>
                 </div>
 
                 <Link
-                  href={getServiceHref(active)}
+                  href={getServiceHref(active, locale)}
                   className="relative mt-6 inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white/25 text-white px-5 py-3 text-sm font-semibold rounded-sm transition-all duration-200 border border-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
                 >
-                  Bu Alan Hakkında Detay Al
+                  {copy.detailCta}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
@@ -243,14 +275,14 @@ export function ServicesSection() {
               <div className="flex-1 flex flex-col overflow-hidden">
                 <div className="p-6 sm:p-7 space-y-2 overflow-y-auto">
                   <span className="text-[10px] font-mono tracking-widest text-[#C5A059] font-bold uppercase block mb-3">
-                    Bu kategorideki hizmetler
+                    {copy.categoryServices}
                   </span>
 
                   {active.subServices.map((sub, idx) => {
                     const isSelected = selectedSub === idx
                     return (
                       <button
-                        key={sub.title}
+                        key={pick(sub.title, locale)}
                         type="button"
                         onClick={() => setSelectedSub(idx)}
                         onMouseEnter={() => setSelectedSub(idx)}
@@ -268,11 +300,11 @@ export function ServicesSection() {
                             className="font-sans font-semibold text-sm transition-colors"
                             style={{ color: isSelected ? active.accent : '#1A1C1E' }}
                           >
-                            {sub.title}
+                            {pick(sub.title, locale)}
                           </span>
                         </div>
                         <p className="font-sans text-xs text-[#5B6168] leading-relaxed pt-2.5">
-                          {sub.description}
+                          {pick(sub.description, locale)}
                         </p>
                       </button>
                     )

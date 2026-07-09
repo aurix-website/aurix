@@ -1,9 +1,20 @@
-import { getPayload } from 'payload'
-import configPromise from '@payload-config'
 import net from 'node:net'
+import type { getPayload as getPayloadFn } from 'payload'
 
-// Payload singleton — reset on failure so next request retries
-let payloadClientPromise: ReturnType<typeof getPayload> | null = null
+let payloadClientPromise: ReturnType<typeof getPayloadFn> | null = null
+let dbReachabilityPromise: Promise<boolean> | null = null
+let dbReachabilityCache: {
+  endpointKey: string | null
+  checkedAt: number
+  reachable: boolean
+} = {
+  endpointKey: null,
+  checkedAt: 0,
+  reachable: false,
+}
+
+const DB_REACHABILITY_CACHE_MS = Number(process.env.PAYLOAD_DB_CHECK_CACHE_MS ?? 30_000)
+const DB_CONNECT_TIMEOUT_MS = Number(process.env.PAYLOAD_DB_CONNECT_TIMEOUT_MS ?? 120)
 
 function getDatabaseEndpoint(): { host: string; port: number } | null {
   const url = process.env.DATABASE_URL
@@ -16,22 +27,71 @@ function getDatabaseEndpoint(): { host: string; port: number } | null {
   }
 }
 
-function canReachDatabase(): Promise<boolean> {
-  const endpoint = getDatabaseEndpoint()
-  if (!endpoint) return Promise.resolve(false)
+function getEndpointKey(endpoint: { host: string; port: number } | null): string | null {
+  return endpoint ? `${endpoint.host}:${endpoint.port}` : null
+}
 
+function isPayloadDisabled(): boolean {
+  return process.env.PAYLOAD_DISABLED === 'true'
+}
+
+function canReadPayloadFromPublicPages(): boolean {
+  return process.env.PAYLOAD_PUBLIC_READS === 'true'
+}
+
+function probeDatabase(endpoint: { host: string; port: number }): Promise<boolean> {
   return new Promise((resolve) => {
     const socket = net.createConnection(endpoint)
+    let settled = false
+
     const done = (v: boolean) => {
+      if (settled) return
+      settled = true
       socket.removeAllListeners()
       socket.destroy()
       resolve(v)
     }
-    socket.setTimeout(400)
+
+    socket.setTimeout(DB_CONNECT_TIMEOUT_MS)
     socket.once('connect', () => done(true))
     socket.once('error', () => done(false))
     socket.once('timeout', () => done(false))
   })
+}
+
+function canReachDatabase({ force = false }: { force?: boolean } = {}): Promise<boolean> {
+  if (isPayloadDisabled()) return Promise.resolve(false)
+
+  const endpoint = getDatabaseEndpoint()
+  if (!endpoint) return Promise.resolve(false)
+
+  const endpointKey = getEndpointKey(endpoint)
+  const now = Date.now()
+
+  if (
+    !force &&
+    dbReachabilityCache.endpointKey === endpointKey &&
+    now - dbReachabilityCache.checkedAt < DB_REACHABILITY_CACHE_MS
+  ) {
+    return Promise.resolve(dbReachabilityCache.reachable)
+  }
+
+  if (!force && dbReachabilityPromise) return dbReachabilityPromise
+
+  dbReachabilityPromise = probeDatabase(endpoint)
+    .then((reachable) => {
+      dbReachabilityCache = {
+        endpointKey,
+        checkedAt: Date.now(),
+        reachable,
+      }
+      return reachable
+    })
+    .finally(() => {
+      dbReachabilityPromise = null
+    })
+
+  return dbReachabilityPromise
 }
 
 export async function isPayloadAvailable(): Promise<boolean> {
@@ -40,8 +100,11 @@ export async function isPayloadAvailable(): Promise<boolean> {
 
 export const getPayloadClient = async () => {
   if (!payloadClientPromise) {
+    const [{ getPayload }, { default: configPromise }] = await Promise.all([
+      import('payload'),
+      import('@payload-config'),
+    ])
     payloadClientPromise = getPayload({ config: configPromise })
-    // Reset singleton if initialization fails so future requests retry
     payloadClientPromise.catch(() => {
       payloadClientPromise = null
     })
@@ -49,9 +112,14 @@ export const getPayloadClient = async () => {
   return payloadClientPromise
 }
 
-export const getOptionalPayloadClient = async () => {
+export const getOptionalPayloadClient = async (
+  options: { forceCheck?: boolean; allowPublicReadDisabled?: boolean } = {},
+) => {
   try {
-    const reachable = await canReachDatabase()
+    if (!options.allowPublicReadDisabled && !canReadPayloadFromPublicPages()) {
+      return null
+    }
+    const reachable = await canReachDatabase({ force: options.forceCheck })
     if (!reachable) return null
     return await getPayloadClient()
   } catch {

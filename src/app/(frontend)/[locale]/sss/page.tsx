@@ -5,26 +5,72 @@ import { FadeIn } from '@/components/ui/FadeIn'
 import { FinalCTA } from '@/components/sections/FinalCTA'
 import { FaqAccordion } from '@/components/FaqAccordion'
 import { FAQ_CATEGORIES, ALL_FAQ_ITEMS } from '@/lib/faq-data'
+import { pick, localeHref } from '@/lib/i18n/pick'
+import type { Locale } from '@/lib/i18n/types'
 
-export const metadata: Metadata = {
-  title: 'Sıkça Sorulan Sorular',
-  description:
-    'AURIX hizmetleri, uzmanları, ön görüşme süreci ve kurumsal eğitimler hakkında sıkça sorulan sorular.',
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const title = locale === 'en' ? 'Frequently Asked Questions' : 'Sıkça Sorulan Sorular'
+  const description =
+    locale === 'en'
+      ? 'Frequently asked questions about AURIX services, experts, the introductory call process, and corporate training.'
+      : 'AURIX hizmetleri, uzmanları, ön görüşme süreci ve kurumsal eğitimler hakkında sıkça sorulan sorular.'
+  return {
+    title,
+    description,
+    alternates: { languages: { tr: '/sss', en: '/en/sss' } },
+  }
 }
 
-const FAQ_SCHEMA = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: ALL_FAQ_ITEMS.map((item) => ({
-    '@type': 'Question',
-    name: item.question,
-    acceptedAnswer: { '@type': 'Answer', text: item.answer },
-  })),
-}
+const COPY = {
+  tr: {
+    eyebrow: 'SSS',
+    heading: 'Sıkça sorulan sorular',
+    body: 'Hizmetler, uzmanlar, ön görüşme süreci ve kurumsal eğitimler hakkında en çok sorulan soruları bir araya getirdik. Aradığınızı bulamazsanız doğrudan bizimle iletişime geçebilirsiniz.',
+    heroPillars: ['Netlik', 'Gizlilik', 'Hız'],
+    guideLabel: 'SSS Rehberi',
+    guideHeading: 'Merak edilen konular tek sayfada',
+    guideBody: (categories: number, items: number) =>
+      `${categories} kategori altında ${items} soruyu yanıtladık; aradığınızı bulamazsanız ön görüşme talebiyle doğrudan bize ulaşabilirsiniz.`,
+    ctaHeading: 'Aradığınız cevabı bulamadınız mı?',
+    ctaBody: 'İhtiyacınızı paylaşın; size uygun hizmet, uzman ve ön görüşme sürecini birlikte netleştirelim.',
+    ctaButton: 'Ön Görüşme Talep Et',
+  },
+  en: {
+    eyebrow: 'FAQ',
+    heading: 'Frequently asked questions',
+    body: 'We brought together the most frequently asked questions about our services, experts, the introductory call process, and corporate training. If you can’t find what you’re looking for, feel free to contact us directly.',
+    heroPillars: ['Clarity', 'Confidentiality', 'Speed'],
+    guideLabel: 'FAQ Guide',
+    guideHeading: 'Everything you’re curious about, on one page',
+    guideBody: (categories: number, items: number) =>
+      `We answered ${items} questions across ${categories} categories; if you can’t find what you’re looking for, you can reach us directly by requesting an introductory call.`,
+    ctaHeading: "Couldn't find the answer you were looking for?",
+    ctaBody: "Share what you need; let's clarify together the right service, expert, and introductory call process for you.",
+    ctaButton: 'Request an Introductory Call',
+  },
+} as const
 
-const HERO_PILLARS = ['Netlik', 'Gizlilik', 'Hız']
-
-export default function SssPage() {
+export default async function SssPage({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>
+}) {
+  const { locale } = await params
+  const copy = COPY[locale]
+  const FAQ_SCHEMA = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: ALL_FAQ_ITEMS.map((item) => ({
+      '@type': 'Question',
+      name: pick(item.question, locale),
+      acceptedAnswer: { '@type': 'Answer', text: pick(item.answer, locale) },
+    })),
+  }
   return (
     <>
       <script
@@ -40,18 +86,16 @@ export default function SssPage() {
           <FadeIn>
             <div>
               <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#C5A059]">
-                SSS
+                {copy.eyebrow}
               </span>
               <h1
                 id="sss-hero-heading"
                 className="mt-4 max-w-xl font-serif text-display-serif-lg tracking-tight text-[#1A1C1E]"
               >
-                Sıkça sorulan sorular
+                {copy.heading}
               </h1>
               <p className="mt-6 max-w-xl text-body-md leading-relaxed text-[#5B6168]">
-                Hizmetler, uzmanlar, ön görüşme süreci ve kurumsal eğitimler hakkında en çok
-                sorulan soruları bir araya getirdik. Aradığınızı bulamazsanız doğrudan bizimle
-                iletişime geçebilirsiniz.
+                {copy.body}
               </p>
               <div className="mt-8 flex flex-wrap gap-2.5">
                 {FAQ_CATEGORIES.map((category) => {
@@ -63,7 +107,7 @@ export default function SssPage() {
                       className="inline-flex items-center gap-2 rounded-sm border border-[#E2E5DE] bg-[#FCFDF9] px-4 py-2.5 text-sm font-semibold text-[#1A1C1E] transition-colors duration-200 hover:border-[#14797C] hover:text-[#14797C] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
                     >
                       <Icon className="h-3.5 w-3.5" aria-hidden="true" />
-                      {category.title}
+                      {pick(category.title, locale)}
                     </Link>
                   )
                 })}
@@ -78,19 +122,17 @@ export default function SssPage() {
                   <HelpCircle className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <span className="mt-6 block text-[10px] font-mono font-bold uppercase tracking-[0.22em] text-[#C5A059]">
-                  SSS Rehberi
+                  {copy.guideLabel}
                 </span>
                 <p className="mt-3 font-serif text-2xl leading-tight text-[#1A1C1E]">
-                  Merak edilen konular tek sayfada
+                  {copy.guideHeading}
                 </p>
                 <p className="mt-4 text-sm leading-relaxed text-[#5B6168]">
-                  {FAQ_CATEGORIES.length} kategori altında {ALL_FAQ_ITEMS.length} soruyu
-                  yanıtladık; aradığınızı bulamazsanız ön görüşme talebiyle doğrudan bize
-                  ulaşabilirsiniz.
+                  {copy.guideBody(FAQ_CATEGORIES.length, ALL_FAQ_ITEMS.length)}
                 </p>
 
                 <div className="mt-7 grid grid-cols-3 gap-2">
-                  {HERO_PILLARS.map((pillar) => (
+                  {copy.heroPillars.map((pillar) => (
                     <div key={pillar} className="rounded-sm border border-[#E2E5DE] bg-white px-3 py-3 text-center transition-transform duration-300 motion-safe:hover:scale-[1.04] motion-reduce:transition-none">
                       <HelpCircle className="mx-auto h-4 w-4 text-[#14797C]" aria-hidden="true" />
                       <span className="mt-2 block text-[11px] font-bold text-[#1A1C1E]">{pillar}</span>
@@ -124,14 +166,14 @@ export default function SssPage() {
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <h2 id={`${category.id}-heading`} className="mt-1 font-serif text-display-serif-md text-[#1A1C1E]">
-                        {category.title}
+                        {pick(category.title, locale)}
                       </h2>
                     </div>
                   </div>
                 </FadeIn>
 
                 <FadeIn delay={0.08}>
-                  <FaqAccordion items={category.items} />
+                  <FaqAccordion items={category.items} locale={locale} />
                 </FadeIn>
               </div>
             </div>
@@ -149,17 +191,16 @@ export default function SssPage() {
                   <HelpCircle className="h-6 w-6" aria-hidden="true" />
                 </div>
                 <h2 id="sss-cta-heading" className="font-serif text-3xl text-[#F6F7F1]">
-                  Aradığınız cevabı bulamadınız mı?
+                  {copy.ctaHeading}
                 </h2>
                 <p className="mt-5 text-base leading-8 text-[#D9DDD4]">
-                  İhtiyacınızı paylaşın; size uygun hizmet, uzman ve ön görüşme sürecini
-                  birlikte netleştirelim.
+                  {copy.ctaBody}
                 </p>
                 <Link
-                  href="/iletisim"
+                  href={localeHref('/iletisim', locale)}
                   className="mt-7 inline-flex items-center justify-center gap-2 rounded-sm bg-[#14797C] px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#0f5f62] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
                 >
-                  Ön Görüşme Talep Et
+                  {copy.ctaButton}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </div>
@@ -168,7 +209,7 @@ export default function SssPage() {
         </div>
       </section>
 
-      <FinalCTA />
+      <FinalCTA locale={locale} />
     </>
   )
 }

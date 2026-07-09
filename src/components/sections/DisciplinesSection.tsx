@@ -1,22 +1,15 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import type { Locale } from '@/lib/i18n/types'
+import { dictionary } from '@/lib/i18n/dictionary'
+import { localeHref } from '@/lib/i18n/pick'
 
-const DISCIPLINES = [
-  'Eğitim ve Öğrenme Psikolojisi',
-  'Uluslararası Kariyer Geçişi',
-  'İnsan Kaynakları ve Organizasyon',
-  'Kurumsal Liderlik Gelişimi',
-  'Nörobilim ve Davranış Tasarımı',
-  'Koçluk Metodolojisi',
-  'Kariyer Yönelimi',
-  'Takım Dinamikleri',
-]
-
-const ROW_1 = [...DISCIPLINES, ...DISCIPLINES]
-const ROW_2 = [...DISCIPLINES.slice(4), ...DISCIPLINES, ...DISCIPLINES.slice(0, 4)]
-const ROW_3 = [...DISCIPLINES.slice(2), ...DISCIPLINES, ...DISCIPLINES.slice(0, 2)]
-
-export function DisciplinesSection() {
+export function DisciplinesSection({ locale }: { locale: Locale }) {
+  const copy = dictionary[locale].disciplines
+  const DISCIPLINES = copy.items
+  const ROW_1 = [...DISCIPLINES, ...DISCIPLINES]
+  const ROW_2 = [...DISCIPLINES.slice(4), ...DISCIPLINES, ...DISCIPLINES.slice(0, 4)]
+  const ROW_3 = [...DISCIPLINES.slice(2), ...DISCIPLINES, ...DISCIPLINES.slice(0, 2)]
   return (
     <section className="bg-[#2E2E30] py-14 lg:py-20 overflow-hidden">
       <div className="mx-auto px-4 sm:px-6" style={{ maxWidth: '1200px' }}>
@@ -25,24 +18,22 @@ export function DisciplinesSection() {
           {/* Sol: Başlık */}
           <div className="space-y-6">
             <span className="text-[11px] font-mono tracking-widest text-[#C5A059] font-bold uppercase block">
-              YAKLAŞIMIMIZ
+              {copy.eyebrow}
             </span>
             <h2
               className="font-serif text-[#F6F7F1] tracking-tight"
               style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', lineHeight: '1.2' }}
             >
-              Farklı disiplinlerden uzmanlar,
-              ortak bir çerçevede çalışır.
+              {copy.heading}
             </h2>
             <p className="font-sans text-[#D7DEE4] leading-relaxed max-w-md" style={{ fontSize: '1.0625rem' }}>
-              Her danışanın ihtiyacı farklıdır. Bu yüzden tek bir metodoloji değil,
-              birbirini tamamlayan uzmanlık alanlarından oluşan bir ekosistem sunuyoruz.
+              {copy.body}
             </p>
             <Link
-              href="/hakkimizda"
+              href={localeHref('/hakkimizda', locale)}
               className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-[#C5A059] hover:text-[#F6F7F1] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C5A059] focus-visible:outline-offset-2 rounded-sm"
             >
-              Yaklaşımımızı öğren
+              {copy.cta}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>

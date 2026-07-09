@@ -1,7 +1,6 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import {
   ArrowRight,
@@ -14,18 +13,60 @@ import {
   User,
   Users,
 } from 'lucide-react'
-import { STATIC_EXPERTS, EXPERT_PLACEHOLDERS, EXPERT_FILTER_CATEGORIES } from '@/lib/experts-data'
+import { ExpertVisual } from '@/components/ExpertVisual'
+import { STATIC_EXPERTS, EXPERT_FILTER_CATEGORIES } from '@/lib/experts-data'
+import { pick, localeHref } from '@/lib/i18n/pick'
+import { DEFAULT_LOCALE, type Locale } from '@/lib/i18n/types'
 
-const ALL = 'Tümü'
-const FILTERS = [ALL, ...EXPERT_FILTER_CATEGORIES]
+const ALL_TR = 'Tümü'
+const ALL_EN = 'All'
+
+const COPY = {
+  tr: {
+    searchSr: 'Uzman ara',
+    searchPlaceholder: 'Uzman adı veya uzmanlık ara',
+    sortLabel: 'Sırala',
+    sortAria: 'Uzmanları sırala',
+    sortByName: 'İsme göre',
+    sortByCategory: 'Uzmanlığa göre',
+    filterAria: 'Uzmanlık alanına göre filtrele',
+    emptyHeading: 'Uygun uzman bulunamadı.',
+    emptyBody: 'Arama veya filtre seçimini değiştirerek tekrar deneyebilirsiniz.',
+    profileAria: (name: string) => `${name} uzman profili`,
+    photoAlt: (name: string) => `${name} uzman görseli`,
+    tagsAria: (name: string) => `${name} etiketleri`,
+    viewProfile: 'Profili İncele',
+    ctaHeading: 'Doğru uzmanla başlayın',
+    ctaBody: 'İhtiyacınızı anlamak ve en uygun uzmana yönlendirmek için kısa bir ön görüşme planlayalım.',
+    ctaButton: 'Ön Görüşme Planla',
+  },
+  en: {
+    searchSr: 'Search experts',
+    searchPlaceholder: 'Search by expert name or specialty',
+    sortLabel: 'Sort',
+    sortAria: 'Sort experts',
+    sortByName: 'By name',
+    sortByCategory: 'By specialty',
+    filterAria: 'Filter by area of expertise',
+    emptyHeading: 'No matching expert found.',
+    emptyBody: 'Try changing your search or filter selection.',
+    profileAria: (name: string) => `${name} expert profile`,
+    photoAlt: (name: string) => `${name} expert photo`,
+    tagsAria: (name: string) => `${name} tags`,
+    viewProfile: 'View Profile',
+    ctaHeading: 'Start with the right expert',
+    ctaBody: 'Let’s schedule a short introductory call to understand your need and guide you to the right expert.',
+    ctaButton: 'Schedule an Introductory Call',
+  },
+} as const
 
 function getCategoryIcon(label?: string) {
   if (!label) return User
-  if (label.includes('Yönetici')) return Crown
-  if (label.includes('Kurumsal')) return BriefcaseBusiness
-  if (label.includes('Öğrenci')) return GraduationCap
-  if (label.includes('Takım')) return Users
-  if (label.includes('Kariyer')) return Target
+  if (label.includes('Yönetici') || label.includes('Executive')) return Crown
+  if (label.includes('Kurumsal') || label.includes('Corporate')) return BriefcaseBusiness
+  if (label.includes('Öğrenci') || label.includes('Student')) return GraduationCap
+  if (label.includes('Takım') || label.includes('Team')) return Users
+  if (label.includes('Kariyer') || label.includes('Career')) return Target
   return User
 }
 
@@ -33,36 +74,44 @@ function getAccent(index: number) {
   return ['#14797C', '#C5A059', '#82906F'][index % 3]
 }
 
-export function ExpertsGrid() {
+export function ExpertsGrid({ locale = DEFAULT_LOCALE }: { locale?: Locale }) {
+  const copy = COPY[locale]
+  const ALL = locale === 'en' ? ALL_EN : ALL_TR
+  const FILTERS = [ALL, ...pick(EXPERT_FILTER_CATEGORIES, locale)]
   const [active, setActive] = useState<string>(ALL)
   const [query, setQuery] = useState('')
   const [sort, setSort] = useState('name')
+  const localeTag = locale === 'en' ? 'en' : 'tr-TR'
 
   const filtered = useMemo(() => {
-    const normalizedQuery = query.trim().toLocaleLowerCase('tr-TR')
+    const normalizedQuery = query.trim().toLocaleLowerCase(localeTag)
     const result = STATIC_EXPERTS.filter((expert) => {
-      const matchesFilter = active === ALL || expert.filterCategories?.includes(active)
+      const filterCategories = expert.filterCategories ? pick(expert.filterCategories, locale) : undefined
+      const listingTags = expert.listingTags ? pick(expert.listingTags, locale) : undefined
+      const matchesFilter = active === ALL || filterCategories?.includes(active)
       const haystack = [
         expert.name,
-        expert.title,
-        expert.shortCard,
-        ...(expert.listingTags ?? []),
-        ...(expert.filterCategories ?? []),
+        expert.title ? pick(expert.title, locale) : undefined,
+        expert.shortCard ? pick(expert.shortCard, locale) : undefined,
+        ...(listingTags ?? []),
+        ...(filterCategories ?? []),
       ]
         .filter(Boolean)
         .join(' ')
-        .toLocaleLowerCase('tr-TR')
+        .toLocaleLowerCase(localeTag)
 
       return matchesFilter && (!normalizedQuery || haystack.includes(normalizedQuery))
     })
 
     return [...result].sort((a, b) => {
+      const aCategories = a.filterCategories ? pick(a.filterCategories, locale) : []
+      const bCategories = b.filterCategories ? pick(b.filterCategories, locale) : []
       if (sort === 'category') {
-        return (a.filterCategories?.[0] ?? '').localeCompare(b.filterCategories?.[0] ?? '', 'tr')
+        return (aCategories[0] ?? '').localeCompare(bCategories[0] ?? '', localeTag)
       }
-      return a.name.localeCompare(b.name, 'tr')
+      return a.name.localeCompare(b.name, localeTag)
     })
-  }, [active, query, sort])
+  }, [active, query, sort, locale, ALL, localeTag])
 
   return (
     <div>
@@ -71,27 +120,27 @@ export function ExpertsGrid() {
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <label className="relative flex min-h-11 w-full items-center md:max-w-[360px]">
             <Search className="absolute left-3 h-4 w-4 text-[#5B6168]" aria-hidden="true" />
-            <span className="sr-only">Uzman ara</span>
+            <span className="sr-only">{copy.searchSr}</span>
             <input
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Uzman adı veya uzmanlık ara"
+              placeholder={copy.searchPlaceholder}
               className="h-11 w-full rounded-sm border border-[#E2E5DE] bg-white pl-10 pr-3 text-sm text-[#1A1C1E] outline-none transition-colors placeholder:text-[#8A929A] focus:border-[#14797C]"
             />
             </label>
 
             <div className="flex items-center justify-between gap-2 md:justify-end">
               <span className="text-[11px] font-mono font-bold uppercase tracking-[0.16em] text-[#8A929A]">
-                Sırala
+                {copy.sortLabel}
               </span>
               <select
                 value={sort}
                 onChange={(event) => setSort(event.target.value)}
                 className="h-10 min-w-[150px] rounded-sm border border-[#E2E5DE] bg-white px-3 text-xs font-semibold text-[#5B6168] outline-none transition-colors focus:border-[#14797C]"
-                aria-label="Uzmanları sırala"
+                aria-label={copy.sortAria}
               >
-                <option value="name">İsme göre</option>
-                <option value="category">Uzmanlığa göre</option>
+                <option value="name">{copy.sortByName}</option>
+                <option value="category">{copy.sortByCategory}</option>
               </select>
               <span className="hidden h-10 w-10 items-center justify-center rounded-sm border border-[#E2E5DE] bg-white text-[#14797C] sm:inline-flex">
                 <Grid2X2 className="h-4 w-4" aria-hidden="true" />
@@ -102,7 +151,7 @@ export function ExpertsGrid() {
           <div
             className="flex flex-wrap items-center gap-2 border-t border-[#E2E5DE] pt-4"
             role="group"
-            aria-label="Uzmanlık alanına göre filtrele"
+            aria-label={copy.filterAria}
           >
             {FILTERS.map((filter) => {
               const isActive = filter === active
@@ -128,18 +177,18 @@ export function ExpertsGrid() {
 
       {filtered.length === 0 ? (
         <div className="rounded-md border border-[#E2E5DE] bg-[#FCFDF9] p-8 text-center">
-          <h3 className="font-serif text-2xl text-[#1A1C1E]">Uygun uzman bulunamadı.</h3>
-          <p className="mt-2 text-sm text-[#5B6168]">Arama veya filtre seçimini değiştirerek tekrar deneyebilirsiniz.</p>
+          <h3 className="font-serif text-2xl text-[#1A1C1E]">{copy.emptyHeading}</h3>
+          <p className="mt-2 text-sm text-[#5B6168]">{copy.emptyBody}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3" role="list">
           {filtered.map((expert, index) => {
-            const photo =
-              expert.photo != null && typeof expert.photo === 'object' ? expert.photo : null
-            const placeholder =
-              (expert.slug && EXPERT_PLACEHOLDERS[expert.slug]) ?? `expert-${expert.id}.jpg`
             const accent = getAccent(index)
-            const Icon = getCategoryIcon(expert.filterCategories?.[0])
+            const filterCategories = expert.filterCategories ? pick(expert.filterCategories, locale) : undefined
+            const listingTags = expert.listingTags ? pick(expert.listingTags, locale) : undefined
+            const title = expert.title ? pick(expert.title, locale) : undefined
+            const shortCard = expert.shortCard ? pick(expert.shortCard, locale) : undefined
+            const Icon = getCategoryIcon(filterCategories?.[0])
 
             return (
               <article
@@ -147,32 +196,21 @@ export function ExpertsGrid() {
                 role="listitem"
                 className="group overflow-hidden rounded-md border border-[#E2E5DE] bg-[#FCFDF9] shadow-[0_14px_38px_rgba(26,28,30,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(26,28,30,0.11)]"
               >
-                <div className="grid min-h-[240px] grid-cols-[42%_1fr]">
+                <div className="grid grid-cols-1 sm:min-h-[240px] sm:grid-cols-[42%_1fr]">
                   <Link
-                    href={`/uzmanlar/${expert.slug}`}
-                    className="relative block overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2"
-                    aria-label={`${expert.name} uzman profili`}
+                    href={localeHref(`/uzmanlar/${expert.slug}`, locale)}
+                    className="relative block min-h-[230px] overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2 sm:min-h-0"
+                    aria-label={copy.profileAria(expert.name)}
                   >
                     <div className="absolute inset-y-0 left-0 w-4" style={{ backgroundColor: accent }} aria-hidden="true" />
-                    <div className="absolute -left-5 top-0 h-full w-16 rounded-r-[60%] bg-[#FCFDF9]" aria-hidden="true" />
+                    <div className="absolute -left-5 top-0 hidden h-full w-16 rounded-r-[60%] bg-[#FCFDF9] sm:block" aria-hidden="true" />
                     <div className="absolute inset-0 left-4">
-                      {photo?.url ? (
-                        <Image
-                          src={photo.url}
-                          alt={photo.alt ?? expert.name}
-                          fill
-                          sizes="(max-width: 768px) 42vw, 240px"
-                          className="object-cover object-top grayscale-[12%] transition-all duration-300 group-hover:scale-[1.03] group-hover:grayscale-0"
-                        />
-                      ) : (
-                        <Image
-                          src={`/media/${placeholder}`}
-                          alt={`${expert.name} uzman gorseli`}
-                          fill
-                          sizes="(max-width: 768px) 42vw, 240px"
-                          className="object-cover object-top grayscale-[12%] transition-all duration-300 group-hover:scale-[1.03] group-hover:grayscale-0"
-                        />
-                      )}
+                      <ExpertVisual
+                        expert={expert}
+                        alt={copy.photoAlt(expert.name)}
+                        sizes="(max-width: 768px) 42vw, 240px"
+                        imageClassName="object-cover object-top grayscale-[12%] transition-all duration-300 group-hover:scale-[1.03] group-hover:grayscale-0"
+                      />
                     </div>
                   </Link>
 
@@ -188,12 +226,12 @@ export function ExpertsGrid() {
                       <h3 className="font-serif text-xl leading-tight text-[#1A1C1E]">
                         {expert.name}
                       </h3>
-                      {expert.title && <p className="mt-1 text-[11px] font-semibold text-[#5B6168]">{expert.title}</p>}
+                      {title && <p className="mt-1 text-[11px] font-semibold text-[#5B6168]">{title}</p>}
                     </div>
 
-                    {expert.listingTags && expert.listingTags.length > 0 && (
-                      <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={`${expert.name} etiketleri`}>
-                        {expert.listingTags.slice(0, 3).map((tag) => (
+                    {listingTags && listingTags.length > 0 && (
+                      <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={copy.tagsAria(expert.name)}>
+                        {listingTags.slice(0, 3).map((tag) => (
                           <li
                             key={tag}
                             className="rounded-full border border-[#E2E5DE] bg-white px-2.5 py-1 text-[10px] font-semibold text-[#5B6168]"
@@ -204,17 +242,17 @@ export function ExpertsGrid() {
                       </ul>
                     )}
 
-                    {expert.shortCard && (
+                    {shortCard && (
                       <p className="mt-4 line-clamp-4 text-xs leading-relaxed text-[#5B6168]">
-                        {expert.shortCard}
+                        {shortCard}
                       </p>
                     )}
 
                     <Link
-                      href={`/uzmanlar/${expert.slug}`}
+                      href={localeHref(`/uzmanlar/${expert.slug}`, locale)}
                       className="mt-auto inline-flex items-center gap-1.5 pt-5 text-xs font-bold text-[#14797C] transition-colors hover:text-[#C5A059] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2 rounded-sm"
                     >
-                      Profili İncele
+                      {copy.viewProfile}
                       <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                     </Link>
                   </div>
@@ -231,16 +269,16 @@ export function ExpertsGrid() {
             <Users className="h-6 w-6" aria-hidden="true" />
           </div>
           <div>
-            <h3 className="font-serif text-2xl text-[#1A1C1E]">Doğru uzmanla başlayın</h3>
+            <h3 className="font-serif text-2xl text-[#1A1C1E]">{copy.ctaHeading}</h3>
             <p className="mt-1 max-w-2xl text-sm leading-relaxed text-[#5B6168]">
-              İhtiyacınızı anlamak ve en uygun uzmana yönlendirmek için kısa bir ön görüşme planlayalım.
+              {copy.ctaBody}
             </p>
           </div>
           <Link
-            href="/iletisim?interest=emin-degilim"
+            href={localeHref('/iletisim?interest=emin-degilim', locale)}
             className="inline-flex items-center justify-center gap-2 rounded-sm bg-[#14797C] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0f5f62] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
           >
-            Ön Görüşme Planla
+            {copy.ctaButton}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>

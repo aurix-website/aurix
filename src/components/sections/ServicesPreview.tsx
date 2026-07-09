@@ -2,6 +2,9 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { FadeIn } from '@/components/ui/FadeIn'
 import { getOptionalPayloadClient } from '@/lib/payload-client'
+import type { Locale } from '@/lib/i18n/types'
+import { dictionary } from '@/lib/i18n/dictionary'
+import { localeHref } from '@/lib/i18n/pick'
 
 type ServiceDoc = {
   title?: string | null
@@ -18,47 +21,18 @@ type CategoryCard = {
   overline: string
 }
 
-const CATEGORY_FALLBACKS: CategoryCard[] = [
-  {
-    value: 'bireysel-kocluk-kariyer',
-    label: 'Bireysel Koçluk & Kariyer',
-    description:
-      'Kariyer geçişleri, hedef netliği ve bireysel gelişim için yapılandırılmış koçluk.',
-    code: '01',
-    overline: 'BİREYSEL',
-  },
-  {
-    value: 'liderlik-yonetici',
-    label: 'Liderlik & Yönetici Gelişimi',
-    description: 'Liderlik koçluğu ve yönetici gelişimi programları.',
-    code: '02',
-    overline: 'LİDERLİK',
-  },
-  {
-    value: 'kurumsal-takim',
-    label: 'Kurumsal & Takım Koçluğu',
-    description: 'Ekip performansını destekleyen kurumsal eğitim ve takım koçluğu.',
-    code: '03',
-    overline: 'KURUMSAL',
-  },
-  {
-    value: 'gencler-kuresel',
-    label: 'Gençler & Küresel Uyum',
-    description: 'Öğrenci koçluğu, sınav stratejisi ve küresel kariyer uyumu.',
-    code: '04',
-    overline: 'GENÇLER',
-  },
-]
-
-async function getCategories(): Promise<CategoryCard[]> {
+async function getCategories(locale: Locale): Promise<CategoryCard[]> {
+  const fallbacks = dictionary[locale].servicesPreview.categories as unknown as CategoryCard[]
   try {
     const payload = await getOptionalPayloadClient()
-    if (!payload) return CATEGORY_FALLBACKS
+    if (!payload) return fallbacks
 
     const result = await payload.find({
       collection: 'services',
       limit: 100,
       depth: 0,
+      locale,
+      fallbackLocale: 'tr',
     })
 
     const firstByCategory = new Map<string, ServiceDoc>()
@@ -68,7 +42,7 @@ async function getCategories(): Promise<CategoryCard[]> {
       }
     }
 
-    return CATEGORY_FALLBACKS.map((cat) => {
+    return fallbacks.map((cat) => {
       const first = firstByCategory.get(cat.value)
       return {
         ...cat,
@@ -76,12 +50,14 @@ async function getCategories(): Promise<CategoryCard[]> {
       }
     })
   } catch {
-    return CATEGORY_FALLBACKS
+    return fallbacks
   }
 }
 
-export async function ServicesPreview() {
-  const categories = await getCategories()
+export async function ServicesPreview({ locale }: { locale: Locale }) {
+  const categories = await getCategories(locale)
+  const copy = dictionary[locale].servicesPreview
+  const cta = dictionary[locale].common
 
   return (
     <section
@@ -94,21 +70,21 @@ export async function ServicesPreview() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
             <div>
               <span className="block text-[11px] font-mono tracking-widest text-[#C5A059] font-bold uppercase mb-3">
-                Hizmetler
+                {copy.eyebrow}
               </span>
               <h2
                 id="services-heading"
                 className="font-serif text-[#1A1C1E] tracking-tight"
                 style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', lineHeight: '1.15' }}
               >
-                Uzmanlık Alanlarımız
+                {copy.heading}
               </h2>
             </div>
             <Link
-              href="/hizmetler"
+              href={localeHref('/hizmetler', locale)}
               className="shrink-0 text-sm font-bold text-[#14797C] hover:text-[#C5A059] inline-flex items-center gap-1.5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2 rounded-sm"
             >
-              Tümünü gör
+              {cta.viewAll}
               <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
           </div>
@@ -131,11 +107,11 @@ export async function ServicesPreview() {
                   {cat.description}
                 </p>
                 <Link
-                  href={`/hizmetler/${cat.value}`}
+                  href={localeHref(`/hizmetler/${cat.value}`, locale)}
                   className="text-xs text-[#14797C] hover:text-[#C5A059] font-bold inline-flex items-center gap-1.5 transition-colors self-start focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2 rounded-sm"
-                  aria-label={`${cat.label} hizmetini incele`}
+                  aria-label={`${copy.viewAllAria} ${cat.label}`}
                 >
-                  Detayları Gör
+                  {cta.viewDetails}
                   <ArrowRight className="h-3 w-3" aria-hidden="true" />
                 </Link>
               </article>

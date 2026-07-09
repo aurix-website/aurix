@@ -10,75 +10,178 @@ import {
 import { FadeIn } from '@/components/ui/FadeIn'
 import { ExpertsGrid } from '@/components/ExpertsGrid'
 import { FinalCTA } from '@/components/sections/FinalCTA'
+import { localeHref } from '@/lib/i18n/pick'
+import type { Locale } from '@/lib/i18n/types'
 
-export const metadata: Metadata = {
-  title: 'Uzmanlar',
-  description:
-    'AURIX uzman kadrosu; bireysel koçluk, yönetici koçluğu, kurumsal eğitim, öğrenci koçluğu, kariyer gelişimi ve global uyum alanlarında profesyonel destek sunar.',
+const COPY = {
+  tr: {
+    metaTitle: 'Uzmanlar',
+    metaDescription:
+      'AURIX uzman kadrosu; bireysel koçluk, yönetici koçluğu, kurumsal eğitim, öğrenci koçluğu, kariyer gelişimi ve global uyum alanlarında profesyonel destek sunar.',
+    breadcrumbHome: 'Ana Sayfa',
+    breadcrumbCurrent: 'Uzmanlar',
+    eyebrow: 'Aurix Ekibi',
+    heading: 'Uzmanlarımız',
+    body: 'Her uzmanımız farklı deneyim ve yetkinliklerle yanınızda. Hedeflerinize en uygun rehberliği keşfedin, birlikte anlamlı ve sürdürülebilir dönüşüm yaratalım.',
+    ctaPrimary: 'Uzmanları Keşfet',
+    ctaSecondary: 'Ön Görüşme Talep Et',
+    placeholderLabel: 'Placeholder',
+    placeholderTitle: 'Uzman görseli',
+    hoverAreaLabel: 'Hover efektli alan',
+    listHeading: 'Uzman listesi',
+    approachEyebrow: 'Yaklaşımımız',
+    approachHeading: 'Çalışma Yaklaşımımız',
+    approachItems: [
+      {
+        icon: Target,
+        title: 'Netlik',
+        description: 'Hedefleri netleştirir, öncelikleri belirler ve odaklanmayı sağlar.',
+      },
+      {
+        icon: ShieldCheck,
+        title: 'Güven',
+        description: 'Gizlilik, saygı ve empati temelli güvenli bir alan sunar.',
+      },
+      {
+        icon: LayoutGrid,
+        title: 'Yapı',
+        description: 'Kanıta dayalı yöntemlerle sürdürülebilir gelişimi destekler.',
+      },
+      {
+        icon: Leaf,
+        title: 'Sürdürülebilirlik',
+        description: 'Kalıcı gelişim için alışkanlıkları ve sistemleri güçlendirir.',
+      },
+    ],
+    faqHeading: 'Sıkça sorulan sorular',
+    faqItems: [
+      {
+        question: 'Hangi uzmanla çalışmam gerektiğini nasıl anlayacağım?',
+        answer:
+          'Ön görüşmede ihtiyacınızı, hedefinizi ve beklentinizi birlikte değerlendiririz. Buna göre sizi uygun hizmet alanı ve uzmanla eşleştiririz.',
+      },
+      {
+        question: 'Doğrudan bir uzman seçebilir miyim?',
+        answer:
+          'Evet. Uzman profillerini inceleyerek doğrudan ilgili uzman için ön görüşme talep edebilirsiniz. Emin değilseniz AURIX ekibi uygun eşleşme konusunda size rehberlik eder.',
+      },
+      {
+        question: 'Uzmanlarla online görüşme yapılabilir mi?',
+        answer:
+          'Uzman ve hizmet alanına göre online görüşme seçenekleri sunulabilir. Ön görüşme sırasında uygun çalışma biçimi birlikte belirlenir.',
+      },
+      {
+        question: 'Birden fazla uzmanla çalışmak mümkün mü?',
+        answer:
+          'İhtiyaca göre mümkündür. Örneğin bireysel koçluk, kurumsal eğitim veya global uyum gibi farklı alanlarda farklı uzmanların sürece dahil olması değerlendirilebilir.',
+      },
+      {
+        question: 'Uzman profillerindeki bilgiler nasıl kullanılmalı?',
+        answer:
+          'Uzman profilleri, kişinin eğitimini, deneyimini, çalışma alanlarını ve yaklaşımını tanımak için hazırlanmıştır. Nihai eşleşme, ön görüşmede ihtiyacın netleşmesiyle yapılır.',
+      },
+    ],
+  },
+  en: {
+    metaTitle: 'Experts',
+    metaDescription:
+      'The AURIX team of experts offers professional support in personal coaching, executive coaching, corporate training, student coaching, career development, and global adaptation.',
+    breadcrumbHome: 'Home',
+    breadcrumbCurrent: 'Experts',
+    eyebrow: 'The AURIX Team',
+    heading: 'Our Experts',
+    body: 'Each of our experts brings different experience and expertise to your side. Discover the guidance that best fits your goals, and let’s create meaningful, sustainable change together.',
+    ctaPrimary: 'Discover Our Experts',
+    ctaSecondary: 'Request an Introductory Call',
+    placeholderLabel: 'Placeholder',
+    placeholderTitle: 'Expert photo',
+    hoverAreaLabel: 'Hover-effect area',
+    listHeading: 'Expert list',
+    approachEyebrow: 'Our Approach',
+    approachHeading: 'How We Work',
+    approachItems: [
+      {
+        icon: Target,
+        title: 'Clarity',
+        description: 'Clarifies goals, sets priorities, and enables focus.',
+      },
+      {
+        icon: ShieldCheck,
+        title: 'Trust',
+        description: 'Offers a safe space built on confidentiality, respect, and empathy.',
+      },
+      {
+        icon: LayoutGrid,
+        title: 'Structure',
+        description: 'Supports sustainable development through evidence-based methods.',
+      },
+      {
+        icon: Leaf,
+        title: 'Sustainability',
+        description: 'Strengthens habits and systems for lasting growth.',
+      },
+    ],
+    faqHeading: 'Frequently asked questions',
+    faqItems: [
+      {
+        question: 'How will I know which expert I should work with?',
+        answer:
+          'In the introductory call, we assess your need, goal, and expectations together. Based on that, we match you with the right service area and expert.',
+      },
+      {
+        question: 'Can I choose an expert directly?',
+        answer:
+          'Yes. After reviewing expert profiles, you can request an introductory call directly for a specific expert. If you’re not sure, the AURIX team will guide you toward the right match.',
+      },
+      {
+        question: 'Can meetings with experts be held online?',
+        answer:
+          'Depending on the expert and service area, online meeting options may be offered. The appropriate working format is determined together during the introductory call.',
+      },
+      {
+        question: 'Is it possible to work with more than one expert?',
+        answer:
+          'Depending on the need, this is possible. For example, involving different experts across areas such as personal coaching, corporate training, or global adaptation can be considered.',
+      },
+      {
+        question: 'How should the information in expert profiles be used?',
+        answer:
+          'Expert profiles are prepared to introduce a person’s education, experience, working areas, and approach. The final match is made once the need becomes clear during the introductory call.',
+      },
+    ],
+  },
+} as const
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const copy = COPY[locale]
+  return {
+    title: copy.metaTitle,
+    description: copy.metaDescription,
+    alternates: { languages: { tr: '/uzmanlar', en: '/en/uzmanlar' } },
+  }
 }
 
-const APPROACH_ITEMS = [
-  {
-    icon: Target,
-    title: 'Netlik',
-    description: 'Hedefleri netleştirir, öncelikleri belirler ve odaklanmayı sağlar.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Güven',
-    description: 'Gizlilik, saygı ve empati temelli güvenli bir alan sunar.',
-  },
-  {
-    icon: LayoutGrid,
-    title: 'Yapı',
-    description: 'Kanıta dayalı yöntemlerle sürdürülebilir gelişimi destekler.',
-  },
-  {
-    icon: Leaf,
-    title: 'Sürdürülebilirlik',
-    description: 'Kalıcı gelişim için alışkanlıkları ve sistemleri güçlendirir.',
-  },
-]
-
-const FAQ_ITEMS = [
-  {
-    question: 'Hangi uzmanla çalışmam gerektiğini nasıl anlayacağım?',
-    answer:
-      'Ön görüşmede ihtiyacınızı, hedefinizi ve beklentinizi birlikte değerlendiririz. Buna göre sizi uygun hizmet alanı ve uzmanla eşleştiririz.',
-  },
-  {
-    question: 'Doğrudan bir uzman seçebilir miyim?',
-    answer:
-      'Evet. Uzman profillerini inceleyerek doğrudan ilgili uzman için ön görüşme talep edebilirsiniz. Emin değilseniz AURIX ekibi uygun eşleşme konusunda size rehberlik eder.',
-  },
-  {
-    question: 'Uzmanlarla online görüşme yapılabilir mi?',
-    answer:
-      'Uzman ve hizmet alanına göre online görüşme seçenekleri sunulabilir. Ön görüşme sırasında uygun çalışma biçimi birlikte belirlenir.',
-  },
-  {
-    question: 'Birden fazla uzmanla çalışmak mümkün mü?',
-    answer:
-      'İhtiyaca göre mümkündür. Örneğin bireysel koçluk, kurumsal eğitim veya global uyum gibi farklı alanlarda farklı uzmanların sürece dahil olması değerlendirilebilir.',
-  },
-  {
-    question: 'Uzman profillerindeki bilgiler nasıl kullanılmalı?',
-    answer:
-      'Uzman profilleri, kişinin eğitimini, deneyimini, çalışma alanlarını ve yaklaşımını tanımak için hazırlanmıştır. Nihai eşleşme, ön görüşmede ihtiyacın netleşmesiyle yapılır.',
-  },
-]
-
-const FAQ_SCHEMA = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: FAQ_ITEMS.map((item) => ({
-    '@type': 'Question',
-    name: item.question,
-    acceptedAnswer: { '@type': 'Answer', text: item.answer },
-  })),
-}
-
-export default function UzmanlarPage() {
+export default async function UzmanlarPage({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>
+}) {
+  const { locale } = await params
+  const copy = COPY[locale]
+  const FAQ_SCHEMA = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: copy.faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  }
   return (
     <>
       <script
@@ -94,15 +197,15 @@ export default function UzmanlarPage() {
           <FadeIn>
             <div>
               <nav className="mb-10 text-xs text-[#5B6168]" aria-label="Breadcrumb">
-                <Link href="/" className="hover:text-[#14797C]">Ana Sayfa</Link>
+                <Link href={localeHref('/', locale)} className="hover:text-[#14797C]">{copy.breadcrumbHome}</Link>
                 <span className="mx-2 text-[#C5A059]">/</span>
-                <span>Uzmanlar</span>
+                <span>{copy.breadcrumbCurrent}</span>
               </nav>
 
               <div className="mb-4 flex items-center gap-3">
                 <span className="h-px w-10 bg-[#C5A059]" aria-hidden="true" />
                 <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#C5A059]">
-                  Aurix Ekibi
+                  {copy.eyebrow}
                 </span>
               </div>
 
@@ -110,11 +213,10 @@ export default function UzmanlarPage() {
                 id="uzmanlar-hero-heading"
                 className="font-serif text-display-serif-lg text-[#1A1C1E]"
               >
-                Uzmanlarımız
+                {copy.heading}
               </h1>
               <p className="mt-5 max-w-xl text-body-md leading-relaxed text-[#5B6168]">
-                Her uzmanımız farklı deneyim ve yetkinliklerle yanınızda. Hedeflerinize en uygun
-                rehberliği keşfedin, birlikte anlamlı ve sürdürülebilir dönüşüm yaratalım.
+                {copy.body}
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -122,14 +224,14 @@ export default function UzmanlarPage() {
                   href="#uzman-listesi"
                   className="inline-flex items-center justify-center gap-2 rounded-sm bg-[#14797C] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#0f5f62] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
                 >
-                  Uzmanları Keşfet
+                  {copy.ctaPrimary}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
                 <Link
-                  href="/iletisim"
+                  href={localeHref('/iletisim', locale)}
                   className="inline-flex items-center justify-center gap-2 rounded-sm border border-[#14797C] px-6 py-3.5 text-sm font-semibold text-[#14797C] transition-colors hover:bg-[#14797C]/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
                 >
-                  Ön Görüşme Talep Et
+                  {copy.ctaSecondary}
                 </Link>
               </div>
             </div>
@@ -149,16 +251,16 @@ export default function UzmanlarPage() {
 
                 <div className="absolute left-5 top-5 border border-white/70 bg-[#FCFDF9]/88 px-4 py-3 shadow-[0_14px_36px_rgba(26,28,30,0.08)] backdrop-blur-sm transition-transform duration-500 group-hover:translate-x-1 group-hover:translate-y-1">
                   <span className="block text-[10px] font-mono font-bold uppercase tracking-[0.22em] text-[#C5A059]">
-                    Placeholder
+                    {copy.placeholderLabel}
                   </span>
                   <span className="mt-1 block font-serif text-xl font-semibold text-[#1A1C1E]">
-                    Uzman görseli
+                    {copy.placeholderTitle}
                   </span>
                 </div>
 
                 <div className="absolute bottom-5 right-5 flex items-center gap-2 border border-white/70 bg-[#14797C] px-4 py-3 text-xs font-semibold text-white shadow-[0_14px_36px_rgba(20,121,124,0.22)] transition-transform duration-500 group-hover:-translate-y-1">
                   <span className="h-2 w-2 bg-white/90" aria-hidden="true" />
-                  Hover efektli alan
+                  {copy.hoverAreaLabel}
                 </div>
               </div>
             </div>
@@ -170,11 +272,11 @@ export default function UzmanlarPage() {
         <div className="mx-auto max-w-container px-6">
           <FadeIn>
             <div className="sr-only">
-              <h2 id="uzman-listesi-heading">Uzman listesi</h2>
+              <h2 id="uzman-listesi-heading">{copy.listHeading}</h2>
             </div>
           </FadeIn>
 
-          <ExpertsGrid />
+          <ExpertsGrid locale={locale} />
         </div>
       </section>
 
@@ -185,19 +287,19 @@ export default function UzmanlarPage() {
               <div className="mb-3 flex items-center justify-center gap-3">
                 <span className="h-px w-12 bg-[#C5A059]" aria-hidden="true" />
                 <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#C5A059]">
-                  Yaklaşımımız
+                  {copy.approachEyebrow}
                 </span>
                 <span className="h-px w-12 bg-[#C5A059]" aria-hidden="true" />
               </div>
               <h2 id="approach-heading" className="font-serif text-display-serif-md text-[#1A1C1E]">
-                Çalışma Yaklaşımımız
+                {copy.approachHeading}
               </h2>
             </div>
           </FadeIn>
 
           <FadeIn delay={0.08}>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {APPROACH_ITEMS.map((item, index) => {
+              {copy.approachItems.map((item, index) => {
                 const Icon = item.icon
                 const accent = ['#14797C', '#C5A059', '#82906F', '#14797C'][index]
                 return (
@@ -227,13 +329,13 @@ export default function UzmanlarPage() {
           <div className="max-w-3xl">
             <FadeIn>
               <h2 id="faq-heading" className="text-display-lg font-semibold text-ink mb-10">
-                Sıkça sorulan sorular
+                {copy.faqHeading}
               </h2>
             </FadeIn>
 
             <FadeIn delay={0.1}>
               <dl className="flex flex-col divide-y divide-hairline border-t border-b border-hairline">
-                {FAQ_ITEMS.map((item) => (
+                {copy.faqItems.map((item) => (
                   <div key={item.question} className="py-6">
                     <dt className="text-title-sm font-semibold text-ink mb-2">{item.question}</dt>
                     <dd className="text-body-sm text-body leading-relaxed">{item.answer}</dd>
@@ -245,7 +347,7 @@ export default function UzmanlarPage() {
         </div>
       </section>
 
-      <FinalCTA />
+      <FinalCTA locale={locale} />
     </>
   )
 }

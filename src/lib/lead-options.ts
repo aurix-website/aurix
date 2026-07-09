@@ -1,55 +1,72 @@
+import type { Localized } from './i18n/types'
+
 export interface SelectOption {
-  label: string
+  label: Localized<string>
   value: string
 }
 
 /** Ortak "destek almak istediğiniz alan" taksonomisi — /iletisim, /on-gorusme ve kart yönlendirmeleri bunu paylaşır */
 export const INTEREST_AREAS: SelectOption[] = [
-  { label: 'Bireysel Koçluk', value: 'bireysel-kocluk' },
-  { label: 'Yönetici Koçluğu', value: 'yonetici-koclugu' },
-  { label: 'Kurumsal Eğitim', value: 'kurumsal-egitim' },
-  { label: 'Öğrenci Koçluğu', value: 'ogrenci-koclugu' },
-  { label: 'Kariyer Koçluğu', value: 'kariyer-koclugu' },
-  { label: 'Takım Koçluğu', value: 'takim-koclugu' },
-  { label: 'Global Uyum ve Kariyer', value: 'global-uyum' },
-  { label: 'Emin Değilim', value: 'emin-degilim' },
+  { label: { tr: 'Bireysel Koçluk', en: 'Personal Coaching' }, value: 'bireysel-kocluk' },
+  { label: { tr: 'Yönetici Koçluğu', en: 'Executive Coaching' }, value: 'yonetici-koclugu' },
+  { label: { tr: 'Kurumsal Eğitim', en: 'Corporate Training' }, value: 'kurumsal-egitim' },
+  { label: { tr: 'Öğrenci Koçluğu', en: 'Student Coaching' }, value: 'ogrenci-koclugu' },
+  { label: { tr: 'Kariyer Koçluğu', en: 'Career Coaching' }, value: 'kariyer-koclugu' },
+  { label: { tr: 'Takım Koçluğu', en: 'Team Coaching' }, value: 'takim-koclugu' },
+  { label: { tr: 'Global Uyum ve Kariyer', en: 'Global Adaptation and Career' }, value: 'global-uyum' },
+  { label: { tr: 'Emin Değilim', en: 'Not Sure' }, value: 'emin-degilim' },
 ]
 
 export const CONTACT_REASONS: SelectOption[] = [
-  { label: 'Ön görüşme talep etmek istiyorum', value: 'on-gorusme' },
-  { label: 'Hizmetler hakkında bilgi almak istiyorum', value: 'hizmet-bilgi' },
-  { label: 'Kurumsal eğitim için görüşmek istiyorum', value: 'kurumsal' },
-  { label: 'Bir uzman hakkında bilgi almak istiyorum', value: 'uzman-bilgi' },
-  { label: 'Öğrenci koçluğu hakkında bilgi almak istiyorum', value: 'ogrenci-bilgi' },
-  { label: 'Genel bilgi almak istiyorum', value: 'genel' },
+  { label: { tr: 'Ön görüşme talep etmek istiyorum', en: 'I would like to request an introductory call' }, value: 'on-gorusme' },
+  { label: { tr: 'Hizmetler hakkında bilgi almak istiyorum', en: 'I would like information about services' }, value: 'hizmet-bilgi' },
+  { label: { tr: 'Kurumsal eğitim için görüşmek istiyorum', en: 'I would like to discuss corporate training' }, value: 'kurumsal' },
+  { label: { tr: 'Bir uzman hakkında bilgi almak istiyorum', en: 'I would like information about an expert' }, value: 'uzman-bilgi' },
+  { label: { tr: 'Öğrenci koçluğu hakkında bilgi almak istiyorum', en: 'I would like information about student coaching' }, value: 'ogrenci-bilgi' },
+  { label: { tr: 'Genel bilgi almak istiyorum', en: 'I would like general information' }, value: 'genel' },
 ]
 
 export const LANGUAGE_OPTIONS: SelectOption[] = [
-  { label: 'Türkçe', value: 'tr' },
-  { label: 'İngilizce', value: 'en' },
-  { label: 'Fark etmez', value: 'fark-etmez' },
+  { label: { tr: 'Türkçe', en: 'Turkish' }, value: 'tr' },
+  { label: { tr: 'İngilizce', en: 'English' }, value: 'en' },
+  { label: { tr: 'Fark etmez', en: 'No preference' }, value: 'fark-etmez' },
 ]
 
 export const MEETING_PREFERENCES: SelectOption[] = [
-  { label: 'Online görüşme', value: 'online' },
-  { label: 'Telefon görüşmesi', value: 'telefon' },
-  { label: 'WhatsApp üzerinden ilk temas', value: 'whatsapp' },
-  { label: 'Yüz yüze seçenekleri hakkında bilgi almak istiyorum', value: 'yuz-yuze-bilgi' },
+  { label: { tr: 'Online görüşme', en: 'Online meeting' }, value: 'online' },
+  { label: { tr: 'Telefon görüşmesi', en: 'Phone call' }, value: 'telefon' },
+  { label: { tr: 'WhatsApp üzerinden ilk temas', en: 'First contact via WhatsApp' }, value: 'whatsapp' },
+  {
+    label: { tr: 'Yüz yüze seçenekleri hakkında bilgi almak istiyorum', en: 'I would like information about in-person options' },
+    value: 'yuz-yuze-bilgi',
+  },
 ]
 
 /** Hizmete göre form-sonrası başarı mesajı (yalnızca /on-gorusme) */
-export const SUCCESS_MESSAGE_BY_INTEREST: Record<string, string> = {
-  'bireysel-kocluk':
-    'Talebiniz alındı. Bireysel koçluk ihtiyacınız değerlendirildikten sonra size uygun uzman ve ön görüşme süreci için dönüş yapılacaktır.',
-  'yonetici-koclugu':
-    'Talebiniz alındı. Liderlik rolünüz ve gelişim ihtiyacınız değerlendirildikten sonra size uygun yönetici koçluğu süreci için dönüş yapılacaktır.',
-  'kurumsal-egitim':
-    'Kurumsal talebiniz alındı. AURIX ekibi kurumunuzun ihtiyacını değerlendirmek ve uygun ihtiyaç analizi görüşmesini planlamak için sizinle iletişime geçecektir.',
-  'ogrenci-koclugu':
-    'Talebiniz alındı. Öğrencinin ihtiyacı ve hedefleri değerlendirildikten sonra uygun öğrenci koçluğu süreci için sizinle iletişime geçilecektir.',
-  'emin-degilim':
-    'Talebiniz alındı. Paylaştığınız bilgiler doğrultusunda size en uygun hizmet alanı ve uzman eşleşmesi için AURIX ekibi sizinle iletişime geçecektir.',
+export const SUCCESS_MESSAGE_BY_INTEREST: Record<string, Localized<string>> = {
+  'bireysel-kocluk': {
+    tr: 'Talebiniz alındı. Bireysel koçluk ihtiyacınız değerlendirildikten sonra size uygun uzman ve ön görüşme süreci için dönüş yapılacaktır.',
+    en: 'Your request has been received. Once your personal coaching need has been assessed, we will get back to you about the right expert and introductory call process.',
+  },
+  'yonetici-koclugu': {
+    tr: 'Talebiniz alındı. Liderlik rolünüz ve gelişim ihtiyacınız değerlendirildikten sonra size uygun yönetici koçluğu süreci için dönüş yapılacaktır.',
+    en: 'Your request has been received. Once your leadership role and development need have been assessed, we will get back to you about the right executive coaching process.',
+  },
+  'kurumsal-egitim': {
+    tr: 'Kurumsal talebiniz alındı. AURIX ekibi kurumunuzun ihtiyacını değerlendirmek ve uygun ihtiyaç analizi görüşmesini planlamak için sizinle iletişime geçecektir.',
+    en: 'Your corporate request has been received. The AURIX team will contact you to assess your organization’s need and schedule a needs analysis call.',
+  },
+  'ogrenci-koclugu': {
+    tr: 'Talebiniz alındı. Öğrencinin ihtiyacı ve hedefleri değerlendirildikten sonra uygun öğrenci koçluğu süreci için sizinle iletişime geçilecektir.',
+    en: 'Your request has been received. Once the student’s need and goals have been assessed, we will contact you about the right student coaching process.',
+  },
+  'emin-degilim': {
+    tr: 'Talebiniz alındı. Paylaştığınız bilgiler doğrultusunda size en uygun hizmet alanı ve uzman eşleşmesi için AURIX ekibi sizinle iletişime geçecektir.',
+    en: 'Your request has been received. Based on the information you shared, the AURIX team will contact you about the service area and expert match that fit you best.',
+  },
 }
 
-export const DEFAULT_SUCCESS_MESSAGE =
-  'Talebiniz başarıyla alındı. İhtiyacınız değerlendirildikten sonra uygun hizmet, uzman veya ön görüşme süreci hakkında sizinle iletişime geçilecektir.'
+export const DEFAULT_SUCCESS_MESSAGE: Localized<string> = {
+  tr: 'Talebiniz başarıyla alındı. İhtiyacınız değerlendirildikten sonra uygun hizmet, uzman veya ön görüşme süreci hakkında sizinle iletişime geçilecektir.',
+  en: 'Your request has been received successfully. Once your need has been assessed, we will contact you about the right service, expert, or introductory call process.',
+}

@@ -7,6 +7,8 @@ import { FinalCTA } from '@/components/sections/FinalCTA'
 import { getExpertBySlug } from '@/lib/experts-data'
 import { SERVICES } from '@/lib/services-data'
 import type { ServiceDetail } from '@/lib/service-detail-data'
+import { pick } from '@/lib/i18n/pick'
+import { DEFAULT_LOCALE, type Locale } from '@/lib/i18n/types'
 
 const SERVICE_IMAGE_SLUGS = new Set([
   'bireysel-kocluk',
@@ -15,7 +17,13 @@ const SERVICE_IMAGE_SLUGS = new Set([
   'ogrenci-koclugu',
 ])
 
-export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
+export function ServiceDetailTemplate({
+  detail,
+  locale = DEFAULT_LOCALE,
+}: {
+  detail: ServiceDetail
+  locale?: Locale
+}) {
   const experts = detail.expertSlugs
     .map((slug) => getExpertBySlug(slug))
     .filter((expert): expert is NonNullable<typeof expert> => Boolean(expert))
@@ -36,34 +44,34 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
                 <div className="flex items-center gap-3">
                   <span className="h-px w-10 bg-[#C5A059]" aria-hidden="true" />
                   <span className="text-[11px] font-mono tracking-widest text-[#C5A059] font-bold uppercase">
-                    {detail.eyebrow}
+                    {pick(detail.eyebrow, locale)}
                   </span>
                 </div>
                 <h1
                   id="service-hero-heading"
                   className="font-serif text-ink tracking-tight text-display-serif-lg"
                 >
-                  {detail.h1}
+                  {pick(detail.h1, locale)}
                 </h1>
                 <p className="text-body-md text-muted leading-relaxed max-w-2xl">
-                  {detail.heroSubtitle}
+                  {pick(detail.heroSubtitle, locale)}
                 </p>
                 <p className="text-body-sm text-body leading-relaxed max-w-2xl border-l border-[#C5A059]/50 pl-5">
-                  {detail.introText}
+                  {pick(detail.introText, locale)}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Link
                     href={`/iletisim?interest=${detail.slug}`}
                     className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#14797C] hover:bg-[#0f5f62] text-white text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
                   >
-                    {detail.primaryCta}
+                    {pick(detail.primaryCta, locale)}
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                   <Link
                     href="/hizmetler"
                     className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-transparent border border-[#14797C] text-[#14797C] hover:bg-[#14797C]/5 text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
                   >
-                    {detail.secondaryCta}
+                    {pick(detail.secondaryCta, locale)}
                   </Link>
                 </div>
               </div>
@@ -96,7 +104,7 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
                     <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#1A1C1E]">
                       AURIX
                     </span>
-                    <span className="text-xs text-muted">{detail.eyebrow}</span>
+                    <span className="text-xs text-muted">{pick(detail.eyebrow, locale)}</span>
                   </div>
                 </div>
               </div>
@@ -115,10 +123,10 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
                     id="audience-heading"
                     className="font-serif text-display-serif-md text-[#1A1C1E] tracking-tight"
                   >
-                    {detail.audienceHeading}
+                    {pick(detail.audienceHeading, locale)}
                   </h2>
                   <p className="font-sans text-body-md text-[#5B6168] leading-relaxed">
-                    {detail.audienceIntro}
+                    {pick(detail.audienceIntro, locale)}
                   </p>
                 </div>
               </FadeIn>
@@ -126,21 +134,21 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
               <FadeIn delay={0.1}>
                 <div className="flex flex-col gap-5">
                   <p className="border-l-2 border-[#C5A059] pl-4 font-sans text-sm font-semibold text-[#1A1C1E]">
-                    {detail.audienceClosing}
+                    {pick(detail.audienceClosing, locale)}
                   </p>
                   <div className="hidden lg:flex flex-col sm:flex-row gap-3">
                     <Link
                       href={`/iletisim?interest=${detail.slug}`}
                       className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#14797C] hover:bg-[#0f5f62] text-white text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
                     >
-                      {detail.audienceCtaLabel}
+                      {pick(detail.audienceCtaLabel, locale)}
                       <ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </Link>
                     <Link
                       href="#process-heading"
                       className="inline-flex items-center justify-center gap-1.5 px-2 py-3.5 text-sm font-bold text-[#14797C] hover:text-[#C5A059] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0] rounded-sm"
                     >
-                      {detail.audienceSecondaryLabel}
+                      {pick(detail.audienceSecondaryLabel, locale)}
                     </Link>
                   </div>
                 </div>
@@ -150,14 +158,15 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
             <ol
               className="lg:col-span-7 divide-y divide-[#E2E5DE] border-y border-[#E2E5DE]"
               role="list"
-              aria-label={detail.audienceHeading}
+              aria-label={pick(detail.audienceHeading, locale)}
             >
               {detail.audienceItems.map((item, i) => {
                 const Icon = item.icon
                 const itemAccent = i % 2 === 0 ? accent : '#C5A059'
+                const itemTitle = pick(item.title, locale)
 
                 return (
-                  <li key={item.title}>
+                  <li key={itemTitle}>
                     <FadeIn delay={0.08 + i * 0.06}>
                       <div
                         role="listitem"
@@ -174,10 +183,10 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
                         </span>
                         <div className="space-y-1.5">
                           <h3 className="font-serif text-xl text-[#1A1C1E] leading-snug">
-                            {item.title}
+                            {itemTitle}
                           </h3>
                           <p className="font-sans text-sm text-[#5B6168] leading-relaxed">
-                            {item.description}
+                            {pick(item.description, locale)}
                           </p>
                         </div>
                       </div>
@@ -193,14 +202,14 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
                   href={`/iletisim?interest=${detail.slug}`}
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#14797C] hover:bg-[#0f5f62] text-white text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
                 >
-                  {detail.audienceCtaLabel}
+                  {pick(detail.audienceCtaLabel, locale)}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
                 <Link
                   href="#process-heading"
                   className="inline-flex items-center justify-center gap-1.5 px-2 py-3.5 text-sm font-bold text-[#14797C] hover:text-[#C5A059] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0] rounded-sm"
                 >
-                  {detail.audienceSecondaryLabel}
+                  {pick(detail.audienceSecondaryLabel, locale)}
                 </Link>
               </div>
             </FadeIn>
@@ -213,12 +222,12 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end">
             <FadeIn className="lg:col-span-6">
               <h2 id="needs-heading" className="text-display-serif-md font-serif text-ink">
-                {detail.needsHeading}
+                {pick(detail.needsHeading, locale)}
               </h2>
             </FadeIn>
             <FadeIn delay={0.08} className="lg:col-span-5 lg:col-start-8">
               <p className="text-body-md text-muted leading-relaxed">
-                {detail.heroSubtitle}
+                {pick(detail.heroSubtitle, locale)}
               </p>
             </FadeIn>
           </div>
@@ -229,10 +238,11 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
                 const isLead = i === 0
                 const isWide = i === 1 || i === 4
                 const showNeedImage = detail.slug === 'bireysel-kocluk' && isLead
+                const needTitle = pick(need.title, locale)
 
                 return (
                   <article
-                    key={need.title}
+                    key={needTitle}
                     className={[
                       'relative min-h-[220px] overflow-hidden rounded-sm border p-6 transition-colors duration-200',
                       isLead
@@ -269,7 +279,7 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
                             isLead ? 'text-3xl text-white' : 'text-xl text-ink',
                           ].join(' ')}
                         >
-                          {need.title}
+                          {needTitle}
                         </h3>
                         <p
                           className={[
@@ -277,7 +287,7 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
                             isLead ? 'text-white/72' : 'text-body',
                           ].join(' ')}
                         >
-                          {need.description}
+                          {pick(need.description, locale)}
                         </p>
                       </div>
                     </div>
@@ -290,8 +300,8 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
           {detail.extra && (
             <FadeIn delay={0.15}>
               <div className="mt-6 grid grid-cols-1 gap-6 bg-surface-dark rounded-sm p-8 md:grid-cols-[0.7fr_1.3fr] md:p-10">
-                <h3 className="font-serif text-xl text-on-dark">{detail.extra.heading}</h3>
-                <p className="text-body-sm text-on-dark-soft leading-relaxed">{detail.extra.body}</p>
+                <h3 className="font-serif text-xl text-on-dark">{pick(detail.extra.heading, locale)}</h3>
+                <p className="text-body-sm text-on-dark-soft leading-relaxed">{pick(detail.extra.body, locale)}</p>
               </div>
             </FadeIn>
           )}
@@ -304,7 +314,7 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
             <FadeIn className="lg:col-span-4">
               <div className="lg:sticky lg:top-28">
                 <h2 id="process-heading" className="text-display-serif-md font-serif text-ink">
-                  {detail.processHeading}
+                  {pick(detail.processHeading, locale)}
                 </h2>
                 <LineDraw className="mt-8" />
               </div>
@@ -324,8 +334,8 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
                         {step.number}
                       </span>
                       <div className="max-w-2xl border-b border-[#E2E5DE] pb-8">
-                        <h3 className="text-title-md font-semibold text-ink">{step.title}</h3>
-                        <p className="mt-2 text-body-sm text-body leading-relaxed">{step.description}</p>
+                        <h3 className="text-title-md font-semibold text-ink">{pick(step.title, locale)}</h3>
+                        <p className="mt-2 text-body-sm text-body leading-relaxed">{pick(step.description, locale)}</p>
                       </div>
                     </li>
                   </FadeIn>
@@ -343,10 +353,10 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
               <FadeIn className="lg:col-span-5">
                 <div className="space-y-5">
                   <h2 id="experts-heading" className="text-display-serif-md font-serif text-ink">
-                    {detail.expertsHeading}
+                    {pick(detail.expertsHeading, locale)}
                   </h2>
                   <p className="text-body-sm text-muted leading-relaxed">
-                    {detail.expertsNote}
+                    {pick(detail.expertsNote, locale)}
                   </p>
                 </div>
               </FadeIn>
@@ -363,7 +373,7 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
                           <span className="block text-base font-semibold text-ink">{expert.name}</span>
                           {expert.title && (
                             <span className="mt-1 block text-caption text-muted">
-                              {expert.title}
+                              {pick(expert.title, locale)}
                             </span>
                           )}
                         </span>
@@ -387,15 +397,15 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
               <div className="absolute right-0 top-0 h-full w-1/3 border-l border-white/10 bg-white/[0.03]" aria-hidden="true" />
               <div className="relative grid grid-cols-1 gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
                 <h2 id="page-cta-heading" className="font-serif text-display-serif-md text-white">
-                  {detail.ctaHeading}
+                  {pick(detail.ctaHeading, locale)}
                 </h2>
                 <div className="flex flex-col gap-5">
-                  <p className="text-body-md text-white/70 leading-relaxed">{detail.ctaText}</p>
+                  <p className="text-body-md text-white/70 leading-relaxed">{pick(detail.ctaText, locale)}</p>
                   <Link
                     href={`/iletisim?interest=${detail.slug}`}
                     className="inline-flex items-center justify-center gap-2 self-start px-6 py-3.5 bg-[#C5A059] hover:bg-[#b18d47] text-[#1A1C1E] text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   >
-                    {detail.ctaButton}
+                    {pick(detail.ctaButton, locale)}
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                 </div>
@@ -405,7 +415,7 @@ export function ServiceDetailTemplate({ detail }: { detail: ServiceDetail }) {
         </div>
       </section>
 
-      <FinalCTA />
+      <FinalCTA locale={locale} />
     </>
   )
 }

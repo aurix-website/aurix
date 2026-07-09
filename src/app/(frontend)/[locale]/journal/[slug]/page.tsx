@@ -11,6 +11,29 @@ import {
   getArticleBySlug,
   getRelatedArticles,
 } from '@/lib/articles-data'
+import { pick, localeHref } from '@/lib/i18n/pick'
+import type { Locale } from '@/lib/i18n/types'
+
+const COPY = {
+  tr: {
+    orgName: 'AURIX Koçluk ve Danışmanlık',
+    coverImageAlt: (title: string) => `${title} kapak görseli`,
+    supportHeading: 'Bu konuda destek almak ister misiniz?',
+    supportBody:
+      'Hangi hizmetin veya uzmanın size uygun olduğundan emin değilseniz, kısa bir ön görüşme ile ihtiyacınızı birlikte değerlendirebiliriz.',
+    supportCta: 'Ön Görüşme Talep Et',
+    relatedHeading: 'İlgili yazılar',
+  },
+  en: {
+    orgName: 'AURIX Koçluk ve Danışmanlık',
+    coverImageAlt: (title: string) => `${title} cover image`,
+    supportHeading: 'Would you like support on this topic?',
+    supportBody:
+      "If you're not sure which service or expert is right for you, we can assess your need together in a short introductory call.",
+    supportCta: 'Request an Introductory Call',
+    relatedHeading: 'Related articles',
+  },
+} as const
 
 export function generateStaticParams() {
   return ARTICLES.map((article) => ({ slug: article.slug }))
@@ -19,20 +42,23 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ locale: Locale; slug: string }>
 }): Promise<Metadata> {
-  const { slug } = await params
+  const { locale, slug } = await params
   const article = getArticleBySlug(slug)
   if (!article) return {}
   return {
-    title: article.seoTitle,
-    description: article.seoDescription,
+    title: pick(article.seoTitle, locale),
+    description: pick(article.seoDescription, locale),
+    alternates: {
+      languages: { tr: `/journal/${slug}`, en: `/en/journal/${slug}` },
+    },
   }
 }
 
-function formatDate(dateStr: string): string {
+function formatDate(dateStr: string, locale: Locale): string {
   try {
-    return new Date(dateStr).toLocaleDateString('tr-TR', {
+    return new Date(dateStr).toLocaleDateString(locale === 'en' ? 'en-US' : 'tr-TR', {
       day: 'numeric',
       month: 'long',
       year: 'numeric',
@@ -45,9 +71,9 @@ function formatDate(dateStr: string): string {
 export default async function ArticlePage({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ locale: Locale; slug: string }>
 }) {
-  const { slug } = await params
+  const { locale, slug } = await params
   const article = getArticleBySlug(slug)
 
   if (!article) {
@@ -55,6 +81,7 @@ export default async function ArticlePage({
   }
 
   const related = getRelatedArticles(slug)
+  const copy = COPY[locale]
 
   return (
     <>
@@ -64,10 +91,10 @@ export default async function ArticlePage({
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Article',
-            headline: article.title,
-            description: article.excerpt,
+            headline: pick(article.title, locale),
+            description: pick(article.excerpt, locale),
             datePublished: article.publishedDate,
-            publisher: { '@type': 'Organization', name: 'AURIX Koçluk ve Danışmanlık' },
+            publisher: { '@type': 'Organization', name: copy.orgName },
           }),
         }}
       />
@@ -78,16 +105,16 @@ export default async function ArticlePage({
           <FadeIn>
             <div className="max-w-3xl flex flex-col gap-5">
               <span className="text-caption font-medium px-3 py-1 bg-surface-elevated border border-hairline rounded-pill text-muted self-start">
-                {CATEGORY_LABELS[article.category]}
+                {pick(CATEGORY_LABELS[article.category], locale)}
               </span>
               <h1
                 id="article-hero-heading"
                 className="font-serif text-ink tracking-tight text-display-lg"
               >
-                {article.title}
+                {pick(article.title, locale)}
               </h1>
-              <p className="text-body-md text-muted leading-relaxed">{article.excerpt}</p>
-              <span className="text-caption text-muted">{formatDate(article.publishedDate)}</span>
+              <p className="text-body-md text-muted leading-relaxed">{pick(article.excerpt, locale)}</p>
+              <span className="text-caption text-muted">{formatDate(article.publishedDate, locale)}</span>
             </div>
           </FadeIn>
         </div>
@@ -99,7 +126,7 @@ export default async function ArticlePage({
           <div className="aspect-[16/7] relative w-full overflow-hidden rounded-sm">
             <Image
               src={`/media/journal-${article.slug}.jpg`}
-              alt={`${article.title} kapak gorseli`}
+              alt={copy.coverImageAlt(pick(article.title, locale))}
               fill
               sizes="100vw"
               className="object-cover"
@@ -112,7 +139,7 @@ export default async function ArticlePage({
       <section aria-labelledby="article-hero-heading" className="pb-section bg-canvas">
         <div className="max-w-container mx-auto px-6">
           <div className="max-w-2xl flex flex-col gap-8">
-            {article.body.map((section, i) => (
+            {pick(article.body, locale).map((section, i) => (
               <FadeIn key={i} delay={i * 0.04}>
                 <div className="flex flex-col gap-4">
                   {section.heading && (
@@ -131,17 +158,16 @@ export default async function ArticlePage({
           <FadeIn delay={0.1}>
             <div className="max-w-2xl mt-12 bg-surface-dark rounded-sm p-8">
               <h3 className="font-serif text-lg text-on-dark mb-2">
-                Bu konuda destek almak ister misiniz?
+                {copy.supportHeading}
               </h3>
               <p className="text-body-sm text-on-dark-soft leading-relaxed mb-4">
-                Hangi hizmetin veya uzmanın size uygun olduğundan emin değilseniz, kısa bir ön
-                görüşme ile ihtiyacınızı birlikte değerlendirebiliriz.
+                {copy.supportBody}
               </p>
               <Link
-                href="/iletisim"
+                href={localeHref('/iletisim', locale)}
                 className="inline-flex items-center gap-2 px-5 py-3 bg-[#14797C] hover:bg-[#0f5f62] text-white text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
               >
-                Ön Görüşme Talep Et
+                {copy.supportCta}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
@@ -155,18 +181,18 @@ export default async function ArticlePage({
           <div className="max-w-container mx-auto px-6">
             <FadeIn>
               <h2 id="related-heading" className="text-display-lg font-semibold text-ink mb-10">
-                İlgili yazılar
+                {copy.relatedHeading}
               </h2>
             </FadeIn>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {related.map((item) => (
                 <Link
                   key={item.slug}
-                  href={`/journal/${item.slug}`}
+                  href={localeHref(`/journal/${item.slug}`, locale)}
                   className="block bg-surface-elevated border border-hairline rounded-sm p-5 hover:border-[#14797C] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2"
                 >
-                  <span className="text-caption text-muted">{CATEGORY_LABELS[item.category]}</span>
-                  <h3 className="font-serif text-lg text-ink mt-1">{item.title}</h3>
+                  <span className="text-caption text-muted">{pick(CATEGORY_LABELS[item.category], locale)}</span>
+                  <h3 className="font-serif text-lg text-ink mt-1">{pick(item.title, locale)}</h3>
                 </Link>
               ))}
             </div>
@@ -174,7 +200,7 @@ export default async function ArticlePage({
         </section>
       )}
 
-      <FinalCTA />
+      <FinalCTA locale={locale} />
     </>
   )
 }

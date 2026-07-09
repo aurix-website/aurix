@@ -4,20 +4,71 @@ import { BookOpen, Check, Feather, Layers } from 'lucide-react'
 import { FadeIn } from '@/components/ui/FadeIn'
 import { JournalGrid } from '@/components/JournalGrid'
 import { FinalCTA } from '@/components/sections/FinalCTA'
+import type { Locale } from '@/lib/i18n/types'
 
-export const metadata: Metadata = {
-  title: 'Journal',
-  description:
-    'Koçluk, liderlik, kariyer, öğrenci gelişimi ve global uyum üzerine AURIX uzmanlarından yapılandırılmış yazılar.',
+const COPY = {
+  tr: {
+    metaDescription:
+      'Koçluk, liderlik, kariyer, öğrenci gelişimi ve global uyum üzerine AURIX uzmanlarından yapılandırılmış yazılar.',
+    eyebrow: 'Journal',
+    heading: 'AURIX İçgörüleri',
+    body: 'Liderlik, kariyer, eğitim, öğrenci gelişimi ve kişisel dönüşüm üzerine uzmanlarımızdan yazılar, rehberler ve düşünceler.',
+    heroImageAlt: 'AURIX journal içgörü görseli',
+    readingAreaLabel: 'Okuma Alanı',
+    readingAreaHeading: 'Netlik, karar ve gelişim üzerine notlar',
+    cardTitle: 'Düşünceyi sadeleştiren içerikler',
+    cardBody:
+      'AURIX yaklaşımını daha yakından tanımak için kısa, odaklı ve uygulanabilir içgörüler.',
+    heroItems: [
+      { label: 'Rehber', icon: Feather },
+      { label: 'Bakış', icon: Layers },
+      { label: 'Netlik', icon: Check },
+    ],
+    listHeading: 'Tüm yazılar',
+  },
+  en: {
+    metaDescription:
+      'Structured writing from AURIX experts on coaching, leadership, career, student development, and global adaptation.',
+    eyebrow: 'Journal',
+    heading: 'AURIX Insights',
+    body: 'Writing, guides, and reflections from our experts on leadership, career, education, student development, and personal transformation.',
+    heroImageAlt: 'AURIX journal insights image',
+    readingAreaLabel: 'Reading Area',
+    readingAreaHeading: 'Notes on clarity, decisions, and growth',
+    cardTitle: 'Content that simplifies thinking',
+    cardBody:
+      'Short, focused, and actionable insights to get to know the AURIX approach more closely.',
+    heroItems: [
+      { label: 'Guide', icon: Feather },
+      { label: 'Perspective', icon: Layers },
+      { label: 'Clarity', icon: Check },
+    ],
+    listHeading: 'All articles',
+  },
+} as const
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const copy = COPY[locale]
+  const title = 'Journal'
+  return {
+    title,
+    description: copy.metaDescription,
+    alternates: { languages: { tr: '/journal', en: '/en/journal' } },
+  }
 }
 
-const HERO_ITEMS = [
-  { label: 'Rehber', icon: Feather },
-  { label: 'Bakış', icon: Layers },
-  { label: 'Netlik', icon: Check },
-]
-
-export default function JournalPage() {
+export default async function JournalPage({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>
+}) {
+  const { locale } = await params
+  const copy = COPY[locale]
   return (
     <>
       <section aria-labelledby="journal-hero-heading" className="relative overflow-hidden bg-canvas py-16 sm:py-20 lg:py-24">
@@ -28,17 +79,16 @@ export default function JournalPage() {
           <FadeIn>
             <div className="max-w-2xl">
               <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#C5A059]">
-                Journal
+                {copy.eyebrow}
               </span>
               <h1
                 id="journal-hero-heading"
                 className="mt-4 font-serif text-display-serif-lg tracking-tight text-[#1A1C1E]"
               >
-                AURIX İçgörüleri
+                {copy.heading}
               </h1>
               <p className="mt-6 max-w-xl text-body-md leading-relaxed text-[#5B6168]">
-                Liderlik, kariyer, eğitim, öğrenci gelişimi ve kişisel dönüşüm üzerine
-                uzmanlarımızdan yazılar, rehberler ve düşünceler.
+                {copy.body}
               </p>
             </div>
           </FadeIn>
@@ -50,7 +100,7 @@ export default function JournalPage() {
                   <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-[#F4F0E7]">
                     <Image
                       src="/media/journal-hero-insights.jpg"
-                      alt="AURIX journal icgoru gorseli"
+                      alt={copy.heroImageAlt}
                       fill
                       sizes="(max-width: 640px) 100vw, 360px"
                       className="border-0 transition-transform duration-500 motion-safe:group-hover:scale-[1.03]"
@@ -58,10 +108,10 @@ export default function JournalPage() {
                     <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(20,121,124,0.18),transparent_48%,rgba(197,160,89,0.2))]" aria-hidden="true" />
                     <div className="absolute bottom-4 left-4 right-4 rounded-sm border border-white/70 bg-[#FCFDF9]/88 px-4 py-3 shadow-[0_14px_36px_rgba(26,28,30,0.08)] backdrop-blur-sm">
                       <span className="text-[10px] font-mono font-bold uppercase tracking-[0.22em] text-[#C5A059]">
-                        Okuma Alanı
+                        {copy.readingAreaLabel}
                       </span>
                       <p className="mt-1 font-serif text-xl leading-tight text-[#1A1C1E]">
-                        Netlik, karar ve gelişim üzerine notlar
+                        {copy.readingAreaHeading}
                       </p>
                     </div>
                   </div>
@@ -72,16 +122,15 @@ export default function JournalPage() {
                         <BookOpen className="h-5 w-5" aria-hidden="true" />
                       </div>
                       <p className="mt-5 font-serif text-2xl leading-tight text-[#1A1C1E]">
-                        Düşünceyi sadeleştiren içerikler
+                        {copy.cardTitle}
                       </p>
                       <p className="mt-3 text-sm leading-relaxed text-[#5B6168]">
-                        AURIX yaklaşımını daha yakından tanımak için kısa, odaklı ve uygulanabilir
-                        içgörüler.
+                        {copy.cardBody}
                       </p>
                     </div>
 
                     <div className="mt-6 grid grid-cols-3 gap-2">
-                      {HERO_ITEMS.map((item) => {
+                      {copy.heroItems.map((item) => {
                         const Icon = item.icon
                         return (
                           <div
@@ -107,15 +156,15 @@ export default function JournalPage() {
       <section aria-labelledby="journal-list-heading" className="bg-surface-soft py-16 sm:py-20">
         <div className="mx-auto max-w-container px-6">
           <h2 id="journal-list-heading" className="sr-only">
-            Tüm yazılar
+            {copy.listHeading}
           </h2>
           <FadeIn>
-            <JournalGrid />
+            <JournalGrid locale={locale} />
           </FadeIn>
         </div>
       </section>
 
-      <FinalCTA />
+      <FinalCTA locale={locale} />
     </>
   )
 }

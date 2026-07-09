@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AURIX Dijital Kimlik ve Platform Raporu · Kognitect</title>
+  <style>
+    :root {
+      --ink: #1A1C1E;
+      --muted: #5B6168;
+      --surface: #F6F7F1;
+      --card: #FCFDF9;
+      --dark: #2E2E30;
+      --teal: #14797C;
+      --teal-bright: #1A9CA0;
+      --gold: #C5A059;
+      --silver: #D7DEE4;
+      --border: #E2E5DE;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--surface);
+      color: var(--ink);
+      font-family: Inter, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .page {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 56px 56px 72px;
+    }
+
+    .cover {
+      min-height: 900px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 44px;
+    }
+
+    .kicker {
+      color: var(--gold);
+      font-family: "JetBrains Mono", Consolas, monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.12;
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    h1 {
+      max-width: 820px;
+      margin-top: 18px;
+      font-size: 58px;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      margin-top: 58px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      font-size: 34px;
+    }
+
+    h3 {
+      margin-top: 28px;
+      font-size: 22px;
+    }
+
+    p { margin: 14px 0 0; color: var(--muted); }
+    strong { color: var(--ink); }
+
+    .lead {
+      max-width: 720px;
+      margin-top: 28px;
+      color: var(--ink);
+      font-size: 20px;
+      line-height: 1.55;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      margin-top: 56px;
+      border: 1px solid var(--border);
+      background: var(--border);
+    }
+
+    .meta {
+      min-height: 96px;
+      padding: 16px;
+      background: var(--card);
+    }
+
+    .meta span {
+      display: block;
+      color: var(--gold);
+      font-family: "JetBrains Mono", Consolas, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .meta b {
+      display: block;
+      margin-top: 8px;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 72px;
+    }
+
+    .kognitect {
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .logo {
+      display: block;
+      width: 150px;
+      height: auto;
+    }
+
+    .quote {
+      margin: 28px 0 0;
+      padding: 22px 24px;
+      border-left: 4px solid var(--teal);
+      background: var(--card);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 22px;
+      line-height: 1.45;
+    }
+
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .card {
+      padding: 22px;
+      border: 1px solid var(--border);
+      background: var(--card);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      font-family: Inter, Arial, sans-serif;
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    .card p { font-size: 14px; }
+
+    ul {
+      margin: 16px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    li { margin: 7px 0; }
+
+    table {
+      width: 100%;
+      margin-top: 22px;
+      border-collapse: collapse;
+      background: var(--card);
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      color: var(--ink);
+      font-family: "JetBrains Mono", Consolas, monospace;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .logo-comparison {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 18px;
+      margin-top: 24px;
+      align-items: stretch;
+    }
+
+    .logo-panel {
+      display: flex;
+      min-height: 230px;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      border: 1px solid var(--border);
+      background: var(--card);
+    }
+
+    .logo-panel.dark { background: var(--dark); }
+    .logo-panel img { max-width: 100%; height: auto; }
+    .logo-panel .metallic { width: 100%; border-radius: 6px; }
+
+    .caption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .dark-band {
+      margin: 48px -56px 0;
+      padding: 44px 56px;
+      background: var(--dark);
+      color: #F6F7F1;
+    }
+
+    .dark-band h2 {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+      color: #F6F7F1;
+    }
+
+    .dark-band p,
+    .dark-band li { color: #D7DEE4; }
+
+    .toc {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px 32px;
+      margin-top: 30px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-family: "JetBrains Mono", Consolas, monospace;
+      font-size: 12px;
+    }
+
+    .footer-note {
+      margin-top: 60px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media print {
+      body { background: white; }
+      .page { max-width: none; padding: 34px 44px 48px; }
+      h2, .dark-band { break-before: auto; }
+      .card, .logo-panel, table { break-inside: avoid; }
+      .cover { min-height: 940px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="cover">
+      <div>
+        <div class="brand-row">
+          <div>
+            <div class="kognitect">Kognitect</div>
+            <div class="caption">Marka, ürün ve platform danışmanlığı</div>
+          </div>
+          <img class="logo" src="../public/brand/aurix-primary-flat-logo-web.png" alt="AURIX Koçluk ve Danışmanlık logosu" />
+        </div>
+
+        <div class="kicker">AURIX · Dijital Kimlik ve Platform Raporu</div>
+        <h1>Neden bu arayüz, bu logo sistemi ve bu platform mimarisi?</h1>
+        <p class="lead">
+          Bu rapor, Kognitect tarafından AURIX Koçluk ve Danışmanlık için yürütülen dijital kimlik ve web platformu çalışmasının
+          marka danışmanı bakış açısıyla özetidir. Amaç; henüz tamamlanma aşamasındaki web sitesinin arkasındaki kararları,
+          müşteriye sade, gerekçeli ve doğrulanabilir biçimde anlatmaktır.
+        </p>
+
+        <div class="meta-grid">
+          <div class="meta"><span>Hazırlayan</span><b>Kognitect</b></div>
+          <div class="meta"><span>Müşteri</span><b>AURIX Koçluk ve Danışmanlık</b></div>
+          <div class="meta"><span>Kapsam</span><b>Marka sistemi, UI/UX, içerik mimarisi, teknoloji</b></div>
+          <div class="meta"><span>Tarih</span><b>9 Temmuz 2026</b></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="toc">
+          <div>00 · Çıkış noktası</div>
+          <div>01 · Marka konumlandırması</div>
+          <div>02 · Logo kararı</div>
+          <div>03 · Renk ve tipografi</div>
+          <div>04 · Arayüz yaklaşımı</div>
+          <div>05 · İçerik mimarisi</div>
+          <div>06 · Teknoloji altyapısı</div>
+          <div>07 · Tamamlanacak işler</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="kicker">00 · Çıkış Noktası</div>
+      <h2>AURIX için asıl mesele bir web sitesi değil, güven inşasıdır.</h2>
+      <p>
+        AURIX, farklı disiplinlerden gelen uzmanları aynı çatı altında toplayan bir koçluk ve danışmanlık ekosistemidir.
+        Bu yapı doğru anlatıldığında güçlü bir avantajdır; yanlış anlatıldığında ise ziyaretçiye dağınık, ortak tabela altında
+        birleşmiş bağımsız uzmanlar izlenimi verebilir.
+      </p>
+      <p>
+        Kognitect olarak proje boyunca tüm kararları tek bir soruya göre değerlendirdik:
+      </p>
+      <div class="quote">
+        Bu karar, AURIX'i ilk kez gören bir kişinin markaya güvenmesini, doğru hizmeti anlamasını ve ön görüşme talep etmesini kolaylaştırıyor mu?
+      </div>
+    </section>
+
+    <section>
+      <div class="kicker">01 · Marka Konumlandırması</div>
+      <h2>AURIX, wellness değil; profesyonel gelişim ve danışmanlık markasıdır.</h2>
+      <p>
+        AURIX için önerilen marka cümlesi: <strong>Profesyonel gelişim, kariyer netliği ve liderlik dönüşümü için çok uzmanlı
+        koçluk ve danışmanlık ekosistemi.</strong>
+      </p>
+      <div class="decision-grid">
+        <div class="card">
+          <h3>Profesyonel gelişim</h3>
+          <p>Kişisel gelişim veya spiritüel dönüşüm algısından uzak, daha kurumsal ve güven veren bir alan açar.</p>
+        </div>
+        <div class="card">
+          <h3>Kariyer ve liderlik</h3>
+          <p>Hedef kitlenin somut ihtiyacını işaret eder: karar, yön, iletişim, performans ve gelişim.</p>
+        </div>
+        <div class="card">
+          <h3>Çok uzmanlı yapı</h3>
+          <p>AURIX'in tek bir kişiden değil, farklı uzmanlıklardan beslenen bir ekosistemden oluştuğunu anlatır.</p>
+        </div>
+        <div class="card">
+          <h3>Ortak metodoloji</h3>
+          <p>Uzman çeşitliliğini dağınıklık değil, yapılandırılmış bir çalışma biçimi olarak konumlar.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="kicker">02 · Logo Kararı</div>
+      <h2>Müşteriden gelen metalik logo, dijital kullanım için flat sisteme dönüştürüldü.</h2>
+      <p>
+        AURIX'in başlangıçta ilettiği logo metalik ve 3D etkiye sahipti. Bu versiyon markanın premium hissini taşısa da,
+        web arayüzünde küçük boyutlarda okunurluk, farklı zeminlerde tutarlılık ve modern dijital görünüm açısından riskler oluşturur.
+      </p>
+
+      <div class="logo-comparison">
+        <div>
+          <div class="logo-panel">
+            <img class="metallic" src="../public/brand/aurix-metallic-source-logo.jpeg" alt="AURIX metalik kaynak logo" />
+          </div>
+          <div class="caption">Müşteriden gelen metalik kaynak logo: premium his verir, ancak web'de küçük kullanım için ağırdır.</div>
+        </div>
+        <div>
+          <div class="logo-panel">
+            <img src="../public/brand/aurix-primary-flat-logo-web.png" alt="AURIX primary flat logo" />
+          </div>
+          <div class="caption">Primary Flat: açık zeminlerde header ve genel arayüz kullanımı için seçildi.</div>
+        </div>
+        <div>
+          <div class="logo-panel dark">
+            <img src="../public/brand/aurix-secondary-flat-logo-web.png" alt="AURIX secondary flat logo" />
+          </div>
+          <div class="caption">Secondary Flat: koyu footer ve koyu yüzeylerde kontrastlı kullanım için seçildi.</div>
+        </div>
+      </div>
+
+      <h3>Neden flat logo?</h3>
+      <ul>
+        <li>Küçük header alanında daha okunaklıdır.</li>
+        <li>Mobil ekranlarda form ve yazı detayları daha net kalır.</li>
+        <li>Modern web arayüzüyle daha uyumlu görünür.</li>
+        <li>Farklı zeminlerde ve sosyal medya önizlemelerinde daha tutarlı çalışır.</li>
+        <li>Metalik logonun premium referansını korur, fakat dijital üründe daha hafif taşır.</li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="kicker">03 · Renk ve Tipografi</div>
+      <h2>Renk sistemi logodan türetildi: silver-teal, sessiz güven.</h2>
+      <table>
+        <thead>
+          <tr><th>Renk</th><th>Rol</th><th>Kullanım Gerekçesi</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Turkuaz</td><td>Birincil vurgu</td><td>CTA, link ve odak durumlarında markanın enerjisini taşır.</td></tr>
+          <tr><td>Koyu turkuaz</td><td>Buton zemini</td><td>Beyaz metinle daha güvenli kontrast verir.</td></tr>
+          <tr><td>Altın</td><td>İkincil hiyerarşi</td><td>Overline ve küçük ikon vurgularında premium hissi destekler.</td></tr>
+          <tr><td>Sıcak kırık beyaz</td><td>Sayfa zemini</td><td>Steril beyaz yerine daha sakin ve insani bir yüzey oluşturur.</td></tr>
+          <tr><td>Grafit</td><td>Koyu yüzey</td><td>Footer ve koyu bölümlerde ciddiyet ve kurumsal ağırlık verir.</td></tr>
+        </tbody>
+      </table>
+
+      <p>
+        Tipografi üç role ayrıldı: başlıklarda editoryal ve güven veren serif karakter; gövde ve arayüzde okunabilir sans-serif;
+        bölüm etiketlerinde ise teknik, düzenli ve ayırt edici monospace kullanım.
+      </p>
+    </section>
+
+    <section class="dark-band">
+      <div class="kicker">04 · Arayüz Yaklaşımı</div>
+      <h2>Gösteriş yerine sessiz güven.</h2>
+      <p>
+        AURIX'in hedef kitlesi, karar alırken abartılı efektlerden çok açıklık, düzen ve profesyonel tutarlılık arar.
+        Bu nedenle arayüzde ana hedef "etkilemek" değil, güven hissini azaltmadan bilgiye erişimi hızlandırmaktır.
+      </p>
+      <ul>
+        <li>Hizmetler dört net kategori altında toplandı.</li>
+        <li>Her bölüm aynı overline ve başlık ritmiyle açıldı.</li>
+        <li>Ön görüşme talebi ana dönüşüm aksiyonu olarak konumlandı.</li>
+        <li>Uzman profilleri tek editoryal şablonla düzenlendi.</li>
+        <li>Journal, marka otoritesini destekleyen bilgi kütüphanesi olarak kurgulandı.</li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="kicker">05 · İçerik Mimarisi</div>
+      <h2>Site akışı, ziyaretçiyi meraktan ön görüşmeye taşır.</h2>
+      <table>
+        <thead>
+          <tr><th>Bölüm</th><th>Görevi</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Hero</td><td>AURIX'in ne yaptığını ve ilk aksiyonu hızlı anlatır.</td></tr>
+          <tr><td>Güven / disiplin alanı</td><td>Farklı uzmanlıkların ortak çerçevede çalıştığını gösterir.</td></tr>
+          <tr><td>Hizmetler</td><td>Kullanıcının kendi ihtiyacını doğru kategoriye yerleştirmesini sağlar.</td></tr>
+          <tr><td>AURIX yaklaşımı</td><td>Sürecin rastgele değil, metodolojik olduğunu gösterir.</td></tr>
+          <tr><td>Uzmanlar</td><td>Ekibi tek marka sesiyle sunar.</td></tr>
+          <tr><td>Kimler için?</td><td>Farklı hedef kitlelerin kendini sitede bulmasını sağlar.</td></tr>
+          <tr><td>Journal</td><td>Uzmanlık ve SEO otoritesini güçlendirir.</td></tr>
+          <tr><td>Final CTA</td><td>Ön görüşme talebine net kapanış yapar.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <div class="kicker">06 · Teknoloji Altyapısı</div>
+      <h2>Teknoloji seçimi, AURIX'in içerik bağımsızlığı için yapıldı.</h2>
+      <table>
+        <thead>
+          <tr><th>Katman</th><th>Teknoloji</th><th>Neden</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Frontend</td><td>Next.js 15 + TypeScript</td><td>SEO, hız, güvenilir geliştirme ve ölçeklenebilir sayfa yapısı.</td></tr>
+          <tr><td>Tasarım sistemi</td><td>Tailwind CSS</td><td>Renk, tipografi ve boşluk kararlarının kodda tutarlı uygulanması.</td></tr>
+          <tr><td>CMS</td><td>Payload 3</td><td>Admin panelin aynı uygulama içinde yönetilmesi.</td></tr>
+          <tr><td>Veritabanı</td><td>PostgreSQL</td><td>Uzman, hizmet, makale ve başvuru ilişkilerini güvenilir tutma.</td></tr>
+          <tr><td>Zengin metin</td><td>Lexical</td><td>Journal ve biyografi içeriklerinin editör dostu yönetimi.</td></tr>
+          <tr><td>Görsel işleme</td><td>sharp</td><td>Medya dosyalarını farklı kullanım boyutlarına hazırlama.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <div class="kicker">07 · Tamamlanacak İşler</div>
+      <h2>Faz 1 tamamlanmadan önce kalite turu yapılmalıdır.</h2>
+      <div class="decision-grid">
+        <div class="card">
+          <h3>İçerik onayı</h3>
+          <p>Uzman biyografileri, hizmet açıklamaları ve CTA metinleri müşteri tarafından son kez doğrulanmalıdır.</p>
+        </div>
+        <div class="card">
+          <h3>Görsel kontrol</h3>
+          <p>Mobil, tablet ve desktop kırılımlarında logo, görsel, boşluk ve metin taşmaları kontrol edilmelidir.</p>
+        </div>
+        <div class="card">
+          <h3>Admin panel testi</h3>
+          <p>Uzman, hizmet, Journal ve lead akışları gerçek veriyle denenmelidir.</p>
+        </div>
+        <div class="card">
+          <h3>Yayın öncesi metrikler</h3>
+          <p>Performance, Accessibility ve SEO denetimleri tamamlanarak yayın kararı verilmelidir.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="kicker">Sonuç</div>
+      <h2>Kognitect'in çalışması, AURIX için bir site değil, yönetilebilir bir marka-platform temeli kurar.</h2>
+      <p>
+        AURIX'in metalik logosu marka kökenindeki premium hissi taşırken, web sitesinde kullanılan flat logo sistemi bu kimliği
+        daha okunur, daha çağdaş ve daha sürdürülebilir hale getirir. Arayüz dili gösterişli efektler yerine sessiz güven,
+        hızlı bilgi erişimi ve kurumsal tutarlılık üzerine kurulmuştur.
+      </p>
+      <p>
+        Faz 1'in sonraki adımı; müşteri onayı, içerik doğrulaması, performans denetimi ve yayın öncesi kalite kontrolleriyle
+        bu altyapıyı canlı kullanıma hazır hale getirmektir.
+      </p>
+      <div class="footer-note">
+        Bu rapor Kognitect tarafından AURIX Koçluk ve Danışmanlık için hazırlanmıştır. İçerik, 9 Temmuz 2026 tarihli proje durumunu yansıtır.
+      </div>
+    </section>
+  </main>
+</body>
+</html>

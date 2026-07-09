@@ -1,89 +1,50 @@
-'use client'
-import { motion } from 'motion/react'
 import { User, Compass, Building2, GraduationCap, Globe } from 'lucide-react'
 import { FadeIn } from '@/components/ui/FadeIn'
-import { STAGGER_CONTAINER, FADE_UP_ITEM, FADE_UP_TRANSITION } from '@/lib/motion-variants'
+import type { Locale } from '@/lib/i18n/types'
+import { dictionary } from '@/lib/i18n/dictionary'
 
-const PERSONAS = [
-  {
-    id: 'profesyonel',
-    icon: User,
-    accent: '#14797C',
-    title: 'Profesyonel Birey',
-    description:
-      'Kariyer geçişlerinde, hedef belirsizliğinde veya yeni bir role hazırlanırken.',
-  },
-  {
-    id: 'lider',
-    icon: Compass,
-    accent: '#C5A059',
-    title: 'Lider ve Yönetici',
-    description:
-      'Karar süreçlerini güçlendirmek, iletişimi ve ekip performansını geliştirmek için.',
-  },
-  {
-    id: 'kurum',
-    icon: Building2,
-    accent: '#14797C',
-    title: 'Kurum ve İnsan Kaynakları',
-    description:
-      'Takım koçluğu, kurumsal eğitim programları ve liderlik akademisi tasarımı.',
-  },
-  {
-    id: 'genç',
-    icon: GraduationCap,
-    accent: '#C5A059',
-    title: 'Genç, Öğrenci ve Veli',
-    description: 'Kariyer farkındalığı, üniversite ve bölüm seçimi, sınav stratejisi.',
-  },
-  {
-    id: 'yurtdisi',
-    icon: Globe,
-    accent: '#14797C',
-    title: 'Yurtdışı Geçiş Yapan Birey',
-    description:
-      'Küresel kariyer uyumu, yeni çevreye adaptasyon ve kimlik geçişi.',
-  },
+const PERSONA_META = [
+  { icon: User, accent: '#14797C' },
+  { icon: Compass, accent: '#C5A059' },
+  { icon: Building2, accent: '#14797C' },
+  { icon: GraduationCap, accent: '#C5A059' },
+  { icon: Globe, accent: '#14797C' },
 ]
 
-export function PersonaGrid() {
+export function PersonaGrid({ locale }: { locale: Locale }) {
+  const copy = dictionary[locale].persona
+  const personas = copy.items.map((item, i) => ({ ...item, ...PERSONA_META[i] }))
   return (
     <section aria-labelledby="persona-heading" className="py-24 bg-[#F9FBFB]">
       <div className="mx-auto px-4 sm:px-6" style={{ maxWidth: '1200px' }}>
         <FadeIn>
           <div className="mb-12 max-w-xl">
             <span className="text-[11px] font-mono tracking-widest text-[#C5A059] font-bold uppercase block mb-3">
-              KİMLER İÇİN
+              {copy.eyebrow}
             </span>
             <h2
               id="persona-heading"
               className="font-serif text-[#1A1C1E] tracking-tight"
               style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.5rem)', lineHeight: '1.2' }}
             >
-              Kimler İçin?
+              {copy.heading}
             </h2>
             <p className="mt-3 font-sans text-[#5B6168] leading-relaxed" style={{ fontSize: '1.0625rem' }}>
-              AURIX, farklı gelişim ihtiyaçlarına göre yapılandırılmış bir ekip sunar.
+              {copy.body}
             </p>
           </div>
         </FadeIn>
 
-        <motion.div
-          variants={STAGGER_CONTAINER}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
+        <div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
           role="list"
-          aria-label="Hedef kitleler"
+          aria-label={copy.ariaLabel}
         >
-          {PERSONAS.map((persona) => {
+          {personas.map((persona) => {
             const Icon = persona.icon
             return (
-              <motion.div
+              <div
                 key={persona.id}
-                variants={FADE_UP_ITEM}
-                transition={FADE_UP_TRANSITION}
                 role="listitem"
                 className="group bg-[#FCFDF9] border border-[#E2E5DE] rounded-sm p-6 flex flex-col gap-4 transition-colors duration-300 hover:border-[#C5A059]/40"
               >
@@ -99,10 +60,10 @@ export function PersonaGrid() {
                     {persona.description}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             )
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

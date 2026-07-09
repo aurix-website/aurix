@@ -2,6 +2,9 @@ import React from 'react'
 import Link from 'next/link'
 import { getOptionalPayloadClient } from '@/lib/payload-client'
 import { CONTACT_EMAIL, WHATSAPP_DISPLAY, WHATSAPP_NUMBER } from '@/lib/contact-channels'
+import type { Locale } from '@/lib/i18n/types'
+import { dictionary } from '@/lib/i18n/dictionary'
+import { localeHref } from '@/lib/i18n/pick'
 
 type PopulatedMedia = { url?: string | null; alt?: string | null }
 
@@ -10,23 +13,25 @@ type SiteSettingsData = {
   contactEmail?: string | null
   whatsappNumber?: string | null
   socialLinks?: Array<{ platform?: string | null; url?: string | null }> | null
-  kvkkUrl?: string | null
 }
 
 const FALLBACK: SiteSettingsData = {
+  logoLight: {
+    url: '/brand/aurix-secondary-flat-logo-web.png',
+    alt: 'AURIX Koçluk ve Danışmanlık',
+  },
   contactEmail: CONTACT_EMAIL,
   whatsappNumber: WHATSAPP_NUMBER,
   socialLinks: [],
-  kvkkUrl: '/kvkk',
 }
 
-async function getSiteSettings(): Promise<SiteSettingsData> {
+async function getSiteSettings(locale: Locale): Promise<SiteSettingsData> {
   try {
     const payload = await getOptionalPayloadClient()
 
     if (!payload) return FALLBACK
 
-    const data = await payload.findGlobal({ slug: 'site-settings' })
+    const data = await payload.findGlobal({ slug: 'site-settings', locale, fallbackLocale: 'tr' })
     return data as unknown as SiteSettingsData
   } catch {
     return FALLBACK
@@ -54,35 +59,42 @@ const SOCIAL_ICONS: Record<string, React.FC> = {
   instagram: InstagramIcon,
 }
 
-export async function Footer() {
-  const settings = await getSiteSettings()
+export async function Footer({ locale }: { locale: Locale }) {
+  const settings = await getSiteSettings(locale)
+  const copy = dictionary[locale].footer
 
   const email = settings.contactEmail ?? FALLBACK.contactEmail
   const whatsapp = settings.whatsappNumber ?? FALLBACK.whatsappNumber
   const socials = settings.socialLinks ?? []
-  const kvkkUrl = settings.kvkkUrl ?? FALLBACK.kvkkUrl
   const year = new Date().getFullYear()
+  const legalLinks = [
+    { label: copy.kvkk, href: '/kvkk' },
+    { label: copy.privacy, href: '/gizlilik-politikasi' },
+    { label: copy.cookies, href: '/cerez-politikasi' },
+  ]
 
   const logoLight =
     settings.logoLight != null && typeof settings.logoLight === 'object'
       ? settings.logoLight
-      : null
+      : FALLBACK.logoLight && typeof FALLBACK.logoLight === 'object'
+        ? FALLBACK.logoLight
+        : null
 
   return (
-    <footer className="bg-surface-dark text-on-dark-soft" aria-label="Site alt bilgisi">
+    <footer className="bg-surface-dark text-on-dark-soft" aria-label={copy.ariaLabel}>
       <div className="max-w-container mx-auto px-6 pt-16 pb-8">
         {/* Top grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-16 pb-12 border-b border-surface-dark-elevated">
           {/* Brand */}
           <div>
             <Link
-              href="/"
+              href={localeHref('/', locale)}
               className="inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-md mb-4"
-              aria-label="AURIX — Ana sayfaya git"
+              aria-label={copy.homeAria}
             >
               {logoLight?.url ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={logoLight.url} alt={logoLight.alt ?? 'AURIX'} className="h-7 w-auto" />
+                <img src={logoLight.url} alt={logoLight.alt ?? 'AURIX'} className="h-14 w-auto" />
               ) : (
                 <span className="font-sans text-xl font-semibold text-on-dark tracking-tight leading-none">
                   AURIX
@@ -90,18 +102,17 @@ export async function Footer() {
               )}
             </Link>
             <p className="text-body-sm text-on-dark-soft leading-relaxed max-w-[260px]">
-              Profesyonel gelişim, kariyer netliği ve liderlik dönüşümü için çok uzmanlı
-              danışmanlık ekosistemi.
+              {copy.tagline}
             </p>
             <p className="mt-3 text-caption text-on-dark-soft opacity-60">
-              İzmir · Online · Yüz yüze
+              {copy.locationLine}
             </p>
           </div>
 
           {/* Contact */}
           <div>
             <p className="text-caption font-medium tracking-widest uppercase text-on-dark-soft mb-4">
-              İletişim
+              {copy.contactHeading}
             </p>
             <ul className="space-y-3 text-body-sm">
               {email && (
@@ -133,7 +144,7 @@ export async function Footer() {
           {socials.length > 0 && (
             <div>
               <p className="text-caption font-medium tracking-widest uppercase text-on-dark-soft mb-4">
-                Sosyal
+                {copy.socialHeading}
               </p>
               <ul className="flex flex-wrap gap-4">
                 {socials.map((s, i) => {
@@ -146,7 +157,7 @@ export async function Footer() {
                         href={s.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={s.platform ?? 'Sosyal medya'}
+                        aria-label={s.platform ?? copy.socialFallbackLabel}
                         className="text-on-dark-soft hover:text-on-dark transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
                       >
                         {Icon ? <Icon /> : <span className="text-body-sm">{s.platform}</span>}
@@ -160,16 +171,22 @@ export async function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-caption text-on-dark-soft">
-          <p>© {year} AURIX Danışmanlık. Tüm hakları saklıdır.</p>
-          {kvkkUrl && (
-            <Link
-              href={kvkkUrl}
-              className="hover:text-on-dark transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
-            >
-              KVKK Aydınlatma Metni
-            </Link>
-          )}
+        <div className="pt-6 flex flex-col gap-4 text-caption text-on-dark-soft lg:flex-row lg:items-center lg:justify-between">
+          <p>© {year} {copy.copyright}</p>
+          <nav aria-label={copy.legalNavAria}>
+            <ul className="flex flex-wrap gap-x-5 gap-y-2">
+              {legalLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={localeHref(link.href, locale)}
+                    className="hover:text-on-dark transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
       </div>
     </footer>

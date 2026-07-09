@@ -1,6 +1,8 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import type { Locale } from '@/lib/i18n/types'
+import { dictionary } from '@/lib/i18n/dictionary'
 
 function useCountUp(target: number, duration: number = 1500, start: boolean = false) {
   const [count, setCount] = useState(0)
@@ -28,12 +30,6 @@ interface StatItem {
   duration?: number
 }
 
-const STATS: StatItem[] = [
-  { value: 200, suffix: '+', label: 'Saat Koçluk', duration: 1800 },
-  { value: 7,   suffix: '',  label: 'Uzman',        duration: 800  },
-  { value: 100, suffix: '%', label: 'Erickson Sertifikalı', duration: 1400 },
-]
-
 function StatNumber({ value, suffix, label, duration, visible }: StatItem & { visible: boolean }) {
   const count = useCountUp(value, duration, visible)
 
@@ -49,7 +45,8 @@ function StatNumber({ value, suffix, label, duration, visible }: StatItem & { vi
   )
 }
 
-export default function StatBand() {
+export default function StatBand({ locale }: { locale: Locale }) {
+  const stats: StatItem[] = dictionary[locale].hero.stats.map((s) => ({ ...s }))
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
 
@@ -72,7 +69,7 @@ export default function StatBand() {
       ref={ref}
       className="border-t border-[#E2E5DE] mt-8 sm:mt-12 pt-6 sm:pt-8 pb-10 sm:pb-16 grid grid-cols-3 gap-4 sm:gap-8"
     >
-      {STATS.map((stat) => (
+      {stats.map((stat) => (
         <StatNumber key={stat.label} {...stat} visible={visible} />
       ))}
     </div>

@@ -2,26 +2,11 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { FadeIn } from '@/components/ui/FadeIn'
+import type { Locale } from '@/lib/i18n/types'
+import { dictionary } from '@/lib/i18n/dictionary'
 
-const PROMISE_CARDS = [
-  {
-    title: 'Netlik',
-    description:
-      'Hedeflerinizi, önceliklerinizi ve mevcut durumunuzu daha berrak görmenize yardımcı oluruz.',
-  },
-  {
-    title: 'Yön',
-    description:
-      'Size uygun hizmet alanını ve uzmanı belirleyerek süreci daha doğru bir başlangıçla tasarlarız.',
-  },
-  {
-    title: 'Gelişim',
-    description:
-      'Görüşmeleri yalnızca farkındalıkla sınırlı bırakmadan, uygulanabilir adımlara dönüştürmeye odaklanırız.',
-  },
-]
-
-export function ManifestoSection() {
+export function ManifestoSection({ locale }: { locale: Locale }) {
+  const copy = dictionary[locale].manifesto
   return (
     <section
       aria-labelledby="manifesto-heading"
@@ -37,7 +22,7 @@ export function ManifestoSection() {
               <div className="aspect-[4/5] relative overflow-hidden rounded-sm">
                 <Image
                   src="/media/manifesto-portrait.jpg"
-                  alt="AURIX yaklasimini temsil eden yon ve netlik odakli masa kompozisyonu"
+                  alt={copy.imageAlt}
                   fill
                   sizes="(min-width: 1024px) 360px, 100vw"
                   className="object-cover"
@@ -50,7 +35,7 @@ export function ManifestoSection() {
           <FadeIn delay={0.08}>
             <div className="flex flex-col gap-6 max-w-xl">
               <span className="text-[11px] font-mono tracking-widest text-[#C5A059] font-bold uppercase block">
-                AURIX Felsefesi
+                {copy.eyebrow}
               </span>
 
               <h2
@@ -58,21 +43,19 @@ export function ManifestoSection() {
                 className="font-serif text-[#F6F7F1] tracking-tight"
                 style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)', lineHeight: '1.2' }}
               >
-                AURIX, gelişim yolculuğunuzu{' '}
-                <span className="text-[#1A9CA0]">tesadüfe bırakmaz.</span>
+                {copy.headingPrefix}{' '}
+                <span className="text-[#1A9CA0]">{copy.headingAccent}</span>
               </h2>
 
               <p className="font-sans text-[#D7DEE4] leading-relaxed" style={{ fontSize: '1.0625rem' }}>
-                Koçluk ve danışmanlık sürecini yalnızca bir görüşme deneyimi olarak değil; ihtiyaç
-                analizi, uzman eşleşmesi, hedef netliği ve sürdürülebilir aksiyon adımlarından
-                oluşan yapılandırılmış bir gelişim süreci olarak ele alır.
+                {copy.body}
               </p>
 
               <Link
                 href="#approach-heading"
                 className="inline-flex items-center gap-1.5 text-sm font-bold text-[#F6F7F1] hover:text-[#C5A059] transition-colors self-start focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C5A059] focus-visible:outline-offset-2 rounded-sm"
               >
-                AURIX Yaklaşımını İncele
+                {copy.cta}
                 <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
               </Link>
             </div>
@@ -81,7 +64,7 @@ export function ManifestoSection() {
 
         <FadeIn delay={0.16}>
           <div className="mt-16 lg:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {PROMISE_CARDS.map((card) => (
+            {copy.promiseCards.map((card) => (
               <div
                 key={card.title}
                 className="bg-white/5 border border-white/10 rounded-sm p-6 flex flex-col gap-2"
