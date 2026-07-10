@@ -65,14 +65,15 @@ export function NavClient({ logoDark }: { logoDark: LogoMedia | null }) {
   }, [mobileOpen])
 
   return (
-    <header
-      className="bg-[#F6F7F1]/95 backdrop-blur-md border-b border-[#E2E5DE]"
-      role="banner"
-    >
-      <div
-        className="mx-auto px-6 flex items-center justify-between"
-        style={{ maxWidth: '1200px', height: '72px' }}
+    <>
+      <header
+        className="bg-[#F6F7F1]/95 backdrop-blur-md border-b border-[#E2E5DE]"
+        role="banner"
       >
+        <div
+          className="mx-auto px-6 flex items-center justify-between"
+          style={{ maxWidth: '1200px', height: '72px' }}
+        >
         {/* Logo */}
         <Link
           href={localizePath('/', isEnglish)}
@@ -192,7 +193,8 @@ export function NavClient({ logoDark }: { logoDark: LogoMedia | null }) {
             <Menu className="h-5 w-5" aria-hidden="true" />
           )}
         </button>
-      </div>
+        </div>
+      </header>
 
       {/* Mobil overlay */}
       {mobileOpen && (
@@ -269,6 +271,6 @@ export function NavClient({ logoDark }: { logoDark: LogoMedia | null }) {
           </nav>
         </div>
       )}
-    </header>
+    </>
   )
 }
