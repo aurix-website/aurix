@@ -15,26 +15,33 @@ type SiteSettingsData = {
   socialLinks?: Array<{ platform?: string | null; url?: string | null }> | null
 }
 
-const FALLBACK: SiteSettingsData = {
-  logoLight: {
-    url: '/brand/aurix-secondary-flat-logo-web.png',
-    alt: 'AURIX Koçluk ve Danışmanlık',
-  },
-  contactEmail: CONTACT_EMAIL,
-  whatsappNumber: WHATSAPP_NUMBER,
-  socialLinks: [],
+const FALLBACK_LOGO_LIGHT_ALT: Record<Locale, string> = {
+  tr: 'AURIX Koçluk ve Danışmanlık',
+  en: 'AURIX Coaching and Consulting',
+}
+
+function getFallback(locale: Locale): SiteSettingsData {
+  return {
+    logoLight: {
+      url: '/brand/aurix-secondary-flat-logo-web.png',
+      alt: FALLBACK_LOGO_LIGHT_ALT[locale],
+    },
+    contactEmail: CONTACT_EMAIL,
+    whatsappNumber: WHATSAPP_NUMBER,
+    socialLinks: [],
+  }
 }
 
 async function getSiteSettings(locale: Locale): Promise<SiteSettingsData> {
   try {
     const payload = await getOptionalPayloadClient()
 
-    if (!payload) return FALLBACK
+    if (!payload) return getFallback(locale)
 
     const data = await payload.findGlobal({ slug: 'site-settings', locale, fallbackLocale: 'tr' })
     return data as unknown as SiteSettingsData
   } catch {
-    return FALLBACK
+    return getFallback(locale)
   }
 }
 
@@ -61,10 +68,11 @@ const SOCIAL_ICONS: Record<string, React.FC> = {
 
 export async function Footer({ locale }: { locale: Locale }) {
   const settings = await getSiteSettings(locale)
+  const fallback = getFallback(locale)
   const copy = dictionary[locale].footer
 
-  const email = settings.contactEmail ?? FALLBACK.contactEmail
-  const whatsapp = settings.whatsappNumber ?? FALLBACK.whatsappNumber
+  const email = settings.contactEmail ?? fallback.contactEmail
+  const whatsapp = settings.whatsappNumber ?? fallback.whatsappNumber
   const socials = settings.socialLinks ?? []
   const year = new Date().getFullYear()
   const legalLinks = [
@@ -76,8 +84,8 @@ export async function Footer({ locale }: { locale: Locale }) {
   const logoLight =
     settings.logoLight != null && typeof settings.logoLight === 'object'
       ? settings.logoLight
-      : FALLBACK.logoLight && typeof FALLBACK.logoLight === 'object'
-        ? FALLBACK.logoLight
+      : fallback.logoLight && typeof fallback.logoLight === 'object'
+        ? fallback.logoLight
         : null
 
   return (

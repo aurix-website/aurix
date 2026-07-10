@@ -14,9 +14,9 @@ type SiteSettingsData = {
   logoDark?: PopulatedMedia | string | null
 }
 
-const FALLBACK_LOGO_DARK: PopulatedMedia = {
-  url: '/brand/aurix-primary-flat-logo-web.png',
-  alt: 'AURIX Koçluk ve Danışmanlık',
+const FALLBACK_LOGO_DARK_ALT: Record<Locale, string> = {
+  tr: 'AURIX Koçluk ve Danışmanlık',
+  en: 'AURIX Coaching and Consulting',
 }
 
 async function getSiteSettings(locale: Locale): Promise<SiteSettingsData> {
@@ -35,7 +35,7 @@ export async function Header({ locale }: { locale: Locale }) {
   const logoDark =
     settings.logoDark != null && typeof settings.logoDark === 'object'
       ? settings.logoDark
-      : FALLBACK_LOGO_DARK
+      : { url: '/brand/aurix-primary-flat-logo-web.png', alt: FALLBACK_LOGO_DARK_ALT[locale] }
 
   return (
     <div className="sticky top-0 z-50">
