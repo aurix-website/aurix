@@ -16,6 +16,7 @@ import {
 } from 'lucide-react'
 import { FadeIn } from '@/components/ui/FadeIn'
 import { FinalCTA } from '@/components/sections/FinalCTA'
+import { LocationSection } from '@/components/sections/LocationSection'
 import { APPROACH_STEPS } from '@/lib/approach-steps-data'
 import { EXPERT_PLACEHOLDERS, STATIC_EXPERTS } from '@/lib/experts-data'
 import { pick, localeHref } from '@/lib/i18n/pick'
@@ -26,25 +27,26 @@ const COPY = {
     heroEyebrow: 'Hakkımızda',
     heroHeading: 'İhtiyacı anlayan, doğru uzmanla buluşturan çok disiplinli gelişim çatısı.',
     heroBody:
-      'AURIX, Kaan Yazıcı liderliğinde bireyler, yöneticiler, kurumlar ve öğrenciler için güvenilir, yapılandırılmış ve insan odaklı koçluk süreçleri tasarlar.',
+      'AURIX, bireyler, yöneticiler, kurumlar ve öğrenciler için güvenilir, yapılandırılmış ve insan odaklı koçluk süreçleri tasarlayan çok disiplinli bir uzman ekibidir.',
     ctaPrimary: 'Ön Görüşme Talep Et',
     ctaSecondary: 'Uzman Kadromuzu Tanıyın',
-    founderCardEyebrow: 'Kurucu Liderlik',
-    founderCardTitle: 'Kaan Yazıcı ve AURIX yaklaşımı',
-    founderCardBody: 'İnsan odağı, etik çerçeve ve doğru uzman eşleşmesi aynı masada buluşur.',
+    approachCardEyebrow: 'AURIX Yaklaşımı',
+    approachCardTitle: 'İnsan odağı, etik çerçeve, doğru eşleşme',
+    approachCardBody: 'İnsan odağı, etik çerçeve ve doğru uzman eşleşmesi aynı masada buluşur.',
     heroPillars: ['Netlik', 'Eşleşme', 'Gelişim'],
-    founderStoryEyebrow: 'Founder Story',
-    founderStoryHeading: 'Kurucumuz Kaan Yazıcı’nın yolculuğu',
-    founderStoryParagraphs: [
-      'AURIX’in kurucu hikâyesi, insanı yalnızca mesleki başarılarıyla değil; zihinsel, duygusal ve sosyal bütünlüğüyle ele alma fikrine dayanır.',
-      'Kaan Yazıcı, sağlık alanındaki deneyimini kamu yönetimi perspektifi ve profesyonel koçluk yaklaşımıyla birleştirerek bireylerin ve takımların potansiyellerini daha bilinçli şekilde ortaya çıkarmalarına eşlik eder.',
+    profileEyebrow: 'Ekipten Bir Profil',
+    profileHeading: 'Kaan Yazıcı’nın yolculuğu',
+    profileParagraphs: [
+      'AURIX’in yaklaşımı, insanı yalnızca mesleki başarılarıyla değil; zihinsel, duygusal ve sosyal bütünlüğüyle ele alma fikrine dayanır. Bu bakış açısı, AURIX’teki 6 uzmanın her birinin kendi deneyiminden beslenir.',
+      'Kaan Yazıcı, diş hekimliği alanındaki deneyimini kamu yönetimi perspektifi ve profesyonel koçluk yaklaşımıyla birleştirerek bireylerin ve takımların potansiyellerini daha bilinçli şekilde ortaya çıkarmalarına eşlik eder.',
     ],
-    founderHighlights: [
-      { icon: Heart, title: 'Sağlık alanından insan odaklı deneyim' },
+    profileHighlights: [
+      { icon: Heart, title: 'Diş hekimliğinden insan odaklı deneyim' },
       { icon: LayoutGrid, title: 'Kamu yönetimi perspektifi' },
       { icon: Users, title: 'Profesyonel koçluk ve takım gelişimi' },
     ],
-    founderCta: 'Kaan Yazıcı’yı Tanıyın',
+    profileCta: 'Kaan Yazıcı’yı Tanıyın',
+    profileTeamCta: 'Tüm Uzmanları Tanıyın',
     whyEyebrow: 'Neden AURIX?',
     whyHeading: 'Tek tip cevaplar yerine doğru bağlam.',
     whyItems: [
@@ -84,6 +86,7 @@ const COPY = {
     ],
     ethicsCta: 'Etik çerçeve hakkında sık sorulanları inceleyin',
     expertPhotoAlt: (name: string) => `${name} uzman görseli`,
+    heroVisualAlt: 'AURIX yaklaşımını temsil eden yön ve netlik odaklı masa kompozisyonu',
     metaTitle: 'Hakkımızda',
     metaDescription:
       'AURIX; farklı uzmanlık alanlarından gelen profesyonellerin deneyimini tek bir gelişim çatısı altında buluşturan koçluk ve danışmanlık platformudur.',
@@ -92,25 +95,26 @@ const COPY = {
     heroEyebrow: 'About',
     heroHeading: 'A multi-disciplinary development framework that understands the need and matches the right expert.',
     heroBody:
-      'Led by Kaan Yazıcı, AURIX designs reliable, structured, and human-centered coaching processes for individuals, executives, organizations, and students.',
+      'AURIX is a multi-disciplinary team of experts designing reliable, structured, and human-centered coaching processes for individuals, executives, organizations, and students.',
     ctaPrimary: 'Request an Introductory Call',
     ctaSecondary: 'Meet Our Expert Team',
-    founderCardEyebrow: 'Founding Leadership',
-    founderCardTitle: 'Kaan Yazıcı and the AURIX Approach',
-    founderCardBody: 'A human-centered focus, ethical framework, and right expert match come together at the same table.',
+    approachCardEyebrow: 'The AURIX Approach',
+    approachCardTitle: 'Human focus, ethics, and the right match',
+    approachCardBody: 'A human-centered focus, ethical framework, and right expert match come together at the same table.',
     heroPillars: ['Clarity', 'Match', 'Growth'],
-    founderStoryEyebrow: 'Founder Story',
-    founderStoryHeading: 'Founder Kaan Yazıcı’s Journey',
-    founderStoryParagraphs: [
-      'AURIX’s founding story rests on the idea of approaching a person not only through professional achievement, but through mental, emotional, and social wholeness.',
-      'Kaan Yazıcı combines experience from the healthcare field with a public administration perspective and a professional coaching approach, accompanying individuals and teams as they bring out their potential more consciously.',
+    profileEyebrow: 'From the Team',
+    profileHeading: 'Kaan Yazıcı’s journey',
+    profileParagraphs: [
+      'AURIX’s approach rests on the idea of seeing a person not only through professional achievement, but through mental, emotional, and social wholeness. This perspective is shaped by the experience each of AURIX’s 6 experts brings to the team.',
+      'Kaan Yazıcı combines his experience in dentistry with a public administration perspective and a professional coaching approach, accompanying individuals and teams as they bring out their potential more consciously.',
     ],
-    founderHighlights: [
-      { icon: Heart, title: 'Human-centered experience from healthcare' },
+    profileHighlights: [
+      { icon: Heart, title: 'Human-centered experience from dentistry' },
       { icon: LayoutGrid, title: 'A public administration perspective' },
       { icon: Users, title: 'Professional coaching and team development' },
     ],
-    founderCta: 'Meet Kaan Yazıcı',
+    profileCta: 'Meet Kaan Yazıcı',
+    profileTeamCta: 'Meet All Experts',
     whyEyebrow: 'Why AURIX?',
     whyHeading: 'The right context, instead of one-size-fits-all answers.',
     whyItems: [
@@ -150,6 +154,7 @@ const COPY = {
     ],
     ethicsCta: 'Review frequently asked questions about our ethical framework',
     expertPhotoAlt: (name: string) => `${name} expert photo`,
+    heroVisualAlt: 'A composition representing the AURIX approach of direction and clarity',
     metaTitle: 'About',
     metaDescription:
       'AURIX is a coaching and consulting platform that brings together professionals from different fields of expertise under a single development framework.',
@@ -259,25 +264,29 @@ export default async function HakkimizdaPage({
             <div className="group relative mx-auto w-full max-w-[620px]">
               <div className="relative overflow-hidden rounded-md border border-[#E2E5DE] bg-[#FCFDF9] p-4 shadow-[0_28px_80px_rgba(26,28,30,0.08)] transition-all duration-300 hover:shadow-[0_34px_90px_rgba(26,28,30,0.12)] motion-safe:hover:scale-[1.015] motion-reduce:transition-none">
                 <div className="grid gap-4 sm:grid-cols-[0.95fr_1.05fr]">
-                  <ExpertPortrait
-                    expert={founder}
-                    altText={copy.expertPhotoAlt(founder.name)}
-                    priority
-                    className="aspect-[4/5] rounded-sm shadow-[0_18px_42px_rgba(26,28,30,0.08)] transition-transform duration-500 motion-safe:group-hover:scale-[1.015]"
-                  />
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-sm shadow-[0_18px_42px_rgba(26,28,30,0.08)] transition-transform duration-500 motion-safe:group-hover:scale-[1.015]">
+                    <Image
+                      src="/media/manifesto-portrait.jpg"
+                      alt={copy.heroVisualAlt}
+                      fill
+                      priority
+                      sizes="(max-width: 768px) 90vw, 420px"
+                      className="object-cover object-top"
+                    />
+                  </div>
                   <div className="relative flex min-h-[360px] flex-col justify-between rounded-sm bg-[#F8F7F2] p-5">
                     <div className="absolute right-5 top-5 flex h-12 w-12 items-center justify-center rounded-full border border-[#14797C]/25 bg-white text-[#14797C] shadow-[0_10px_28px_rgba(26,28,30,0.08)]" aria-hidden="true">
                       <ShieldCheck className="h-5 w-5" />
                     </div>
                     <div className="pr-14">
                       <span className="text-[10px] font-mono font-bold uppercase tracking-[0.22em] text-[#C5A059]">
-                        {copy.founderCardEyebrow}
+                        {copy.approachCardEyebrow}
                       </span>
                       <p className="mt-3 font-serif text-2xl leading-tight text-[#1A1C1E]">
-                        {copy.founderCardTitle}
+                        {copy.approachCardTitle}
                       </p>
                       <p className="mt-4 text-sm leading-relaxed text-[#5B6168]">
-                        {copy.founderCardBody}
+                        {copy.approachCardBody}
                       </p>
                     </div>
 
@@ -297,7 +306,7 @@ export default async function HakkimizdaPage({
         </div>
       </section>
 
-      <section aria-labelledby="founder-heading" className="bg-surface-soft py-16 sm:py-20">
+      <section aria-labelledby="profile-heading" className="bg-surface-soft py-16 sm:py-20">
         <div className="mx-auto grid max-w-container grid-cols-1 gap-10 px-6 lg:grid-cols-[0.42fr_0.58fr] lg:items-center">
           <FadeIn>
             <div className="rounded-md border border-[#E2E5DE] bg-[#FCFDF9] p-3 shadow-[0_18px_54px_rgba(26,28,30,0.08)] transition-all duration-300 hover:shadow-[0_24px_64px_rgba(26,28,30,0.12)] motion-safe:hover:scale-[1.015] motion-reduce:transition-none">
@@ -308,19 +317,19 @@ export default async function HakkimizdaPage({
           <FadeIn delay={0.08}>
             <div>
               <span className="text-[11px] font-mono font-bold uppercase tracking-[0.2em] text-[#C5A059]">
-                {copy.founderStoryEyebrow}
+                {copy.profileEyebrow}
               </span>
-              <h2 id="founder-heading" className="mt-3 font-serif text-display-serif-md text-[#1A1C1E]">
-                {copy.founderStoryHeading}
+              <h2 id="profile-heading" className="mt-3 font-serif text-display-serif-md text-[#1A1C1E]">
+                {copy.profileHeading}
               </h2>
               <div className="mt-6 space-y-4 text-body-md leading-relaxed text-[#5B6168]">
-                {copy.founderStoryParagraphs.map((paragraph) => (
+                {copy.profileParagraphs.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
               </div>
 
               <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-3">
-                {copy.founderHighlights.map((item) => {
+                {copy.profileHighlights.map((item) => {
                   const Icon = item.icon
                   return (
                     <div key={item.title} className="rounded-md border border-[#E2E5DE] bg-[#FCFDF9] p-4 transition-all duration-300 hover:border-[#14797C]/45 hover:shadow-[0_16px_36px_rgba(26,28,30,0.08)] motion-safe:hover:scale-[1.025] motion-reduce:transition-none">
@@ -331,17 +340,28 @@ export default async function HakkimizdaPage({
                 })}
               </div>
 
-              <Link
-                href={localeHref('/uzmanlar/kaan-yazici', locale)}
-                className="mt-7 inline-flex items-center gap-1.5 rounded-sm text-sm font-bold text-[#14797C] transition-colors hover:text-[#C5A059] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
-              >
-                {copy.founderCta}
-                <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-              </Link>
+              <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2">
+                <Link
+                  href={localeHref('/uzmanlar/kaan-yazici', locale)}
+                  className="inline-flex items-center gap-1.5 rounded-sm text-sm font-bold text-[#14797C] transition-colors hover:text-[#C5A059] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
+                >
+                  {copy.profileCta}
+                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                </Link>
+                <Link
+                  href={localeHref('/uzmanlar', locale)}
+                  className="inline-flex items-center gap-1.5 rounded-sm text-sm font-bold text-[#5B6168] transition-colors hover:text-[#14797C] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
+                >
+                  {copy.profileTeamCta}
+                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                </Link>
+              </div>
             </div>
           </FadeIn>
         </div>
       </section>
+
+      <LocationSection locale={locale} background="canvas" />
 
       <section aria-labelledby="why-heading" className="bg-canvas py-16 sm:py-20">
         <div className="mx-auto max-w-container px-6">

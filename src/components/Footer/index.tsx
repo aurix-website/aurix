@@ -2,9 +2,12 @@ import React from 'react'
 import Link from 'next/link'
 import { getOptionalPayloadClient } from '@/lib/payload-client'
 import { CONTACT_EMAIL, WHATSAPP_DISPLAY, WHATSAPP_NUMBER } from '@/lib/contact-channels'
+import { SERVICES } from '@/lib/services-data'
 import type { Locale } from '@/lib/i18n/types'
 import { dictionary } from '@/lib/i18n/dictionary'
-import { localeHref } from '@/lib/i18n/pick'
+import { pick, localeHref } from '@/lib/i18n/pick'
+
+const FOOTER_SERVICE_IDS = ['bireysel-kocluk', 'yonetici-koclugu', 'kurumsal-egitim', 'ogrenci-koclugu']
 
 type PopulatedMedia = { url?: string | null; alt?: string | null }
 
@@ -70,11 +73,31 @@ export async function Footer({ locale }: { locale: Locale }) {
   const settings = await getSiteSettings(locale)
   const fallback = getFallback(locale)
   const copy = dictionary[locale].footer
+  const nav = dictionary[locale].nav
 
   const email = settings.contactEmail ?? fallback.contactEmail
   const whatsapp = settings.whatsappNumber ?? fallback.whatsappNumber
   const socials = settings.socialLinks ?? []
   const year = new Date().getFullYear()
+
+  const aboutLinks = [
+    { label: nav.about, href: '/hakkimizda' },
+    { label: nav.experts, href: '/uzmanlar' },
+    { label: nav.journal, href: '/blog' },
+    { label: nav.faq, href: '/sss' },
+    { label: nav.contact, href: '/iletisim' },
+  ]
+
+  const serviceLinks = FOOTER_SERVICE_IDS.map((id) => SERVICES.find((service) => service.id === id))
+    .filter((service): service is NonNullable<typeof service> => Boolean(service))
+    .map((service) => ({ label: pick(service.title, locale), href: `/hizmetler/${service.id}` }))
+
+  const startLinks = [
+    { label: nav.requestCall, href: '/on-gorusme' },
+    { label: copy.ctaExpertMatch, href: '/on-gorusme' },
+    { label: copy.ctaCorporate, href: '/iletisim?interest=kurumsal-egitim' },
+  ]
+
   const legalLinks = [
     { label: copy.kvkk, href: '/kvkk' },
     { label: copy.privacy, href: '/gizlilik-politikasi' },
@@ -89,15 +112,19 @@ export async function Footer({ locale }: { locale: Locale }) {
         : null
 
   return (
-    <footer className="bg-surface-dark text-on-dark-soft" aria-label={copy.ariaLabel}>
-      <div className="max-w-container mx-auto px-6 pt-16 pb-8">
+    <footer className="relative bg-surface-dark text-on-dark-soft" aria-label={copy.ariaLabel}>
+      <div
+        className="h-px w-full bg-gradient-to-r from-transparent via-brand-accent/40 to-[#C5A059]/40"
+        aria-hidden="true"
+      />
+      <div className="max-w-container mx-auto px-6 pt-16 sm:pt-20 pb-8">
         {/* Top grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-16 pb-12 border-b border-surface-dark-elevated">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-12 pb-14 border-b border-surface-dark-elevated sm:grid-cols-2 lg:grid-cols-[1.3fr_0.9fr_0.9fr_0.9fr] lg:gap-12">
           {/* Brand */}
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <Link
               href={localeHref('/', locale)}
-              className="inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-md mb-4"
+              className="inline-block focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-md mb-5"
               aria-label={copy.homeAria}
             >
               {logoLight?.url ? (
@@ -109,25 +136,19 @@ export async function Footer({ locale }: { locale: Locale }) {
                 </span>
               )}
             </Link>
-            <p className="text-body-sm text-on-dark-soft leading-relaxed max-w-[260px]">
+            <p className="text-body-sm text-on-dark-soft leading-relaxed max-w-[280px]">
               {copy.tagline}
             </p>
-            <p className="mt-3 text-caption text-on-dark-soft opacity-60">
+            <p className="mt-3 text-caption font-mono tracking-wide text-[#C5A059]">
               {copy.locationLine}
             </p>
-          </div>
 
-          {/* Contact */}
-          <div>
-            <p className="text-caption font-medium tracking-widest uppercase text-on-dark-soft mb-4">
-              {copy.contactHeading}
-            </p>
-            <ul className="space-y-3 text-body-sm">
+            <ul className="mt-6 space-y-2.5 text-body-sm">
               {email && (
                 <li>
                   <a
                     href={`mailto:${email}`}
-                    className="text-on-dark-soft hover:text-on-dark transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
+                    className="text-on-dark-soft hover:text-brand-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
                   >
                     {email}
                   </a>
@@ -139,22 +160,16 @@ export async function Footer({ locale }: { locale: Locale }) {
                     href={`https://wa.me/${whatsapp.replace(/\D/g, '')}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-on-dark-soft hover:text-on-dark transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
+                    className="text-on-dark-soft hover:text-brand-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
                   >
                     WhatsApp: {WHATSAPP_DISPLAY}
                   </a>
                 </li>
               )}
             </ul>
-          </div>
 
-          {/* Social */}
-          {socials.length > 0 && (
-            <div>
-              <p className="text-caption font-medium tracking-widest uppercase text-on-dark-soft mb-4">
-                {copy.socialHeading}
-              </p>
-              <ul className="flex flex-wrap gap-4">
+            {socials.length > 0 && (
+              <ul className="mt-6 flex flex-wrap gap-4">
                 {socials.map((s, i) => {
                   if (!s.url) return null
                   const platform = (s.platform ?? '').toLowerCase()
@@ -166,7 +181,7 @@ export async function Footer({ locale }: { locale: Locale }) {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={s.platform ?? copy.socialFallbackLabel}
-                        className="text-on-dark-soft hover:text-on-dark transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
+                        className="text-on-dark-soft hover:text-brand-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
                       >
                         {Icon ? <Icon /> : <span className="text-body-sm">{s.platform}</span>}
                       </a>
@@ -174,8 +189,73 @@ export async function Footer({ locale }: { locale: Locale }) {
                   )
                 })}
               </ul>
+            )}
+          </div>
+
+          {/* Menü — AURIX / Hizmetler / Başlayın */}
+          <nav aria-label={copy.footerNavAria} className="contents">
+            <div>
+              <p className="text-caption font-medium tracking-widest uppercase text-[#C5A059] mb-4">
+                {copy.aboutHeading}
+              </p>
+              <ul className="space-y-3 text-body-sm">
+                {aboutLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={localeHref(link.href, locale)}
+                      className="text-on-dark-soft hover:text-on-dark transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-          )}
+
+            <div>
+              <p className="text-caption font-medium tracking-widest uppercase text-[#C5A059] mb-4">
+                {copy.servicesHeading}
+              </p>
+              <ul className="space-y-3 text-body-sm">
+                {serviceLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={localeHref(link.href, locale)}
+                      className="text-on-dark-soft hover:text-on-dark transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link
+                    href={localeHref('/hizmetler', locale)}
+                    className="font-semibold text-brand-accent hover:text-[#C5A059] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
+                  >
+                    {copy.viewAllServices}
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <p className="text-caption font-medium tracking-widest uppercase text-[#C5A059] mb-4">
+                {copy.startHeading}
+              </p>
+              <ul className="space-y-3 text-body-sm">
+                {startLinks.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={localeHref(link.href, locale)}
+                      className="text-on-dark-soft hover:text-on-dark transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </nav>
         </div>
 
         {/* Bottom bar */}

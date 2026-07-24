@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import type { Locale } from '@/lib/i18n/types'
 import { dictionary } from '@/lib/i18n/dictionary'
 
@@ -24,20 +25,35 @@ function useCountUp(target: number, duration: number = 1500, start: boolean = fa
 }
 
 interface StatItem {
-  value: number
-  suffix: string
+  value?: number
+  suffix?: string
   label: string
   duration?: number
+  text?: string
+  logo?: string
 }
 
-function StatNumber({ value, suffix, label, duration, visible }: StatItem & { visible: boolean }) {
-  const count = useCountUp(value, duration, visible)
+function StatNumber({ value, suffix, label, duration, text, logo, visible }: StatItem & { visible: boolean }) {
+  const count = useCountUp(value ?? 0, duration, visible)
 
   return (
     <div className="text-center">
-      <span className="font-serif text-3xl text-[#14797C] font-semibold block tabular-nums">
-        {count}{suffix}
-      </span>
+      {text ? (
+        <span className="flex items-center justify-center gap-2">
+          {logo && (
+            <span className="relative h-5 w-5 shrink-0 sm:h-6 sm:w-6">
+              <Image src={logo} alt="" fill sizes="24px" className="object-contain" />
+            </span>
+          )}
+          <span className="font-serif text-lg sm:text-xl text-[#14797C] font-semibold leading-snug">
+            {text}
+          </span>
+        </span>
+      ) : (
+        <span className="font-serif text-3xl text-[#14797C] font-semibold block tabular-nums">
+          {count}{suffix}
+        </span>
+      )}
       <span className="text-[11px] font-mono text-[#5B6168] uppercase tracking-widest mt-1 block">
         {label}
       </span>

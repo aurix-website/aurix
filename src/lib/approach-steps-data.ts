@@ -17,8 +17,8 @@ export const APPROACH_STEPS: ApproachStep[] = [
     accent: '#14797C',
     title: { tr: 'Dinle', en: 'Listen' },
     description: {
-      tr: 'Hedeflerinizi, endişelerinizi ve bağlamınızı anlamak için zaman ayırıyoruz.',
-      en: 'We take the time to understand your goals, concerns, and context.',
+      tr: 'Hedeflerinizi, önceliklerinizi ve bağlamınızı anlamak için zaman ayırıyoruz.',
+      en: 'We take the time to understand your goals, priorities, and context.',
     },
   },
   {

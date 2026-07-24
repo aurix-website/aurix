@@ -8,14 +8,14 @@ const COPY = {
   tr: {
     eyebrow: 'METODOLOJİ',
     heading: 'AURIX Yaklaşımı',
-    body: 'Bir koç değil; yapılandırılmış bir metodoloji.',
+    body: 'Sadece koçluk değil, yapılandırılmış bir metodoloji.',
     stepsAria: 'AURIX metodoloji adımları',
     note: 'AURIX’te koçluk ve danışmanlık süreçleri; psikoterapi, tıbbi tedavi veya klinik müdahalenin yerine geçmez. Gerektiğinde ilgili uzmanlık alanlarına yönlendirme yapılması önemsenir.',
   },
   en: {
     eyebrow: 'METHODOLOGY',
     heading: 'AURIX Approach',
-    body: 'Not a single coach; a structured methodology.',
+    body: 'Not just coaching, but a structured methodology.',
     stepsAria: 'AURIX methodology steps',
     note: 'At AURIX, coaching and consulting processes do not replace psychotherapy, medical treatment, or clinical intervention. Referral to the relevant area of expertise is taken seriously when needed.',
   },

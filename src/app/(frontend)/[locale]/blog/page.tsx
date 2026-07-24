@@ -10,10 +10,10 @@ const COPY = {
   tr: {
     metaDescription:
       'Koçluk, liderlik, kariyer, öğrenci gelişimi ve global uyum üzerine AURIX uzmanlarından yapılandırılmış yazılar.',
-    eyebrow: 'Journal',
+    eyebrow: 'Blog',
     heading: 'AURIX İçgörüleri',
     body: 'Liderlik, kariyer, eğitim, öğrenci gelişimi ve kişisel dönüşüm üzerine uzmanlarımızdan yazılar, rehberler ve düşünceler.',
-    heroImageAlt: 'AURIX journal içgörü görseli',
+    heroImageAlt: 'AURIX blog içgörü görseli',
     readingAreaLabel: 'Okuma Alanı',
     readingAreaHeading: 'Netlik, karar ve gelişim üzerine notlar',
     cardTitle: 'Düşünceyi sadeleştiren içerikler',
@@ -29,10 +29,10 @@ const COPY = {
   en: {
     metaDescription:
       'Structured writing from AURIX experts on coaching, leadership, career, student development, and global adaptation.',
-    eyebrow: 'Journal',
+    eyebrow: 'Blog',
     heading: 'AURIX Insights',
     body: 'Writing, guides, and reflections from our experts on leadership, career, education, student development, and personal transformation.',
-    heroImageAlt: 'AURIX journal insights image',
+    heroImageAlt: 'AURIX blog insights image',
     readingAreaLabel: 'Reading Area',
     readingAreaHeading: 'Notes on clarity, decisions, and growth',
     cardTitle: 'Content that simplifies thinking',
@@ -54,15 +54,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const copy = COPY[locale]
-  const title = 'Journal'
+  const title = 'Blog'
   return {
     title,
     description: copy.metaDescription,
-    alternates: { languages: { tr: '/journal', en: '/en/journal' } },
+    alternates: { languages: { tr: '/blog', en: '/en/blog' } },
   }
 }
 
-export default async function JournalPage({
+export default async function BlogPage({
   params,
 }: {
   params: Promise<{ locale: Locale }>

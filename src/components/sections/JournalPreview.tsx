@@ -10,7 +10,7 @@ import { DEFAULT_LOCALE, type Locale } from '@/lib/i18n/types'
 const COPY = {
   tr: {
     eyebrow: 'GÜNCEL YAZILAR',
-    heading: 'Journal',
+    heading: 'Blog',
     body: 'Koçluk, kariyer ve liderlik üzerine derinlemesine yazılar.',
     viewAll: 'Tüm yazılar',
     coverAlt: (title: string) => `${title} kapak görseli`,
@@ -20,7 +20,7 @@ const COPY = {
   },
   en: {
     eyebrow: 'LATEST ARTICLES',
-    heading: 'Journal',
+    heading: 'Blog',
     body: 'In-depth writing on coaching, career, and leadership.',
     viewAll: 'All articles',
     coverAlt: (title: string) => `${title} cover image`,
@@ -113,7 +113,7 @@ export async function JournalPreview({ locale = DEFAULT_LOCALE }: { locale?: Loc
               </p>
             </div>
             <Link
-              href={localeHref('/journal', locale)}
+              href={localeHref('/blog', locale)}
               className="shrink-0 text-sm font-sans font-semibold text-[#14797C] hover:text-[#1A1C1E] inline-flex items-center gap-2 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2 rounded-sm"
             >
               {copy.viewAll} <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -179,7 +179,7 @@ export async function JournalPreview({ locale = DEFAULT_LOCALE }: { locale?: Loc
                       )}
                       {article.slug && (
                         <Link
-                          href={localeHref(`/journal/${article.slug}`, locale)}
+                          href={localeHref(`/blog/${article.slug}`, locale)}
                           className="text-xs font-sans font-bold text-[#14797C] hover:text-[#C5A059] inline-flex items-center gap-1.5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2 rounded-sm"
                           aria-label={copy.readMoreAria(article.title ?? copy.fallbackTitle)}
                         >

@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, Compass } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { FadeIn } from '@/components/ui/FadeIn'
 import { LineDraw } from '@/components/ui/LineDraw'
 import { FinalCTA } from '@/components/sections/FinalCTA'
-import { SERVICES, SERVICE_DETAIL_SLUGS } from '@/lib/services-data'
+import { SERVICES } from '@/lib/services-data'
 import { APPROACH_STEPS } from '@/lib/approach-steps-data'
 import { pick, localeHref } from '@/lib/i18n/pick'
 import type { Locale } from '@/lib/i18n/types'
@@ -21,44 +21,6 @@ const COPY = {
       'AURIX, bireysel gelişimden yönetici koçluğuna, kurumsal eğitimlerden gençler için kariyer koçluğuna kadar farklı ihtiyaçlara yönelik yapılandırılmış koçluk ve danışmanlık süreçleri sunar. Her süreç, ön görüşme ve ihtiyaç analiziyle başlar; uygun hizmet alanı ve uzman eşleşmesiyle devam eder.',
     heroCtaPrimary: 'Size Uygun Hizmeti Bulalım',
     heroCtaSecondary: 'Ön Görüşme Talep Et',
-    guideHeading: 'Hangi hizmet size daha uygun?',
-    guideBody:
-      'Gelişim ihtiyacı herkes için aynı değildir. AURIX’te hizmetler; bireysel, profesyonel, kurumsal ve akademik gelişim ihtiyaçlarına göre yapılandırılır.',
-    guideCards: [
-      {
-        question: 'Yaşamımda yön, denge veya netlik arıyorum.',
-        description:
-          'Kişisel hedeflerinizi netleştirmek, karar süreçlerinizi daha bilinçli yönetmek veya yaşamınızda yeni bir yön oluşturmak istiyorsanız bireysel koçluk süreci sizin için uygun olabilir.',
-        href: '/hizmetler/bireysel-kocluk',
-        cta: 'Bireysel Koçluğu İncele',
-      },
-      {
-        question: 'Liderlik rolümde daha etkili olmak istiyorum.',
-        description:
-          'Ekip yönetimi, karar alma, iletişim, önceliklendirme ve liderlik kapasitenizi güçlendirmek istiyorsanız liderlik ve yönetici koçluğu doğru bir başlangıç olabilir.',
-        href: '/hizmetler/yonetici-koclugu',
-        cta: 'Yönetici Koçluğunu İncele',
-      },
-      {
-        question: 'Kurumumuz için eğitim veya gelişim programı arıyoruz.',
-        description:
-          'Liderlik, takım gelişimi, iletişim veya değişim yönetimi alanlarında kuruma özel bir gelişim programı arıyorsanız kurumsal eğitim ve takım koçluğu sürecini birlikte tasarlayabiliriz.',
-        href: '/hizmetler/kurumsal-egitim',
-        cta: 'Kurumsal İhtiyaç Analizi Talep Et',
-      },
-      {
-        question: 'Öğrenci veya veli olarak destek arıyorum.',
-        description:
-          'Hedef belirleme, sınav stratejisi, motivasyon, zaman yönetimi veya küresel kariyer uyumu konularında destek arıyorsanız bu alan sizin için uygun olabilir.',
-        href: '/hizmetler/ogrenci-koclugu',
-        cta: 'Öğrenci Koçluğunu İncele',
-      },
-    ],
-    unsureTitle: 'Emin değilim.',
-    unsureBody:
-      'Hangi hizmetin size uygun olduğundan emin değilseniz, kısa bir ön görüşme ile ihtiyacınızı birlikte değerlendirebiliriz.',
-    unsureCta: 'Bana Uygun Süreci Belirleyelim',
-    unsureHref: '/iletisim?interest=emin-degilim',
     categoriesHeading: 'AURIX hizmet alanları',
     categoriesBody:
       'Her hizmet alanı, farklı bir gelişim ihtiyacına cevap verecek şekilde yapılandırılır. Amaç, sizi tek tip bir programa yönlendirmek değil; ihtiyacınıza uygun süreç ve uzmanla buluşturmaktır.',
@@ -106,44 +68,6 @@ const COPY = {
       'From personal development to executive coaching, from corporate training to career coaching for young people, AURIX offers structured coaching and consulting processes for a wide range of needs. Every process begins with an introductory call and a needs assessment, then continues with the right service area and expert match.',
     heroCtaPrimary: "Let's Find the Right Service for You",
     heroCtaSecondary: 'Request an Introductory Call',
-    guideHeading: 'Which service fits you best?',
-    guideBody:
-      'Development needs are not the same for everyone. At AURIX, services are structured around personal, professional, corporate, and academic development needs.',
-    guideCards: [
-      {
-        question: "I'm looking for direction, balance, or clarity in my life.",
-        description:
-          "If you want to clarify your personal goals, make decisions more consciously, or set a new direction in your life, personal coaching may be the right fit for you.",
-        href: '/hizmetler/bireysel-kocluk',
-        cta: 'Explore Personal Coaching',
-      },
-      {
-        question: 'I want to be more effective in my leadership role.',
-        description:
-          'If you want to strengthen your team management, decision-making, communication, prioritization, or leadership capacity, leadership and executive coaching can be the right starting point.',
-        href: '/hizmetler/yonetici-koclugu',
-        cta: 'Explore Executive Coaching',
-      },
-      {
-        question: 'We are looking for training or a development program for our organization.',
-        description:
-          'If you are looking for a development program tailored to your organization in leadership, team development, communication, or change management, we can design a corporate training and team coaching process together.',
-        href: '/hizmetler/kurumsal-egitim',
-        cta: 'Request a Corporate Needs Analysis',
-      },
-      {
-        question: "I'm a student or parent looking for support.",
-        description:
-          'If you are looking for support with goal setting, exam strategy, motivation, time management, or global career fit, this area may be right for you.',
-        href: '/hizmetler/ogrenci-koclugu',
-        cta: 'Explore Student Coaching',
-      },
-    ],
-    unsureTitle: "I'm not sure.",
-    unsureBody:
-      "If you're not sure which service fits you, we can assess your need together in a short introductory call.",
-    unsureCta: "Let's Find the Right Process for Me",
-    unsureHref: '/iletisim?interest=emin-degilim',
     categoriesHeading: 'AURIX service areas',
     categoriesBody:
       'Each service area is structured to respond to a different development need. The goal is not to route you into a one-size-fits-all program, but to match you with the process and expert that fit your need.',
@@ -241,7 +165,7 @@ export default async function HizmetlerPage({
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Link
-                  href="#hizmet-rehberi"
+                  href="#kategoriler-heading"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#14797C] hover:bg-[#0f5f62] text-white text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
                 >
                   {copy.heroCtaPrimary}
@@ -252,68 +176,6 @@ export default async function HizmetlerPage({
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-transparent border border-[#14797C] text-[#14797C] hover:bg-[#14797C]/5 text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
                 >
                   {copy.heroCtaSecondary}
-                </Link>
-              </div>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* Hizmet Seçim Rehberi */}
-      <section
-        id="hizmet-rehberi"
-        aria-labelledby="rehber-heading"
-        className="py-section bg-surface-soft"
-      >
-        <div className="max-w-container mx-auto px-6">
-          <FadeIn>
-            <div className="mb-10 max-w-xl">
-              <h2 id="rehber-heading" className="text-display-lg font-semibold text-ink">
-                {copy.guideHeading}
-              </h2>
-              <p className="mt-3 text-body-md text-muted">
-                {copy.guideBody}
-              </p>
-            </div>
-          </FadeIn>
-
-          <FadeIn delay={0.1}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {copy.guideCards.map((card) => (
-                <div
-                  key={card.href}
-                  className="bg-surface-elevated border border-hairline rounded-sm p-6 flex flex-col gap-3"
-                >
-                  <h3 className="text-title-sm font-semibold text-ink leading-snug">
-                    {card.question}
-                  </h3>
-                  <p className="text-body-sm text-body leading-relaxed flex-1">
-                    {card.description}
-                  </p>
-                  <Link
-                    href={localeHref(card.href, locale)}
-                    className="inline-flex items-center gap-1.5 text-sm font-bold text-[#14797C] hover:text-[#C5A059] transition-colors self-start focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2 rounded-sm"
-                  >
-                    {card.cta}
-                    <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-                  </Link>
-                </div>
-              ))}
-
-              <div className="bg-surface-dark border border-hairline rounded-sm p-6 flex flex-col gap-3">
-                <Compass className="h-6 w-6 text-brand-accent" aria-hidden="true" />
-                <h3 className="text-title-sm font-semibold text-on-dark leading-snug">
-                  {copy.unsureTitle}
-                </h3>
-                <p className="text-body-sm text-on-dark-soft leading-relaxed flex-1">
-                  {copy.unsureBody}
-                </p>
-                <Link
-                  href={localeHref(copy.unsureHref, locale)}
-                  className="inline-flex items-center gap-1.5 text-sm font-bold text-on-dark hover:text-brand-accent transition-colors self-start focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
-                >
-                  {copy.unsureCta}
-                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </Link>
               </div>
             </div>
@@ -335,55 +197,40 @@ export default async function HizmetlerPage({
             </div>
           </FadeIn>
 
-          <div className="flex flex-col gap-16">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {SERVICES.map((service, i) => {
               const Icon = service.icon
               return (
-                <FadeIn key={service.id} delay={i * 0.05}>
-                  <div id={service.id} className="scroll-mt-24 border-t border-hairline pt-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                      <div className="lg:col-span-4 flex flex-col gap-4">
-                        <div
-                          className="w-14 h-14 rounded-sm flex items-center justify-center"
-                          style={{ backgroundColor: `${service.accent}14`, color: service.accent }}
-                        >
-                          <Icon className="h-7 w-7" aria-hidden="true" />
-                        </div>
-                        <span className="text-[10px] font-mono tracking-widest text-muted uppercase block">
-                          {service.number} / {pick(service.category, locale)}
-                        </span>
-                        <h3 className="font-serif text-2xl text-ink leading-tight">
-                          {pick(service.title, locale)}
-                        </h3>
-                        <p className="text-body-sm text-body leading-relaxed">
-                          {pick(service.description, locale)}
-                        </p>
-                        {SERVICE_DETAIL_SLUGS[service.id] && (
-                          <Link
-                            href={localeHref(`/hizmetler/${SERVICE_DETAIL_SLUGS[service.id]}`, locale)}
-                            className="inline-flex items-center gap-1.5 text-sm font-bold text-[#14797C] hover:text-[#C5A059] transition-colors self-start focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2 rounded-sm"
-                          >
-                            {copy.detailLinkText}
-                            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-                          </Link>
-                        )}
+                <FadeIn key={service.id} delay={i * 0.03}>
+                  <Link
+                    href={localeHref(`/hizmetler/${service.id}`, locale)}
+                    className="group flex h-full flex-col gap-4 rounded-sm border border-hairline bg-surface-elevated p-6 transition-all duration-200 hover:-translate-y-1 hover:border-[#14797C]/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2"
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <div
+                        className="flex h-12 w-12 items-center justify-center rounded-sm"
+                        style={{ backgroundColor: `${service.accent}14`, color: service.accent }}
+                      >
+                        <Icon className="h-6 w-6" aria-hidden="true" />
                       </div>
-
-                      <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {service.subServices.map((sub) => (
-                          <div
-                            key={pick(sub.title, locale)}
-                            className="bg-surface-elevated border border-hairline rounded-sm p-5 flex flex-col gap-2"
-                          >
-                            <h4 className="text-title-sm font-semibold text-ink">{pick(sub.title, locale)}</h4>
-                            <p className="text-body-sm text-body leading-relaxed">
-                              {pick(sub.description, locale)}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
+                      <span
+                        className="text-[10px] font-mono tracking-widest uppercase"
+                        style={{ color: service.accent }}
+                      >
+                        {pick(service.category, locale)}
+                      </span>
                     </div>
-                  </div>
+                    <h3 className="font-serif text-xl text-ink leading-tight transition-colors group-hover:text-[#14797C]">
+                      {pick(service.title, locale)}
+                    </h3>
+                    <p className="text-body-sm text-body leading-relaxed flex-1">
+                      {pick(service.description, locale)}
+                    </p>
+                    <span className="inline-flex items-center gap-1.5 text-sm font-bold text-[#14797C] transition-colors group-hover:text-[#C5A059] self-start">
+                      {copy.detailLinkText}
+                      <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                    </span>
+                  </Link>
                 </FadeIn>
               )
             })}

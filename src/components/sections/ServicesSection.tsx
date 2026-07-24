@@ -1,65 +1,30 @@
-'use client'
-
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Compass, X } from 'lucide-react'
-import { SERVICES, SERVICE_DETAIL_SLUGS, type ServiceCategory } from '@/lib/services-data'
+import { ArrowRight } from 'lucide-react'
+import { SERVICES } from '@/lib/services-data'
 import { pick, localeHref } from '@/lib/i18n/pick'
 import { DEFAULT_LOCALE, type Locale } from '@/lib/i18n/types'
 
 const COPY = {
   tr: {
     eyebrow: 'Uzmanlığımız, etkiniz.',
-    heading: 'Uzmanlık Alanlarımız',
-    body: 'Her kategoriye tıklayarak kapsadığı hizmetleri keşfedin.',
+    heading: 'Hangi Alanda Destek Arıyorsunuz?',
+    body: 'Size uygun alanı seçin, hizmetin detaylarını inceleyin.',
     viewAll: 'Tümünü gör',
-    cardAria: 'hizmetlerini incele',
-    serviceAreaCount: (count: number) => `${count} hizmet alanı`,
+    cardAria: 'hizmetini incele',
     explore: 'İncele',
-    tagline: 'Doğru rehberlik. Güçlü dönüşüm. Sürdürülebilir etki.',
-    close: 'Kapat',
-    detailCta: 'Bu Alan Hakkında Detay Al',
-    categoryServices: 'Bu kategorideki hizmetler',
   },
   en: {
     eyebrow: 'Our expertise, your impact.',
-    heading: 'Our Areas of Expertise',
-    body: 'Click each category to explore the services it includes.',
+    heading: 'Which Area Are You Looking For Support In?',
+    body: 'Choose the area that fits you and explore the details of the service.',
     viewAll: 'View all',
-    cardAria: 'services',
-    serviceAreaCount: (count: number) => `${count} service areas`,
+    cardAria: 'service',
     explore: 'Explore',
-    tagline: 'Right guidance. Strong transformation. Sustainable impact.',
-    close: 'Close',
-    detailCta: 'Get Details About This Area',
-    categoryServices: 'Services in this category',
   },
 } as const
 
-function getServiceHref(service: ServiceCategory, locale: Locale) {
-  return localeHref(`/hizmetler/${SERVICE_DETAIL_SLUGS[service.id] ?? service.id}`, locale)
-}
-
 export function ServicesSection({ locale = DEFAULT_LOCALE }: { locale?: Locale }) {
   const copy = COPY[locale]
-  const [active, setActive] = useState<ServiceCategory | null>(null)
-  const [selectedSub, setSelectedSub] = useState<number>(0)
-
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setActive(null)
-    }
-    window.addEventListener('keydown', handleKey)
-    return () => window.removeEventListener('keydown', handleKey)
-  }, [])
-
-  useEffect(() => {
-    document.body.style.overflow = active ? 'hidden' : ''
-    setSelectedSub(0)
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [active])
 
   return (
     <section className="relative overflow-hidden bg-[#F6F7F1] py-20 sm:py-24">
@@ -94,18 +59,18 @@ export function ServicesSection({ locale = DEFAULT_LOCALE }: { locale?: Locale }
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
-          {SERVICES.map((service, index) => {
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {SERVICES.map((service) => {
             const Icon = service.icon
             const isGold = service.accent.toLowerCase() === '#c5a059'
             const accentSoft = isGold ? '#F4E8C9' : '#DCEFF0'
-            const accentDeep = index === 3 ? '#82906F' : service.accent
+            const accentDeep = service.accent
             const shadowColor = isGold ? 'rgba(197,160,89,0.18)' : 'rgba(20,121,124,0.16)'
 
             return (
-              <button
+              <Link
                 key={service.id}
-                onClick={() => setActive(service)}
+                href={localeHref(`/hizmetler/${service.id}`, locale)}
                 className="group relative min-h-[265px] overflow-hidden rounded-md border border-[#E2E5DE] bg-[#FCFDF9] text-left shadow-[0_18px_45px_rgba(26,28,30,0.07)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_70px_rgba(26,28,30,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#14797C] focus-visible:ring-offset-2"
                 aria-label={`${pick(service.title, locale)} ${copy.cardAria}`}
               >
@@ -188,7 +153,7 @@ export function ServicesSection({ locale = DEFAULT_LOCALE }: { locale?: Locale }
                       >
                         <Icon className="h-4 w-4" />
                       </span>
-                      {copy.serviceAreaCount(service.subServices.length)}
+                      {pick(service.category, locale)}
                     </span>
                     <span
                       className="inline-flex items-center gap-2 text-xs font-semibold transition-all duration-300 group-hover:gap-3"
@@ -198,123 +163,11 @@ export function ServicesSection({ locale = DEFAULT_LOCALE }: { locale?: Locale }
                     </span>
                   </div>
                 </div>
-              </button>
+              </Link>
             )
           })}
         </div>
-
-        <div className="mt-9 flex items-center justify-center gap-5 text-center text-sm text-[#5B6168]">
-          <span className="hidden h-px w-20 bg-[#C5A059]/30 sm:block" aria-hidden="true" />
-          <span className="inline-flex items-center gap-3">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#C5A059]/40 text-[#C5A059]">
-              <Compass className="h-4 w-4" aria-hidden="true" />
-            </span>
-            {copy.tagline}
-          </span>
-          <span className="hidden h-px w-20 bg-[#C5A059]/30 sm:block" aria-hidden="true" />
-        </div>
       </div>
-
-      {active && (() => {
-        const ActiveIcon = active.icon
-        return (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
-            <div
-              className="absolute inset-0 bg-[#1A1C1E]/75 backdrop-blur-sm"
-              onClick={() => setActive(null)}
-              aria-hidden="true"
-            />
-
-            <div
-              className="relative bg-[#F6F7F1] rounded-sm w-full max-w-3xl max-h-[88vh] overflow-hidden shadow-2xl flex flex-col md:flex-row"
-              role="dialog"
-              aria-modal="true"
-              aria-label={pick(active.title, locale)}
-            >
-              <button
-                onClick={() => setActive(null)}
-                className="absolute top-4 right-4 z-20 w-9 h-9 rounded-sm bg-white/15 hover:bg-white/30 md:bg-[#E2E5DE]/50 md:hover:bg-[#E2E5DE] flex items-center justify-center transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white md:focus-visible:outline-[#1A9CA0]"
-                aria-label={copy.close}
-              >
-                <X className="h-4 w-4 text-white md:text-[#1A1C1E]" aria-hidden="true" />
-              </button>
-
-              <div
-                className="md:w-[38%] flex-shrink-0 p-7 sm:p-8 flex flex-col justify-between relative overflow-hidden"
-                style={{ backgroundColor: active.accent }}
-              >
-                <ActiveIcon
-                  className="absolute -bottom-6 -right-6 h-40 w-40 opacity-10 pointer-events-none"
-                  aria-hidden="true"
-                />
-
-                <div className="relative space-y-4">
-                  <div className="w-14 h-14 rounded-sm bg-white/15 flex items-center justify-center">
-                    <ActiveIcon className="h-7 w-7 text-white" aria-hidden="true" />
-                  </div>
-                  <span className="text-[10px] font-mono tracking-widest font-bold uppercase block text-white/70">
-                    {active.number} / {pick(active.category, locale)}
-                  </span>
-                  <h3 className="font-serif text-2xl text-white leading-tight">
-                    {pick(active.title, locale)}
-                  </h3>
-                  <p className="font-sans text-sm leading-relaxed text-white/85">
-                    {pick(active.description, locale)}
-                  </p>
-                </div>
-
-                <Link
-                  href={getServiceHref(active, locale)}
-                  className="relative mt-6 inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white/25 text-white px-5 py-3 text-sm font-semibold rounded-sm transition-all duration-200 border border-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-                >
-                  {copy.detailCta}
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-              </div>
-
-              <div className="flex-1 flex flex-col overflow-hidden">
-                <div className="p-6 sm:p-7 space-y-2 overflow-y-auto">
-                  <span className="text-[10px] font-mono tracking-widest text-[#C5A059] font-bold uppercase block mb-3">
-                    {copy.categoryServices}
-                  </span>
-
-                  {active.subServices.map((sub, idx) => {
-                    const isSelected = selectedSub === idx
-                    return (
-                      <button
-                        key={pick(sub.title, locale)}
-                        type="button"
-                        onClick={() => setSelectedSub(idx)}
-                        onMouseEnter={() => setSelectedSub(idx)}
-                        onFocus={() => setSelectedSub(idx)}
-                        className="block w-full text-left rounded-sm border transition-all duration-200 p-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#14797C] focus-visible:ring-offset-1"
-                        style={{
-                          borderColor: isSelected ? active.accent : '#E2E5DE',
-                          borderLeftWidth: isSelected ? '3px' : '1px',
-                          backgroundColor: isSelected ? '#FFFFFF' : 'transparent',
-                        }}
-                        aria-pressed={isSelected}
-                      >
-                        <div className="flex items-center justify-between gap-3">
-                          <span
-                            className="font-sans font-semibold text-sm transition-colors"
-                            style={{ color: isSelected ? active.accent : '#1A1C1E' }}
-                          >
-                            {pick(sub.title, locale)}
-                          </span>
-                        </div>
-                        <p className="font-sans text-xs text-[#5B6168] leading-relaxed pt-2.5">
-                          {pick(sub.description, locale)}
-                        </p>
-                      </button>
-                    )
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
-        )
-      })()}
     </section>
   )
 }

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ArrowRight, ChevronDown, Menu, MessageCircle, X } from 'lucide-react'
 import { localizePath } from '@/components/LanguageSwitcher'
-import { SERVICES, SERVICE_DETAIL_SLUGS } from '@/lib/services-data'
+import { SERVICES } from '@/lib/services-data'
 import { getWhatsAppUrl } from '@/lib/contact-channels'
 import { pick } from '@/lib/i18n/pick'
 import type { Locale } from '@/lib/i18n/types'
@@ -21,13 +21,13 @@ export function NavClient({ logoDark }: { logoDark: LogoMedia | null }) {
 
   const NAV_SERVICES = SERVICES.map((service) => ({
     label: pick(service.title, locale),
-    href: `/hizmetler/${SERVICE_DETAIL_SLUGS[service.id] ?? service.id}`,
+    href: `/hizmetler/${service.id}`,
   }))
 
   const NAV_LINKS = [
     { label: nav.experts, href: '/uzmanlar' },
     { label: nav.about, href: '/hakkimizda' },
-    { label: nav.journal, href: '/journal' },
+    { label: nav.journal, href: '/blog' },
     { label: nav.faq, href: '/sss' },
     { label: nav.contact, href: '/iletisim' },
   ]
@@ -125,7 +125,7 @@ export function NavClient({ logoDark }: { logoDark: LogoMedia | null }) {
 
             {servicesOpen && (
               <div
-                className="absolute top-full left-0 mt-1 w-64 bg-white border border-[#E2E5DE] rounded-sm z-50"
+                className="absolute top-full left-0 mt-1 max-h-[70vh] w-80 overflow-y-auto bg-white border border-[#E2E5DE] rounded-sm z-50"
                 style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.06)' }}
                 role="menu"
                 onMouseLeave={() => setServicesOpen(false)}

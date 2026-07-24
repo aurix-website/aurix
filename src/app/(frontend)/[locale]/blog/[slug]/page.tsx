@@ -51,7 +51,7 @@ export async function generateMetadata({
     title: pick(article.seoTitle, locale),
     description: pick(article.seoDescription, locale),
     alternates: {
-      languages: { tr: `/journal/${slug}`, en: `/en/journal/${slug}` },
+      languages: { tr: `/blog/${slug}`, en: `/en/blog/${slug}` },
     },
   }
 }
@@ -188,7 +188,7 @@ export default async function ArticlePage({
               {related.map((item) => (
                 <Link
                   key={item.slug}
-                  href={localeHref(`/journal/${item.slug}`, locale)}
+                  href={localeHref(`/blog/${item.slug}`, locale)}
                   className="block bg-surface-elevated border border-hairline rounded-sm p-5 hover:border-[#14797C] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2"
                 >
                   <span className="text-caption text-muted">{pick(CATEGORY_LABELS[item.category], locale)}</span>

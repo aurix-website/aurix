@@ -1,10 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, ArrowUpRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { FadeIn } from '@/components/ui/FadeIn'
 import { LineDraw } from '@/components/ui/LineDraw'
 import { FinalCTA } from '@/components/sections/FinalCTA'
-import { getExpertBySlug } from '@/lib/experts-data'
 import { SERVICES } from '@/lib/services-data'
 import type { ServiceDetail } from '@/lib/service-detail-data'
 import { pick } from '@/lib/i18n/pick'
@@ -17,6 +16,20 @@ const SERVICE_IMAGE_SLUGS = new Set([
   'ogrenci-koclugu',
 ])
 
+/** "Hangi alanlarda destek sağlar?" bölümündeki öne çıkan (siyah) kartın arka plan görseli, hizmete göre. */
+const NEEDS_LEAD_IMAGE: Record<string, string> = {
+  'bireysel-kocluk': '/media/service-bireysel-kocluk-hedef-netligi.jpg',
+  'yonetici-koclugu': '/media/service-yonetici-koclugu.jpg',
+  'kurumsal-egitim': '/media/service-kurumsal-egitim.jpg',
+  'ogrenci-koclugu': '/media/service-ogrenci-koclugu.jpg',
+  'kariyer-koclugu': '/media/journal-kariyer-gecislerinde-zihinsel-netlik.jpg',
+  'takim-koclugu': '/media/journal-takim-koclugu-egitim-farki.jpg',
+  'ogrenci-mentorlugu-sinav-stratejisi': '/media/journal-ogrenci-koclugu-sinav-basarisindan-fazlasi.jpg',
+  'genclerde-kariyer-farkindaligi': '/media/journal-gencler-icin-kariyer-farkindaligi.jpg',
+  'global-uyum-kariyer-koclugu': '/media/journal-yurtdisinda-yeni-kariyer-global-uyum.jpg',
+  'dil-ogreniminde-zihinsel-donusum-koclugu': '/media/journal-kocluk-nedir-danismanlik-terapiden-farki.jpg',
+}
+
 export function ServiceDetailTemplate({
   detail,
   locale = DEFAULT_LOCALE,
@@ -24,14 +37,11 @@ export function ServiceDetailTemplate({
   detail: ServiceDetail
   locale?: Locale
 }) {
-  const experts = detail.expertSlugs
-    .map((slug) => getExpertBySlug(slug))
-    .filter((expert): expert is NonNullable<typeof expert> => Boolean(expert))
-
   const category = SERVICES.find((service) => service.id === detail.serviceId)
   const CategoryIcon = category?.icon
   const accent = category?.accent ?? '#14797C'
-  const hasServiceImage = SERVICE_IMAGE_SLUGS.has(detail.slug)
+  const heroImageSrc =
+    detail.heroImage ?? (SERVICE_IMAGE_SLUGS.has(detail.slug) ? `/media/service-${detail.slug}.jpg` : null)
 
   return (
     <>
@@ -82,10 +92,10 @@ export function ServiceDetailTemplate({
                 <div className="absolute -inset-5 border border-[#C5A059]/25 rounded-sm translate-x-4 translate-y-4" aria-hidden="true" />
                 <div className="relative bg-[#FCFDF9] border border-[#E2E5DE] rounded-sm p-3 shadow-[0_24px_70px_rgba(26,28,30,0.08)]">
                   <div className="aspect-[5/4] relative overflow-hidden rounded-sm">
-                    {hasServiceImage && (
+                    {heroImageSrc && (
                       <Image
-                        src={`/media/service-${detail.slug}.jpg`}
-                        alt={`${detail.h1} hizmet gorseli`}
+                        src={heroImageSrc}
+                        alt={`${pick(detail.h1, locale)} hizmet gorseli`}
                         fill
                         sizes="(min-width: 1024px) 520px, 100vw"
                         className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
@@ -237,7 +247,7 @@ export function ServiceDetailTemplate({
               {detail.needs.map((need, i) => {
                 const isLead = i === 0
                 const isWide = i === 1 || i === 4
-                const showNeedImage = detail.slug === 'bireysel-kocluk' && isLead
+                const needLeadImage = isLead ? NEEDS_LEAD_IMAGE[detail.slug] : undefined
                 const needTitle = pick(need.title, locale)
 
                 return (
@@ -251,10 +261,10 @@ export function ServiceDetailTemplate({
                       isWide && !isLead ? 'lg:col-span-3' : '',
                     ].join(' ')}
                   >
-                    {showNeedImage && (
+                    {needLeadImage && (
                       <>
                         <Image
-                          src="/media/service-bireysel-kocluk-hedef-netligi.jpg"
+                          src={needLeadImage}
                           alt=""
                           fill
                           sizes="(min-width: 768px) 50vw, 100vw"
@@ -345,50 +355,6 @@ export function ServiceDetailTemplate({
           </div>
         </div>
       </section>
-
-      {experts.length > 0 && (
-        <section aria-labelledby="experts-heading" className="py-section bg-canvas">
-          <div className="max-w-container mx-auto px-6">
-            <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
-              <FadeIn className="lg:col-span-5">
-                <div className="space-y-5">
-                  <h2 id="experts-heading" className="text-display-serif-md font-serif text-ink">
-                    {pick(detail.expertsHeading, locale)}
-                  </h2>
-                  <p className="text-body-sm text-muted leading-relaxed">
-                    {pick(detail.expertsNote, locale)}
-                  </p>
-                </div>
-              </FadeIn>
-
-              <FadeIn delay={0.08} className="lg:col-span-7">
-                <ul className="divide-y divide-[#E2E5DE] border-y border-[#E2E5DE]" aria-label="Ilgili uzmanlar">
-                  {experts.map((expert) => (
-                    <li key={expert.slug ?? expert.id}>
-                      <Link
-                        href={`/uzmanlar/${expert.slug ?? expert.id}`}
-                        className="group grid grid-cols-[1fr_auto] items-center gap-4 py-5 transition-colors hover:bg-[#FCFDF9] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2 sm:px-4"
-                      >
-                        <span>
-                          <span className="block text-base font-semibold text-ink">{expert.name}</span>
-                          {expert.title && (
-                            <span className="mt-1 block text-caption text-muted">
-                              {pick(expert.title, locale)}
-                            </span>
-                          )}
-                        </span>
-                        <span className="flex h-10 w-10 items-center justify-center rounded-sm border border-[#E2E5DE] text-[#14797C] transition-colors group-hover:border-[#14797C] group-hover:bg-[#14797C] group-hover:text-white">
-                          <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </FadeIn>
-            </div>
-          </div>
-        </section>
-      )}
 
       <section aria-labelledby="page-cta-heading" className="py-section bg-surface-soft">
         <div className="max-w-container mx-auto px-6">

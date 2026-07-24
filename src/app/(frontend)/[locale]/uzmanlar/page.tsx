@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import {
   ArrowRight,
@@ -25,9 +26,8 @@ const COPY = {
     body: 'Her uzmanımız farklı deneyim ve yetkinliklerle yanınızda. Hedeflerinize en uygun rehberliği keşfedin, birlikte anlamlı ve sürdürülebilir dönüşüm yaratalım.',
     ctaPrimary: 'Uzmanları Keşfet',
     ctaSecondary: 'Ön Görüşme Talep Et',
-    placeholderLabel: 'Placeholder',
-    placeholderTitle: 'Uzman görseli',
-    hoverAreaLabel: 'Hover efektli alan',
+    teamPhotoAlt: 'AURIX uzman ekibi',
+    teamBadge: 'AURIX Ekibi',
     listHeading: 'Uzman listesi',
     approachEyebrow: 'Yaklaşımımız',
     approachHeading: 'Çalışma Yaklaşımımız',
@@ -93,9 +93,8 @@ const COPY = {
     body: 'Each of our experts brings different experience and expertise to your side. Discover the guidance that best fits your goals, and let’s create meaningful, sustainable change together.',
     ctaPrimary: 'Discover Our Experts',
     ctaSecondary: 'Request an Introductory Call',
-    placeholderLabel: 'Placeholder',
-    placeholderTitle: 'Expert photo',
-    hoverAreaLabel: 'Hover-effect area',
+    teamPhotoAlt: 'The AURIX team of experts',
+    teamBadge: 'The AURIX Team',
     listHeading: 'Expert list',
     approachEyebrow: 'Our Approach',
     approachHeading: 'How We Work',
@@ -243,24 +242,19 @@ export default async function UzmanlarPage({
               <div className="pointer-events-none absolute -left-5 bottom-8 h-28 w-28 border border-[#14797C]/10 transition-transform duration-500 group-hover:-translate-x-2 group-hover:translate-y-2" aria-hidden="true" />
 
               <div className="relative aspect-[4/3] overflow-hidden border border-[#E2E5DE] bg-[#F4F0E7] shadow-[0_28px_80px_rgba(26,28,30,0.08)]">
-                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(20,121,124,0.18),rgba(252,253,249,0.66)_45%,rgba(197,160,89,0.18))] transition-transform duration-700 group-hover:scale-105" aria-hidden="true" />
-                <div className="absolute inset-x-10 top-10 h-[58%] bg-white/55 shadow-[0_24px_70px_rgba(26,28,30,0.08)] transition-all duration-700 group-hover:inset-x-8 group-hover:top-8" aria-hidden="true" />
-                <div className="absolute bottom-0 left-1/2 h-[74%] w-[46%] -translate-x-1/2 bg-[#FCFDF9] shadow-[0_20px_54px_rgba(26,28,30,0.1)] transition-transform duration-700 group-hover:scale-[1.04]" aria-hidden="true" />
-                <div className="absolute bottom-[18%] left-1/2 h-[28%] w-[26%] -translate-x-1/2 bg-[#D7DED2] transition-transform duration-700 group-hover:-translate-y-2" aria-hidden="true" />
-                <div className="absolute left-1/2 top-[18%] h-24 w-24 -translate-x-1/2 rounded-full bg-[#E7E1D4] shadow-[0_14px_34px_rgba(26,28,30,0.08)] transition-transform duration-700 group-hover:scale-105 sm:h-28 sm:w-28" aria-hidden="true" />
+                <Image
+                  src="/media/expert-team.png"
+                  alt={copy.teamPhotoAlt}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 90vw, 620px"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
 
-                <div className="absolute left-5 top-5 border border-white/70 bg-[#FCFDF9]/88 px-4 py-3 shadow-[0_14px_36px_rgba(26,28,30,0.08)] backdrop-blur-sm transition-transform duration-500 group-hover:translate-x-1 group-hover:translate-y-1">
+                <div className="absolute bottom-5 left-5 border border-white/70 bg-[#FCFDF9]/90 px-4 py-3 shadow-[0_14px_36px_rgba(26,28,30,0.08)] backdrop-blur-sm transition-transform duration-500 group-hover:-translate-y-1">
                   <span className="block text-[10px] font-mono font-bold uppercase tracking-[0.22em] text-[#C5A059]">
-                    {copy.placeholderLabel}
+                    {copy.teamBadge}
                   </span>
-                  <span className="mt-1 block font-serif text-xl font-semibold text-[#1A1C1E]">
-                    {copy.placeholderTitle}
-                  </span>
-                </div>
-
-                <div className="absolute bottom-5 right-5 flex items-center gap-2 border border-white/70 bg-[#14797C] px-4 py-3 text-xs font-semibold text-white shadow-[0_14px_36px_rgba(20,121,124,0.22)] transition-transform duration-500 group-hover:-translate-y-1">
-                  <span className="h-2 w-2 bg-white/90" aria-hidden="true" />
-                  {copy.hoverAreaLabel}
                 </div>
               </div>
             </div>

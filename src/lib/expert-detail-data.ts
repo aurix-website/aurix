@@ -31,21 +31,21 @@ export const EXPERT_DETAILS: Record<string, ExpertDetail> = {
   'kaan-yazici': {
     slug: 'kaan-yazici',
     heroShort: {
-      tr: 'Sağlık alanındaki profesyonel deneyimini, kamu yönetimi perspektifi ve Erickson koçluk yaklaşımıyla birleştiren Kaan Yazıcı; bireylerin ve takımların potansiyellerini daha bilinçli şekilde ortaya çıkarmalarına eşlik eder.',
-      en: 'Kaan Yazıcı combines his professional experience in healthcare with a public administration perspective and the Erickson coaching approach, guiding individuals and teams toward a more conscious realization of their potential.',
+      tr: 'Diş hekimliği alanındaki profesyonel deneyimini, kamu yönetimi perspektifi ve Erickson koçluk yaklaşımıyla birleştiren Kaan Yazıcı; bireylerin ve takımların potansiyellerini daha bilinçli şekilde ortaya çıkarmalarına eşlik eder.',
+      en: 'Kaan Yazıcı combines his professional experience in dentistry with a public administration perspective and the Erickson coaching approach, guiding individuals and teams toward a more conscious realization of their potential.',
     },
     bio: {
       tr: [
         'Kaan Yazıcı, 1994 yılında Ege Üniversitesi Diş Hekimliği Fakültesi’nden mezun olduğunda kariyerine mesleğini en üst düzeyde icra etme hedefiyle başlamıştır. 16 ay Diş Hekimi Asteğmen olarak görev yaptıktan sonra kendi kliniğini açarak hastalarına hizmet vermeye başlamıştır.',
-        'Sağlık alanındaki uzmanlığını geliştirirken insanlarla kurduğu derin bağların yalnızca fiziksel sağlığı değil, duygusal ve zihinsel sağlığı da etkilediğini fark etmiştir. Sosyal bilimlere ilgisi onu Ekonomi Fakültesi Kamu Yönetimi bölümünden mezun olmaya yönlendirmiş; yönetim, toplumsal yapılar ve insan psikolojisi üzerine edindiği bilgiler ona daha bütünsel bir bakış açısı kazandırmıştır.',
+        'Diş hekimliği alanındaki uzmanlığını geliştirirken insanlarla kurduğu derin bağların yalnızca fiziksel sağlığı değil, duygusal ve zihinsel sağlığı da etkilediğini fark etmiştir. Sosyal bilimlere ilgisi onu Ekonomi Fakültesi Kamu Yönetimi bölümünden mezun olmaya yönlendirmiş; yönetim, toplumsal yapılar ve insan psikolojisi üzerine edindiği bilgiler ona daha bütünsel bir bakış açısı kazandırmıştır.',
         'Bu yolculukta gerçek dönüşümün yalnızca bilgiyle değil, doğru rehberlik ve içsel motivasyonla mümkün olduğunu görerek koçluğa yönelmiştir. Erickson koçluk metodolojisinde eğitimini tamamlamış, Profesyonel Erickson Koçu unvanını kazanmış; bireysel gelişimin ötesinde etki alanını genişletmek için takım koçluğunda uzmanlaşarak Profesyonel Takım Koçu olmuştur.',
-        'Bugün diş hekimliğine devam ederken aynı zamanda bireylere ve takımlara potansiyellerini ortaya çıkarmaları konusunda rehberlik etmektedir. Sağlık alanındaki uzmanlığını koçluk bakış açısıyla birleştirerek danışanlarına fiziksel iyilik halinin yanında zihinsel ve duygusal denge alanında da katkı sunmayı hedefler.',
+        'Bugün diş hekimliğine devam ederken aynı zamanda bireylere ve takımlara potansiyellerini ortaya çıkarmaları konusunda rehberlik etmektedir. Diş hekimi olarak sahip olduğu uzmanlığını koçluk bakış açısıyla birleştirerek danışanlarına fiziksel iyilik halinin yanında zihinsel ve duygusal denge alanında da katkı sunmayı hedefler.',
       ],
       en: [
         'Kaan Yazıcı graduated from Ege University Faculty of Dentistry in 1994 and began his career with the aim of practicing his profession at the highest level. After serving for 16 months as a dental officer, he opened his own clinic and began serving patients.',
-        'While continuing to develop his expertise in healthcare, he realized that the deep bonds he formed with people affected not only their physical health but also their emotional and mental wellbeing. His interest in social sciences led him to graduate from Public Administration in the Faculty of Economics, giving him a broader perspective on management, social structures, and human psychology.',
+        'While continuing to develop his expertise in dentistry, he realized that the deep bonds he formed with people affected not only their physical health but also their emotional and mental wellbeing. His interest in social sciences led him to graduate from Public Administration in the Faculty of Economics, giving him a broader perspective on management, social structures, and human psychology.',
         'Through this journey, he saw that real transformation is not only about knowledge; it also requires proper guidance and inner motivation. He turned toward coaching, completed his education in the Erickson coaching methodology, earned the title of Professional Erickson Coach, and later specialized in team coaching as a Professional Team Coach.',
-        'Today, while continuing his work as a dentist, he guides individuals and teams in realizing their potential. He combines his healthcare expertise with a coaching perspective, aiming to support not only physical wellbeing but also mental and emotional balance.',
+        'Today, while continuing his work as a dentist, he guides individuals and teams in realizing their potential. He combines his expertise as a dentist with a coaching perspective, aiming to support not only physical wellbeing but also mental and emotional balance.',
       ],
     },
     timeline: [
@@ -97,8 +97,8 @@ export const EXPERT_DETAILS: Record<string, ExpertDetail> = {
       ],
     },
     expertise: {
-      tr: ['Bireysel Koçluk', 'Takım Koçluğu', 'Yaşam Geçişleri', 'Potansiyel Farkındalığı', 'Kurucu Vizyon ve Süreç Tasarımı'],
-      en: ['Personal Coaching', 'Team Coaching', 'Life Transitions', 'Potential Awareness', 'Founding Vision and Process Design'],
+      tr: ['Bireysel Koçluk', 'Takım Koçluğu', 'Yaşam Geçişleri', 'Potansiyel Farkındalığı', 'Bütünsel Gelişim Yaklaşımı'],
+      en: ['Personal Coaching', 'Team Coaching', 'Life Transitions', 'Potential Awareness', 'Holistic Development Approach'],
     },
     approach: {
       tr: 'Kaan Yazıcı’nın yaklaşımı, kişiye hazır cevaplar vermekten çok, danışanın kendi hedeflerini, iç kaynaklarını ve karar alanlarını daha net görmesine eşlik etmeye dayanır. AURIX çatısı altında bu yaklaşım, doğru ihtiyaç analizi ve doğru uzman eşleşmesiyle desteklenir.',
@@ -126,10 +126,10 @@ export const EXPERT_DETAILS: Record<string, ExpertDetail> = {
     ],
     primaryCtaLabel: { tr: 'Kaan Yazıcı ile Ön Görüşme Talep Et', en: 'Request an Introductory Call with Kaan Yazıcı' },
     secondaryCta: { label: { tr: 'AURIX Yaklaşımını İncele', en: 'Explore the AURIX Approach' }, href: '/#approach-heading' },
-    seoTitle: { tr: 'Kaan Yazıcı | Kurucu, Profesyonel Koç & Takım Koçu', en: 'Kaan Yazıcı | Founder, Professional Coach & Team Coach' },
+    seoTitle: { tr: 'Kaan Yazıcı | Profesyonel Koç & Takım Koçu', en: 'Kaan Yazıcı | Professional Coach & Team Coach' },
     seoDescription: {
-      tr: 'Kaan Yazıcı; sağlık alanındaki deneyimini Erickson koçluk yaklaşımı ve takım koçluğu uzmanlığıyla birleştiren AURIX kurucusudur.',
-      en: 'Kaan Yazıcı is the founder of AURIX, combining his experience in healthcare with the Erickson coaching approach and team coaching expertise.',
+      tr: 'Kaan Yazıcı; diş hekimliği alanındaki deneyimini Erickson koçluk yaklaşımı ve takım koçluğu uzmanlığıyla birleştiren AURIX uzmanıdır.',
+      en: 'Kaan Yazıcı is an AURIX expert who combines his background in dentistry with the Erickson coaching approach and team coaching expertise.',
     },
   },
 
@@ -415,13 +415,13 @@ export const EXPERT_DETAILS: Record<string, ExpertDetail> = {
         'Hatice Yıldırım kendini öğretmenlik, eğitim yönetimi, kurumsal liderlik ve profesyonel koçluk alanlarında 30 yılı aşkın deneyime sahip bir dönüşüm tasarımcısı olarak konumlandırır. Yönetim ve Denetim üzerine tamamladığı yüksek lisans birikimini Erickson International (ICF) profesyonel koçluk ve NLP uzmanlığıyla birleştirerek bireylerin ve kurumların içindeki insan cevherini ortaya çıkarmaya odaklanır.',
         'Teknopark ekosistemi gibi inovasyonun merkezinde yer alan yapılar için farklı kuşakların sinerjisini yönetebilen, liyakat esaslı liderlik modelleri tasarlayan ve kurumsal başarı kültürünü geliştiren bir çözüm ortağıdır.',
         'Uzun yıllar Orion Vakfı Piri Reis Okulları, SEV ve UKEB gibi prestijli eğitim kurumlarında yöneticilik ve koordinatörlük yaparak binlerce bireyin gelişim yolculuğuna liderlik etmiştir. 2022’den bu yana Erickson metodolojisiyle bireylerin ve kurumların kimliklerindeki ışığı görmelerini sağlayan bir yaşam yoldaşlığı yürütmektedir.',
-        'CHP Narlıdere Kadın Kolları Başkanlığı, ÇYDD bünyesindeki stratejik görevleri ve 1999’dan beri sürdürdüğü gönüllü eğitim projeleriyle insan odaklı toplumsal dönüşüm çalışmalarında aktif rol alır.',
+        '1999’dan beri sürdürdüğü gönüllü eğitim projeleriyle insan odaklı toplumsal dönüşüm çalışmalarında aktif rol alır.',
       ],
       en: [
         'Hatice Yıldırım describes herself as a transformation designer with more than 30 years of experience in teaching, education management, corporate leadership, and professional coaching. She combines her graduate background in Management and Supervision with Erickson International (ICF) professional coaching and NLP expertise, focusing on bringing out the human potential within individuals and organizations.',
         'For innovation-centered structures such as Teknopark ecosystems, she acts as a solution partner who manages cross-generational synergy, designs merit-based leadership models, and develops a culture of sustainable success.',
         'She has led the development journey of thousands of individuals through long-standing management and coordination roles in prestigious educational institutions such as Orion Foundation Piri Reis Schools, SEV, and UKEB. Since 2022, she has been working with the Erickson methodology to help individuals and institutions see the light within their identities.',
-        'Through leadership roles in CHP Narlıdere Women’s Branch, strategic duties within ÇYDD, and volunteer education projects since 1999, she also actively contributes to human-centered social transformation.',
+        'Through volunteer education projects since 1999, she actively contributes to human-centered social transformation.',
       ],
     },
     timeline: [
@@ -444,11 +444,6 @@ export const EXPERT_DETAILS: Record<string, ExpertDetail> = {
         period: { tr: '2022-güncel', en: '2022-current' },
         title: { tr: 'Profesyonel koçluk ve NLP', en: 'Professional coaching and NLP' },
         description: { tr: 'Erickson metodolojisiyle bireylerin ve kurumların kimliklerindeki ışığı görmelerini sağlayan koçluk çalışmaları yürütmektedir.', en: 'Runs coaching work through the Erickson methodology, helping individuals and organizations see the light within their identities.' },
-      },
-      {
-        period: { tr: 'Toplumsal etki', en: 'Social impact' },
-        title: { tr: 'CHP Narlıdere Kadın Kolları ve ÇYDD', en: 'CHP Narlıdere Women’s Branch and ÇYDD' },
-        description: { tr: 'İnsan odaklı projelerle toplumsal dönüşüme liderlik etmektedir.', en: 'Leads human-centered projects that contribute to social transformation.' },
       },
     ],
     audience: {
@@ -742,6 +737,235 @@ export const EXPERT_DETAILS: Record<string, ExpertDetail> = {
     seoDescription: {
       tr: 'Seda Şen; kariyer koçluğu, yönetici koçluğu, kurumsal eğitim, öğrenci gelişimi, göç süreçleri ve global uyum alanlarında çalışan AURIX uzmanıdır.',
       en: 'Seda Şen is an AURIX expert working in career coaching, executive coaching, corporate training, student development, relocation processes, and global adaptation.',
+    },
+  },
+
+  'ayse-kiremitci': {
+    slug: 'ayse-kiremitci',
+    heroShort: {
+      tr: 'Eğitim yönetimi ve kurumsal insan kaynakları deneyimini profesyonel koçluk ve Erickson yaklaşımıyla birleştiren Ayşe Kiremitçi; öğrencilere kariyer danışmanlığı, mesleki eğilim analizi ve sınav sürecinde rehberlik sunar.',
+      en: 'Combining education management and corporate human resources experience with professional coaching and the Erickson approach, Ayşe Kiremitçi offers students career counseling, vocational tendency analysis, and exam-year guidance.',
+    },
+    bio: {
+      tr: [
+        'Ayşe Kiremitçi, 1972 yılında Antalya’da doğdu. Ankara Üniversitesi Eğitim Bilimleri Fakültesi Yetişkin Eğitimi bölümünden mezun olan Kiremitçi, eğitim uzmanı olarak 30 yılı aşkın süredir iş hayatının içinde yer almaktadır.',
+        'Kurumsal kariyerine 1996 yılında Antalya’da ATAÇ grubunun eğitim ve personel yönetimi bölümlerinde başlamıştır. 2000-2019 yılları arasında, önceki adı Telsim olan ve sonrasında Vodafone olarak devam eden GSM firmasında Antalya-İzmir Bölge Ofis Yöneticisi ve İnsan Kaynakları ve İdari İşler Sorumlusu olarak görev almış; 2019 yılında kurumsal iş hayatından emekli olmuştur.',
+        'Eğitimin hayatın her aşamasında vazgeçilmez bir gereklilik olduğunu düşünen Kiremitçi, mesleki ve kişisel gelişimine katkı sağlamak amacıyla 2020 yılında Profesyonel Koçluk ve Eğitim Koçluğu eğitimlerini tamamlamış, Erickson Koçluk Okulu’ndan mezun olmuştur.',
+        '2020 yılından bu yana kurucusu olduğu 3Xacademy Eğitim & Danışmanlık çatısı altında öğrencilere, gençlere ve kurumlara eğitim ve kariyer danışmanlığı hizmeti sunmaktadır. Çalışmalarını öğrencilerin performans ve gelişimlerini desteklemek, gençlerin azimli, kararlı ve güçlü iletişim becerilerine sahip bireyler olarak gelişmelerine eşlik etmek amacıyla yürütür.',
+      ],
+      en: [
+        'Ayşe Kiremitçi was born in Antalya in 1972. A graduate of Adult Education at Ankara University’s Faculty of Educational Sciences, she has worked as an education specialist for more than 30 years.',
+        'She began her corporate career in 1996 in Antalya, in the education and personnel management departments of the ATAÇ group. Between 2000 and 2019, she worked at the GSM operator formerly known as Telsim and later Vodafone, serving as Antalya-İzmir Regional Office Manager and Human Resources and Administrative Affairs Officer; she retired from her corporate career in 2019.',
+        'Believing that education is indispensable at every stage of life, she completed her Professional Coaching and Education Coaching training in 2020 to further her own professional and personal development, and graduated from the Erickson Coaching School.',
+        'Since 2020, through 3Xacademy Eğitim & Danışmanlık, which she founded, she has provided education and career counseling services to students, young people, and institutions. Her work focuses on supporting students’ performance and development, and accompanying young people as they grow into determined, resolute individuals with strong communication skills.',
+      ],
+    },
+    timeline: [
+      {
+        period: { tr: '1996', en: '1996' },
+        title: { tr: 'ATAÇ Grubu', en: 'ATAÇ Group' },
+        description: { tr: 'Antalya’da eğitim ve personel yönetimi bölümlerinde çalışmaya başladı.', en: 'Began working in the education and personnel management departments in Antalya.' },
+      },
+      {
+        period: { tr: '2000-2019', en: '2000-2019' },
+        title: { tr: 'Telsim / Vodafone', en: 'Telsim / Vodafone' },
+        description: { tr: 'Antalya-İzmir Bölge Ofis Yöneticisi ve İnsan Kaynakları ve İdari İşler Sorumlusu olarak görev yaptı.', en: 'Served as Antalya-İzmir Regional Office Manager and Human Resources and Administrative Affairs Officer.' },
+      },
+      {
+        period: { tr: '2019', en: '2019' },
+        title: { tr: 'Emeklilik', en: 'Retirement' },
+        description: { tr: 'Kurumsal iş hayatından emekli oldu.', en: 'Retired from her corporate career.' },
+      },
+      {
+        period: { tr: '2020', en: '2020' },
+        title: { tr: 'Profesyonel Koçluk ve Erickson Koçluk Okulu', en: 'Professional Coaching and Erickson Coaching School' },
+        description: { tr: 'Profesyonel Koçluk ve Eğitim Koçluğu eğitimlerini tamamlayarak Erickson Koçluk Okulu’ndan mezun oldu.', en: 'Completed Professional Coaching and Education Coaching training and graduated from the Erickson Coaching School.' },
+      },
+      {
+        period: { tr: '2020-güncel', en: '2020-current' },
+        title: { tr: '3Xacademy Eğitim & Danışmanlık', en: '3Xacademy Eğitim & Danışmanlık' },
+        description: { tr: 'Kurucusu olarak öğrencilere, gençlere ve kurumlara eğitim ve kariyer danışmanlığı hizmeti sunmaktadır.', en: 'As founder, provides education and career counseling services to students, young people, and institutions.' },
+      },
+    ],
+    audience: {
+      tr: [
+        'Lise öğrencileri ve aileleri',
+        'YKS sınav sürecindeki 12. sınıf ve mezun öğrenciler',
+        'Meslek seçimi ve kariyer yönünü netleştirmek isteyen gençler',
+        'Mesleki eğilim analizi almak isteyenler',
+        'Öğrenci gelişimi konusunda destek arayan kurumlar',
+      ],
+      en: [
+        'High school students and their families',
+        '12th-grade and gap-year students preparing for national university exams',
+        'Young people looking to clarify their profession choice and career direction',
+        'Those who want a vocational tendency analysis',
+        'Institutions seeking support in student development',
+      ],
+    },
+    expertise: {
+      tr: ['Kariyer Danışmanlığı', 'Mesleki Eğilim Analizi', 'YKS Rehberlik ve Mentörlük', 'Eğitim Koçluğu', 'Öğrenci Gelişimi'],
+      en: ['Career Counseling', 'Vocational Tendency Analysis', 'Exam-Year Guidance and Mentoring', 'Education Coaching', 'Student Development'],
+    },
+    approach: {
+      tr: 'Ayşe Kiremitçi’nin yaklaşımı, kariyerin lise yıllarında şekillendiği fikrine dayanır. Öğrencilerin akademik başarılarının yanında ilgi alanlarını, güçlü yönlerini ve motivasyon kaynaklarını fark etmelerine eşlik ederek, uzun vadeli hedeflerine uygun bir yol haritası oluşturmalarına destek olur.',
+      en: 'Ayşe Kiremitçi’s approach rests on the idea that a career takes shape during the high school years. Alongside academic achievement, she accompanies students in recognizing their interests, strengths, and sources of motivation, supporting them in building a roadmap suited to their long-term goals.',
+    },
+    credentials: {
+      tr: [
+        'Ankara Üniversitesi Eğitim Bilimleri Fakültesi — Yetişkin Eğitimi',
+        'Profesyonel Koçluk ve Eğitim Koçluğu sertifikaları (2020)',
+        'Erickson Koçluk Okulu mezuniyeti',
+        '3Xacademy Eğitim & Danışmanlık kurucusu',
+        '200’den fazla öğrenciye Mesleki Eğilim Analizi uygulama deneyimi',
+      ],
+      en: [
+        'Ankara University Faculty of Educational Sciences — Adult Education',
+        'Professional Coaching and Education Coaching certificates (2020)',
+        'Erickson Coaching School graduate',
+        'Founder of 3Xacademy Eğitim & Danışmanlık',
+        'Experience administering Vocational Tendency Analysis to more than 200 students',
+      ],
+    },
+    relatedServices: [
+      { label: { tr: 'Öğrenci Mentörlüğü ve Sınav Stratejisi', en: 'Student Mentoring and Exam Strategy' }, href: '/hizmetler/ogrenci-mentorlugu-sinav-stratejisi' },
+      { label: { tr: 'Gençler için Kariyer Farkındalığı', en: 'Career Awareness for Young People' }, href: '/hizmetler/genclerde-kariyer-farkindaligi' },
+      { label: { tr: 'Öğrenci Koçluğu', en: 'Student Coaching' }, href: '/hizmetler/ogrenci-koclugu' },
+      { label: { tr: 'Kariyer Koçluğu', en: 'Career Coaching' }, href: '/hizmetler/kariyer-koclugu' },
+    ],
+    primaryCtaLabel: { tr: 'Ayşe Kiremitçi ile Ön Görüşme Talep Et', en: 'Request an Introductory Call with Ayşe Kiremitçi' },
+    secondaryCta: { label: { tr: 'Öğrenci Mentörlüğünü İncele', en: 'Explore Student Mentoring' }, href: '/hizmetler/ogrenci-mentorlugu-sinav-stratejisi' },
+    seoTitle: { tr: 'Ayşe Kiremitçi | Eğitim ve Kariyer Danışmanı, Profesyonel Koç', en: 'Ayşe Kiremitçi | Education and Career Consultant, Professional Coach' },
+    seoDescription: {
+      tr: 'Ayşe Kiremitçi; kariyer danışmanlığı, mesleki eğilim analizi ve YKS sınav sürecinde rehberlik sunan eğitim uzmanı ve profesyonel koçtur.',
+      en: 'Ayşe Kiremitçi is an education specialist and professional coach offering career counseling, vocational tendency analysis, and guidance through the national university exam process.',
+    },
+  },
+
+  'iskender-dasdemir': {
+    slug: 'iskender-dasdemir',
+    heroShort: {
+      tr: 'Ege Üniversitesi Eğitim Fakültesi öğretim üyesi olan Doç. Dr. İskender Daşdemir; eğitim bilimleri, liderlik gelişimi, organizasyonel dönüşüm, öğrenci koçluğu ve eğitim psikolojisi alanlarındaki akademik birikimini yirmi yıla yakın saha deneyimiyle birleştirir.',
+      en: 'A faculty member at Ege University’s Faculty of Education, Doç. Dr. İskender Daşdemir combines his academic background in education sciences, leadership development, organizational transformation, student coaching, and education psychology with nearly twenty years of hands-on field experience.',
+    },
+    bio: {
+      tr: [
+        'Doç. Dr. İskender Daşdemir, Ege Üniversitesi Eğitim Fakültesi Türkçe ve Sosyal Bilimler Eğitimi Bölümü Sosyal Bilgiler Eğitimi Anabilim Dalında öğretim üyesi olarak akademik çalışmalarını sürdürmektedir. Eğitim bilimleri, sosyal bilgiler eğitimi, program geliştirme, vatandaşlık eğitimi, eğitim teknolojileri ve eğitim psikolojisi alanlarında araştırmalar yürütürken, özel sektörde edindiği yöneticilik deneyimini kurumsal danışmanlık, liderlik gelişimi ve organizasyonel dönüşüm uygulamalarıyla bütünleştirmektedir.',
+        'Yaklaşık yirmi yıllık profesyonel kariyeri boyunca üniversitelerde akademisyen, eğitim kurumlarında yönetici, araştırma projelerinde yürütücü ve danışman olarak görev almış; bilimsel bilgi ile uygulama deneyimini bir araya getiren eğitim modelleri geliştirmiştir.',
+        'Akademik üretimini bilimsel yayınlarla sınırlamayan Daşdemir; eğitim kurumları, özel okullar, kolejler ve ulusal/uluslararası kuruluşlarda liderlik gelişimi, kurumsal iletişim, eğitim psikolojisi, organizasyonel gelişim ve insan odaklı dönüşüm alanlarında eğitim ve danışmanlık hizmetleri sunmaktadır.',
+        '2008 yılından itibaren eğitim kurumlarının kuruluşu, akademik yapılanması ve yönetimi, KPSS ve merkezi sınav hazırlık sistemleri, kariyer planlama, öğrenci koçluğu ve eğitim psikolojisi alanlarında çalışmalar yürütmüş; üniversiteler, kolejler, kamu kurumları ve özel kuruluşlara eğitim ve danışmanlık hizmeti sunmuştur.',
+      ],
+      en: [
+        'Doç. Dr. İskender Daşdemir continues his academic work as a faculty member in the Department of Social Studies Education, within the Turkish and Social Sciences Education division of Ege University’s Faculty of Education. While conducting research in education sciences, social studies education, curriculum development, citizenship education, educational technology, and education psychology, he integrates his management experience from the private sector with organizational consulting, leadership development, and organizational transformation practices.',
+        'Over a professional career of nearly twenty years, he has served as an academic at universities, a manager at educational institutions, and a principal investigator and consultant on research projects, developing education models that bring together scientific knowledge and applied experience.',
+        'Not limiting his academic output to scientific publications, Daşdemir provides education and consulting services in leadership development, corporate communication, education psychology, organizational development, and human-centered transformation to educational institutions, private schools, colleges, and national and international organizations.',
+        'Since 2008, he has worked on the founding, academic structuring, and management of educational institutions, national exam preparation systems, career planning, student coaching, and education psychology, providing education and consulting services to universities, colleges, public institutions, and private organizations.',
+      ],
+    },
+    timeline: [
+      {
+        period: { tr: 'Akademik görev', en: 'Academic post' },
+        title: { tr: 'Ege Üniversitesi Eğitim Fakültesi', en: 'Ege University Faculty of Education' },
+        description: { tr: 'Sosyal Bilgiler Eğitimi Anabilim Dalında öğretim üyesi olarak lisans/lisansüstü eğitim, tez danışmanlığı ve araştırma projeleri yürütüyor.', en: 'Serves as a faculty member in the Department of Social Studies Education, teaching at undergraduate and graduate levels, supervising theses, and leading research projects.' },
+      },
+      {
+        period: { tr: '2008-güncel', en: '2008-current' },
+        title: { tr: 'Eğitim kurumu yöneticiliği', en: 'Educational institution management' },
+        description: { tr: 'Eğitim kurumlarının kuruluşu, akademik yapılanması ve yönetimi ile kariyer planlama ve öğrenci koçluğu alanlarında görev aldı.', en: 'Took an active role in the founding, academic structuring, and management of educational institutions, as well as in career planning and student coaching.' },
+      },
+      {
+        period: { tr: 'KPSS koordinasyonu', en: 'Civil-service exam coordination' },
+        title: { tr: 'Kariyer ve öğrenci gelişimi', en: 'Career and student development' },
+        description: { tr: 'KPSS hazırlık programlarının akademik koordinasyonunu yürüttü; öğretmen adaylarının kariyer planlama süreçlerine rehberlik etti.', en: 'Coordinated the academic side of civil-service exam preparation programs, guiding prospective teachers through career planning.' },
+      },
+      {
+        period: { tr: 'İzmir, Ankara, İstanbul', en: 'İzmir, Ankara, İstanbul' },
+        title: { tr: 'Kurumsal danışmanlık', en: 'Organizational consulting' },
+        description: { tr: 'Özel eğitim kurumları, kolejler ve şirketlerle liderlik gelişimi, kurumsal iletişim ve organizasyonel gelişim alanlarında çalıştı.', en: 'Worked with private educational institutions, colleges, and companies in leadership development, corporate communication, and organizational development.' },
+      },
+      {
+        period: { tr: 'Güncel', en: 'Current' },
+        title: { tr: 'Akademik üretkenlik', en: 'Academic output' },
+        description: { tr: 'Uluslararası hakemli dergilerde makaleler, bilimsel kitaplar ve araştırma projeleriyle eğitim bilimleri literatürüne katkı sağlıyor.', en: 'Contributes to the education sciences literature through articles in international peer-reviewed journals, academic books, and research projects.' },
+      },
+    ],
+    audience: {
+      tr: [
+        'Eğitim kurumları ve akademik kurumlar',
+        'Liderlik gelişimi arayan yöneticiler',
+        'Öğrenci koçluğu ve sınav kaygısı yönetimi arayan öğrenciler',
+        'Kariyer planlama sürecindeki gençler ve öğretmen adayları',
+        'Kurum kültürünü ve organizasyonel gelişimini güçlendirmek isteyen şirketler',
+        'Ergen ve ebeveyn danışmanlığı arayan aileler',
+      ],
+      en: [
+        'Educational and academic institutions',
+        'Managers seeking leadership development',
+        'Students seeking student coaching and exam anxiety management',
+        'Young people and prospective teachers in the career-planning process',
+        'Companies looking to strengthen their culture and organizational development',
+        'Families seeking adolescent and parental guidance and consulting',
+      ],
+    },
+    expertise: {
+      tr: [
+        'Eğitim Liderliği ve Akademik Yönetim',
+        'Organizasyonel Gelişim',
+        'Liderlik Geliştirme',
+        'Kurumsal İletişim',
+        'Eğitim Psikolojisi',
+        'Öğrenci Koçluğu',
+        'Kariyer Planlama',
+        'Ergen ve Ebeveyn Psikolojisi',
+        'Eğitim Teknolojileri ve Yapay Zekâ Destekli Öğrenme',
+        'Bilimsel Araştırma ve Proje Yönetimi',
+      ],
+      en: [
+        'Education Leadership and Academic Management',
+        'Organizational Development',
+        'Leadership Development',
+        'Corporate Communication',
+        'Education Psychology',
+        'Student Coaching',
+        'Career Planning',
+        'Adolescent and Parental Psychology',
+        'Educational Technology and AI-Supported Learning',
+        'Scientific Research and Project Management',
+      ],
+    },
+    approach: {
+      tr: 'Doç. Dr. İskender Daşdemir’in yaklaşımı, eğitimi yalnızca bilgi aktarma süreci değil; bireyin potansiyelini keşfetmesini sağlayan, kurumların gelişim kültürünü güçlendiren ve toplumun geleceğini şekillendiren stratejik bir dönüşüm alanı olarak görmeye dayanır. Bilimsel bilgi ile uygulamayı bir araya getirerek bireylerin ve kurumların sürdürülebilir gelişimine katkı sunmayı hedefler.',
+      en: 'Doç. Dr. İskender Daşdemir’s approach treats education not merely as a process of transmitting information, but as a strategic field of transformation that helps individuals discover their potential, strengthens organizations’ development culture, and shapes the future of society. He aims to bring scientific knowledge together with practice to contribute to the sustainable development of both individuals and institutions.',
+    },
+    credentials: {
+      tr: [
+        'Ege Üniversitesi Eğitim Fakültesi — Doçent, Sosyal Bilgiler Eğitimi',
+        'Sosyal bilgiler eğitimi, vatandaşlık eğitimi, eğitim teknolojileri, yapay zekâ, dijital vatandaşlık, program okuryazarlığı, Coğrafi Bilgi Sistemleri ve eğitim psikolojisi alanlarında akademik yayınlar',
+        'Ulusal ve uluslararası hakemli dergilerde editörlük ve hakemlik',
+        'Liderlik, organizasyonel gelişim, kurumsal iletişim, sınav psikolojisi, öğrenci koçluğu ve kariyer planlama alanlarında profesyonel gelişim sertifikaları',
+        '2008’den bu yana eğitim kurumu yöneticiliği ve kurumsal danışmanlık deneyimi',
+      ],
+      en: [
+        'Ege University Faculty of Education — Associate Professor, Social Studies Education',
+        'Academic publications in social studies education, citizenship education, educational technology, AI, digital citizenship, curriculum literacy, Geographic Information Systems, and education psychology',
+        'Editorial and peer-review roles in national and international journals',
+        'Professional development certificates in leadership, organizational development, corporate communication, exam psychology, student coaching, and career planning',
+        'Educational institution management and organizational consulting experience since 2008',
+      ],
+    },
+    relatedServices: [
+      { label: { tr: 'Kurumsal Eğitimler', en: 'Corporate Training' }, href: '/hizmetler/kurumsal-egitim' },
+      { label: { tr: 'Yönetici Koçluğu', en: 'Executive Coaching' }, href: '/hizmetler/yonetici-koclugu' },
+      { label: { tr: 'Öğrenci Koçluğu', en: 'Student Coaching' }, href: '/hizmetler/ogrenci-koclugu' },
+      { label: { tr: 'Öğrenci Mentörlüğü ve Sınav Stratejisi', en: 'Student Mentoring and Exam Strategy' }, href: '/hizmetler/ogrenci-mentorlugu-sinav-stratejisi' },
+      { label: { tr: 'Gençler için Kariyer Farkındalığı', en: 'Career Awareness for Young People' }, href: '/hizmetler/genclerde-kariyer-farkindaligi' },
+    ],
+    primaryCtaLabel: { tr: 'İskender Daşdemir ile Ön Görüşme Talep Et', en: 'Request an Introductory Call with İskender Daşdemir' },
+    secondaryCta: { label: { tr: 'Kurumsal Eğitimleri İncele', en: 'Explore Corporate Training' }, href: '/hizmetler/kurumsal-egitim' },
+    seoTitle: { tr: 'Doç. Dr. İskender Daşdemir | Eğitim Stratejisti ve Organizasyonel Gelişim Danışmanı', en: 'Doç. Dr. İskender Daşdemir | Education Strategist and Organizational Development Consultant' },
+    seoDescription: {
+      tr: 'Doç. Dr. İskender Daşdemir; eğitim liderliği, organizasyonel gelişim, öğrenci koçluğu ve eğitim psikolojisi alanlarında akademik birikimini saha deneyimiyle birleştiren AURIX uzmanıdır.',
+      en: 'Doç. Dr. İskender Daşdemir is an AURIX expert who combines his academic background with field experience in education leadership, organizational development, student coaching, and education psychology.',
     },
   },
 

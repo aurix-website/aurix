@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, Check } from 'lucide-react'
+import { ArrowRight, Check, Quote } from 'lucide-react'
 import { ExpertVisual } from '@/components/ExpertVisual'
 import { FadeIn } from '@/components/ui/FadeIn'
 import { FinalCTA } from '@/components/sections/FinalCTA'
@@ -10,28 +10,34 @@ import { DEFAULT_LOCALE, type Locale } from '@/lib/i18n/types'
 
 const COPY = {
   tr: {
-    aboutHeading: (name: string) => `${name} hakkında`,
     photoAlt: (name: string) => `${name} uzman görseli`,
+    visionHeading: 'Vizyonu',
+    aboutHeading: 'Hakkında',
     worksWithHeading: 'Kimlerle çalışır?',
     expertiseHeading: 'Uzmanlık alanları',
     expertiseAria: 'Uzmanlık alanları',
     approachHeading: 'Yaklaşımı',
     credentialsHeading: 'Eğitim ve yetkinlikler',
+    viewAllCredentials: 'Tümünü Gör',
     timelineHeading: 'CV ve deneyim akışı',
     relatedServicesHeading: 'İlgili hizmetler',
     otherExpertsHeading: 'Diğer uzmanlar',
+    ctaHeading: (name: string) => `${name} ile çalışmaya hazır mısınız?`,
   },
   en: {
-    aboutHeading: (name: string) => `About ${name}`,
     photoAlt: (name: string) => `${name} expert photo`,
+    visionHeading: 'Vision',
+    aboutHeading: 'About',
     worksWithHeading: 'Who does this expert work with?',
     expertiseHeading: 'Areas of expertise',
     expertiseAria: 'Areas of expertise',
     approachHeading: 'Approach',
     credentialsHeading: 'Education and qualifications',
+    viewAllCredentials: 'View All',
     timelineHeading: 'CV and experience timeline',
     relatedServicesHeading: 'Related services',
     otherExpertsHeading: 'Other experts',
+    ctaHeading: (name: string) => `Ready to work with ${name}?`,
   },
 } as const
 
@@ -49,21 +55,51 @@ export function ExpertDetailTemplate({
 
   return (
     <>
-      {/* Hero */}
+      {/* Fotoğraf + Hakkında */}
       <section aria-labelledby="expert-hero-heading" className="py-section bg-canvas">
         <div className="max-w-container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             <div className="lg:col-span-4">
-              <div className="bg-white border border-hairline rounded-sm p-3 max-w-sm mx-auto lg:mx-0">
-                <div className="aspect-[4/5] relative overflow-hidden rounded-sm">
-                  <ExpertVisual
-                    expert={expert}
-                    alt={copy.photoAlt(expert.name)}
-                    sizes="(max-width: 1024px) 80vw, 30vw"
-                    imageClassName="object-cover object-top grayscale-[15%]"
-                    priority
-                  />
+              <div className="max-w-sm mx-auto flex flex-col gap-4 lg:mx-0 lg:sticky lg:top-28">
+                <div className="bg-white border border-hairline rounded-sm p-3">
+                  <div className="aspect-[4/5] relative overflow-hidden rounded-sm">
+                    <ExpertVisual
+                      expert={expert}
+                      alt={copy.photoAlt(expert.name)}
+                      sizes="(max-width: 1024px) 80vw, 30vw"
+                      imageClassName="object-cover object-top grayscale-[15%]"
+                      priority
+                    />
+                  </div>
                 </div>
+
+                {(() => {
+                  const credentials = pick(detail.credentials, locale)
+                  const highlighted = credentials.slice(0, 4)
+                  const hasMore = credentials.length > highlighted.length
+                  return (
+                    <div className="rounded-sm border border-hairline bg-white p-5">
+                      <h2 className="text-title-sm font-semibold text-ink mb-3">{copy.credentialsHeading}</h2>
+                      <ul className="flex flex-col gap-2">
+                        {highlighted.map((item) => (
+                          <li key={item} className="flex items-start gap-2 text-body-sm text-body">
+                            <span className="w-1 h-1 rounded-full bg-[#C5A059] mt-2 flex-shrink-0" aria-hidden="true" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      {hasMore && (
+                        <Link
+                          href="#credentials-heading"
+                          className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-[#14797C] hover:text-[#C5A059] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2 rounded-sm"
+                        >
+                          {copy.viewAllCredentials}
+                          <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                        </Link>
+                      )}
+                    </div>
+                  )
+                })()}
               </div>
             </div>
 
@@ -83,21 +119,44 @@ export function ExpertDetailTemplate({
                 </p>
               </FadeIn>
 
+              {expert.vision && (
+                <FadeIn delay={0.04}>
+                  <div className="relative rounded-sm border border-[#14797C]/20 bg-[#14797C]/[0.04] p-6 sm:p-8 pl-10 sm:pl-12">
+                    <Quote className="absolute left-4 top-6 h-5 w-5 text-[#C5A059]" aria-hidden="true" />
+                    <span className="block text-[11px] font-mono tracking-widest text-[#C5A059] font-bold uppercase mb-2">
+                      {copy.visionHeading}
+                    </span>
+                    <p className="font-sans text-body-md text-ink leading-relaxed">
+                      {pick(expert.vision, locale)}
+                    </p>
+                  </div>
+                </FadeIn>
+              )}
+
+              <FadeIn delay={0.06}>
+                <div className="flex flex-col gap-4 rounded-sm border border-hairline bg-white p-6 sm:p-8">
+                  <span className="text-[11px] font-mono tracking-widest text-muted-soft font-bold uppercase">
+                    {copy.aboutHeading}
+                  </span>
+                  {pick(detail.bio, locale).map((paragraph, i) => (
+                    <p key={i} className="text-body-sm text-body leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </FadeIn>
+
               <FadeIn delay={0.1}>
-                <div className="flex flex-col sm:flex-row gap-3 mt-2">
-                  <Link
-                    href={localeHref(`/iletisim?expert=${detail.slug}`, locale)}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#14797C] hover:bg-[#0f5f62] text-white text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
-                  >
-                    {pick(detail.primaryCtaLabel, locale)}
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                  </Link>
-                  <Link
-                    href={localeHref(detail.secondaryCta.href, locale)}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-transparent border border-[#14797C] text-[#14797C] hover:bg-[#14797C]/5 text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
-                  >
-                    {pick(detail.secondaryCta.label, locale)}
-                  </Link>
+                <div className="rounded-sm border border-hairline bg-white p-6">
+                  <h2 className="font-serif text-xl text-ink mb-4">{copy.worksWithHeading}</h2>
+                  <ul className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                    {pick(detail.audience, locale).map((item) => (
+                      <li key={item} className="flex items-start gap-2.5 text-body-sm text-body">
+                        <Check className="h-4 w-4 text-[#14797C] mt-0.5 flex-shrink-0" aria-hidden="true" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </FadeIn>
             </div>
@@ -105,44 +164,9 @@ export function ExpertDetailTemplate({
         </div>
       </section>
 
-      {/* Profil özeti + Kimlerle çalışır */}
-      <section aria-labelledby="bio-heading" className="py-16 bg-surface-soft lg:py-20">
-        <div className="max-w-container mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
-          <div className="lg:col-span-8">
-            <FadeIn>
-              <h2 id="bio-heading" className="font-serif text-3xl text-ink mb-5">
-                {copy.aboutHeading(expert.name)}
-              </h2>
-              <div className="flex flex-col gap-4 rounded-sm border border-hairline bg-white p-6 sm:p-8">
-                {pick(detail.bio, locale).map((paragraph, i) => (
-                  <p key={i} className="text-body-sm text-body leading-relaxed">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-            </FadeIn>
-          </div>
-
-          <div className="lg:col-span-4">
-            <FadeIn delay={0.08}>
-              <div className="rounded-sm border border-hairline bg-white p-6 lg:sticky lg:top-28">
-                <h3 className="font-serif text-2xl text-ink mb-4">{copy.worksWithHeading}</h3>
-                <ul className="flex flex-col gap-2.5">
-                {pick(detail.audience, locale).map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 text-body-sm text-body">
-                    <Check className="h-4 w-4 text-[#14797C] mt-0.5 flex-shrink-0" aria-hidden="true" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-                </ul>
-              </div>
-            </FadeIn>
-          </div>
-        </div>
-      </section>
-
+      {/* CV: deneyim akışı + eğitim/yetkinlikler */}
       {detail.timeline && detail.timeline.length > 0 && (
-        <section aria-labelledby="timeline-heading" className="py-16 bg-canvas lg:py-20">
+        <section aria-labelledby="timeline-heading" className="py-16 bg-surface-soft lg:py-20">
           <div className="max-w-container mx-auto px-6">
             <FadeIn>
               <h2 id="timeline-heading" className="font-serif text-3xl text-ink mb-8">
@@ -175,6 +199,24 @@ export function ExpertDetailTemplate({
         </section>
       )}
 
+      <section aria-labelledby="credentials-heading" className="py-section bg-canvas">
+        <div className="max-w-container mx-auto px-6">
+          <FadeIn>
+            <h2 id="credentials-heading" className="text-title-lg font-semibold text-ink mb-4">
+              {copy.credentialsHeading}
+            </h2>
+            <ul className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+              {pick(detail.credentials, locale).map((item) => (
+                <li key={item} className="flex items-start gap-2.5 text-body-sm text-body">
+                  <span className="w-1 h-1 rounded-full bg-[#C5A059] mt-2.5 flex-shrink-0" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </FadeIn>
+        </div>
+      </section>
+
       {/* Uzmanlık alanları + Yaklaşımı */}
       <section aria-labelledby="expertise-heading" className="py-16 bg-surface-soft lg:py-20">
         <div className="max-w-container mx-auto px-6 grid grid-cols-1 gap-8 lg:grid-cols-12">
@@ -205,28 +247,34 @@ export function ExpertDetailTemplate({
         </div>
       </section>
 
-      {/* Eğitim ve yetkinlikler + İlgili hizmetler */}
-      <section aria-labelledby="credentials-heading" className="py-section bg-surface-soft">
-        <div className="max-w-container mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-6">
-            <FadeIn>
-              <h2 id="credentials-heading" className="text-title-lg font-semibold text-ink mb-4">
-                {copy.credentialsHeading}
+      {/* Ön görüşme CTA + ilgili hizmetler */}
+      <section aria-labelledby="expert-cta-heading" className="py-section bg-canvas">
+        <div className="max-w-container mx-auto px-6">
+          <FadeIn>
+            <div className="rounded-sm border border-hairline bg-surface-elevated p-6 sm:p-8">
+              <h2 id="expert-cta-heading" className="font-serif text-2xl text-ink mb-2">
+                {copy.ctaHeading(expert.name)}
               </h2>
-              <ul className="flex flex-col gap-2.5">
-                {pick(detail.credentials, locale).map((item) => (
-                  <li key={item} className="flex items-start gap-2.5 text-body-sm text-body">
-                    <span className="w-1 h-1 rounded-full bg-[#C5A059] mt-2.5 flex-shrink-0" aria-hidden="true" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </FadeIn>
-          </div>
+              <p className="text-body-sm text-muted leading-relaxed max-w-2xl mb-6">
+                {pick(detail.heroShort, locale)}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 mb-8">
+                <Link
+                  href={localeHref(`/iletisim?expert=${detail.slug}`, locale)}
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#14797C] hover:bg-[#0f5f62] text-white text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
+                >
+                  {pick(detail.primaryCtaLabel, locale)}
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+                <Link
+                  href={localeHref(detail.secondaryCta.href, locale)}
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-transparent border border-[#14797C] text-[#14797C] hover:bg-[#14797C]/5 text-sm font-semibold rounded-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
+                >
+                  {pick(detail.secondaryCta.label, locale)}
+                </Link>
+              </div>
 
-          <div className="lg:col-span-6">
-            <FadeIn delay={0.08}>
-              <h2 className="text-title-lg font-semibold text-ink mb-4">{copy.relatedServicesHeading}</h2>
+              <h3 className="text-title-sm font-semibold text-ink mb-3">{copy.relatedServicesHeading}</h3>
               <ul className="flex flex-wrap gap-2.5" aria-label={copy.relatedServicesHeading}>
                 {detail.relatedServices.map((service) => {
                   const label = pick(service.label, locale)
@@ -234,7 +282,7 @@ export function ExpertDetailTemplate({
                     <li key={label}>
                       <Link
                         href={localeHref(service.href, locale)}
-                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#14797C] hover:text-[#C5A059] bg-surface-elevated border border-hairline rounded-sm px-3.5 py-2 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2"
+                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#14797C] hover:text-[#C5A059] bg-white border border-hairline rounded-sm px-3.5 py-2 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2"
                       >
                         {label}
                         <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -243,13 +291,13 @@ export function ExpertDetailTemplate({
                   )
                 })}
               </ul>
-            </FadeIn>
-          </div>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
       {/* Diğer uzmanlar */}
-      <section aria-labelledby="other-experts-heading" className="py-section bg-canvas">
+      <section aria-labelledby="other-experts-heading" className="py-section bg-surface-soft">
         <div className="max-w-container mx-auto px-6">
           <FadeIn>
             <h2 id="other-experts-heading" className="text-display-lg font-semibold text-ink mb-10">

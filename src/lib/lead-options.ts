@@ -1,3 +1,4 @@
+import { SERVICES } from './services-data'
 import type { Localized } from './i18n/types'
 
 export interface SelectOption {
@@ -5,15 +6,13 @@ export interface SelectOption {
   value: string
 }
 
-/** Ortak "destek almak istediğiniz alan" taksonomisi — /iletisim, /on-gorusme ve kart yönlendirmeleri bunu paylaşır */
+/**
+ * Ortak "destek almak istediğiniz alan" taksonomisi — /iletisim, /on-gorusme ve kart
+ * yönlendirmeleri bunu paylaşır. SERVICES'ten türetilir ki hizmet sayfalarının
+ * `?interest=<slug>` linkleriyle her zaman birebir eşleşsin.
+ */
 export const INTEREST_AREAS: SelectOption[] = [
-  { label: { tr: 'Bireysel Koçluk', en: 'Personal Coaching' }, value: 'bireysel-kocluk' },
-  { label: { tr: 'Yönetici Koçluğu', en: 'Executive Coaching' }, value: 'yonetici-koclugu' },
-  { label: { tr: 'Kurumsal Eğitim', en: 'Corporate Training' }, value: 'kurumsal-egitim' },
-  { label: { tr: 'Öğrenci Koçluğu', en: 'Student Coaching' }, value: 'ogrenci-koclugu' },
-  { label: { tr: 'Kariyer Koçluğu', en: 'Career Coaching' }, value: 'kariyer-koclugu' },
-  { label: { tr: 'Takım Koçluğu', en: 'Team Coaching' }, value: 'takim-koclugu' },
-  { label: { tr: 'Global Uyum ve Kariyer', en: 'Global Adaptation and Career' }, value: 'global-uyum' },
+  ...SERVICES.map((service) => ({ label: service.title, value: service.id })),
   { label: { tr: 'Emin Değilim', en: 'Not Sure' }, value: 'emin-degilim' },
 ]
 

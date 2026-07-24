@@ -6,8 +6,10 @@ import { DisciplinesSection } from '@/components/sections/DisciplinesSection'
 import { ServicesSection } from '@/components/sections/ServicesSection'
 import { ApproachSteps } from '@/components/sections/ApproachSteps'
 import { ExpertsPreview } from '@/components/sections/ExpertsPreview'
+import { VisionSection } from '@/components/sections/VisionSection'
 import { PersonaGrid } from '@/components/sections/PersonaGrid'
 import { ManifestoSection } from '@/components/sections/ManifestoSection'
+import { LocationSection } from '@/components/sections/LocationSection'
 import { JournalPreview } from '@/components/sections/JournalPreview'
 import { FinalCTA } from '@/components/sections/FinalCTA'
 import type { Locale } from '@/lib/i18n/types'
@@ -21,10 +23,12 @@ export default async function Home({ params }: { params: Promise<{ locale: Local
   return (
     <>
       <HeroSection locale={locale} />
+      <LocationSection locale={locale} background="surface-soft" />
       <DisciplinesSection locale={locale} />
       <ServicesSection locale={locale} />
       <ApproachSteps locale={locale} />
       <ExpertsPreview locale={locale} />
+      <VisionSection locale={locale} />
       <PersonaGrid locale={locale} />
       <ManifestoSection locale={locale} />
       <JournalPreview locale={locale} />

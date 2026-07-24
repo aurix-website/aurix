@@ -83,7 +83,7 @@ export function JournalGrid({ locale = DEFAULT_LOCALE }: { locale?: Locale }) {
             className="group flex h-full flex-col overflow-hidden rounded-md border border-[#E2E5DE] bg-[#FCFDF9] p-3 shadow-[0_12px_35px_rgba(26,28,30,0.05)] transition-all duration-300 hover:border-[#14797C]/45 hover:shadow-[0_20px_48px_rgba(26,28,30,0.09)] motion-safe:hover:scale-[1.02] motion-reduce:transition-none"
           >
             <Link
-              href={localeHref(`/journal/${article.slug}`, locale)}
+              href={localeHref(`/blog/${article.slug}`, locale)}
               className="block overflow-hidden rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
             >
               <div className="relative aspect-[3/2] w-full overflow-hidden rounded-sm">
@@ -104,7 +104,7 @@ export function JournalGrid({ locale = DEFAULT_LOCALE }: { locale?: Locale }) {
                 {pick(CATEGORY_LABELS[article.category], locale)}
               </span>
               <Link
-                href={`/journal/${article.slug}`}
+                href={localeHref(`/blog/${article.slug}`, locale)}
                 className="rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
               >
                 <h3 className="text-title-md font-semibold leading-snug text-ink transition-colors group-hover:text-[#14797C]">
@@ -117,7 +117,7 @@ export function JournalGrid({ locale = DEFAULT_LOCALE }: { locale?: Locale }) {
               <div className="mt-auto flex items-center justify-between gap-2 pt-2">
                 <span className="text-caption text-muted">{formatDate(article.publishedDate, locale)}</span>
                 <Link
-                  href={`/journal/${article.slug}`}
+                  href={localeHref(`/blog/${article.slug}`, locale)}
                   className="inline-flex items-center gap-1 rounded-sm text-body-sm font-semibold text-[#14797C] transition-colors hover:text-[#C5A059] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
                 >
                   {copy.readMore} <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
