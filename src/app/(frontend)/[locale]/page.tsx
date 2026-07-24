@@ -5,7 +5,6 @@ import { HeroSection } from '@/components/sections/HeroSection'
 import { DisciplinesSection } from '@/components/sections/DisciplinesSection'
 import { ServicesSection } from '@/components/sections/ServicesSection'
 import { ApproachSteps } from '@/components/sections/ApproachSteps'
-import { ExpertsPreview } from '@/components/sections/ExpertsPreview'
 import { VisionSection } from '@/components/sections/VisionSection'
 import { PersonaGrid } from '@/components/sections/PersonaGrid'
 import { ManifestoSection } from '@/components/sections/ManifestoSection'
@@ -27,7 +26,6 @@ export default async function Home({ params }: { params: Promise<{ locale: Local
       <DisciplinesSection locale={locale} />
       <ServicesSection locale={locale} />
       <ApproachSteps locale={locale} />
-      <ExpertsPreview locale={locale} />
       <VisionSection locale={locale} />
       <PersonaGrid locale={locale} />
       <ManifestoSection locale={locale} />
