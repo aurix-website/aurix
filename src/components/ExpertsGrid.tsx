@@ -47,7 +47,7 @@ export function ExpertsGrid({ locale = DEFAULT_LOCALE }: { locale?: Locale }) {
               role="listitem"
               className="group overflow-hidden rounded-md border border-[#E2E5DE] bg-[#FCFDF9] shadow-[0_14px_38px_rgba(26,28,30,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(26,28,30,0.11)]"
             >
-              <div className="grid grid-cols-1 sm:min-h-[240px] sm:grid-cols-[42%_1fr]">
+              <div className="grid h-full grid-cols-1 sm:min-h-[240px] sm:grid-cols-[42%_1fr]">
                 <Link
                   href={localeHref(`/uzmanlar/${expert.slug}`, locale)}
                   className="relative block min-h-[230px] overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1A9CA0] focus-visible:outline-offset-2 sm:min-h-0"

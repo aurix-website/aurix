@@ -21,9 +21,22 @@ const COPY = {
   },
 } as const
 
+const VISION_ORDER = [
+  'kaan-yazici',
+  'seda-sen',
+  'hatice-yildirim',
+  'secil-ozbayir',
+  'hulya-aksu-spizuoco',
+  'iskender-dasdemir',
+  'cigdem-karavelioglu',
+  'ayse-kiremitci',
+]
+
 export function VisionSection({ locale = DEFAULT_LOCALE }: { locale?: Locale }) {
   const copy = COPY[locale]
-  const experts = STATIC_EXPERTS.filter((expert) => expert.vision)
+  const experts = STATIC_EXPERTS.filter((expert) => expert.vision).sort(
+    (a, b) => VISION_ORDER.indexOf(a.slug ?? '') - VISION_ORDER.indexOf(b.slug ?? '')
+  )
 
   if (experts.length === 0) return null
 

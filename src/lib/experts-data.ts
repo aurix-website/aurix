@@ -156,8 +156,8 @@ export const STATIC_EXPERTS: Expert[] = [
     },
     listingCta: { tr: "Seda Şen'i Tanıyın", en: 'Meet Seda Şen' },
     vision: {
-      tr: 'Potansiyeli gerçekleştirebilecek net bir vizyon tasarlamak ve ulaşılabilir hedeflerle geleceğe yürümek.',
-      en: 'Designing a clear vision that can turn potential into reality, and moving toward the future with attainable goals.',
+      tr: 'Koçluk ve eğitimde amacım; kişinin kendi iç kaynaklarını, değerlerini ve potansiyelini fark ederek yaşamında ve işinde daha bilinçli seçimler yapmasını kolaylaştırmaktır. Teknopark ekosisteminde gençlerin, girişimcilerin ve yöneticilerin hızlı değişen dünyada yönlerini bulmalarına; güçlü yönleri, motivasyon alanları ile dünyanın ihtiyaçları arasında köprü kurmalarına alan açmayı hedefliyorum. İnanıyorum ki; insan kendisine anlamlı gelen, gerçekten istediği, zihninde netleştirdiği hedefleri olduğunda harekete geçer ve bu farkındalıklarla somut adımlar attığında hayalleri gerçek olur. İşte ben bu yolda müşterilerime hizmet etmekten büyük keyif alıyorum.',
+      en: 'My purpose in coaching and training is to help people recognize their own inner resources, values, and potential, so they can make more conscious choices in their lives and work. Within the technopark ecosystem, I aim to open space for young people, entrepreneurs, and executives to find their direction in a fast-changing world, and to build a bridge between their strengths, their sources of motivation, and the needs of the world. I believe that when people have goals that feel meaningful to them, that they truly want and have clarified in their minds, they take action, and when they take concrete steps guided by that awareness, their dreams become real. It is a privilege to serve my clients on this path.',
     },
   },
   {
