@@ -226,6 +226,48 @@ export const LEGAL_PAGES = {
       },
     ],
   },
+  etik: {
+    slug: 'etik-ilkeler',
+    title: { tr: 'Etik İlkeler', en: 'Code of Ethics' },
+    description: {
+      tr: 'AURIX’in koçluk ve danışmanlık süreçlerinde uyguladığı temel değerler ile etik ve profesyonel sınırlar.',
+      en: 'The core values and the ethical and professional boundaries AURIX applies across its coaching and consulting processes.',
+    },
+    eyebrow: { tr: 'Etik ve Değerler', en: 'Ethics and Values' },
+    updatedAt: { tr: 'Son güncelleme: 26 Temmuz 2026', en: 'Last updated: July 26, 2026' },
+    intro: {
+      tr: 'AURIX’te koçluk ve danışmanlık süreçleri, aşağıdaki temel değerler ve etik, profesyonel sınırlar çerçevesinde yürütülür. Bu ilkeler, danışanlarımıza ve kurumsal paydaşlarımıza karşı taşıdığımız sorumluluğun temelini oluşturur.',
+      en: 'AURIX’s coaching and consulting processes are carried out within the framework of the core values and the ethical, professional boundaries below. These principles form the basis of the responsibility we carry toward our clients and institutional stakeholders.',
+    },
+    sections: [
+      {
+        heading: { tr: '1. AURIX Değerleri', en: '1. AURIX Values' },
+        items: {
+          tr: [
+            'Netlik: Her sürecin başlangıcında danışanın gerçek ihtiyacını ve hedefini anlamaya odaklanırız.',
+            'Güven: Koçluk ve danışmanlık sürecinde açıklık, gizlilik ve etik sınırlar bizim için temel ilkedir.',
+            'Uygun Eşleşme: Her danışanı aynı hizmete yönlendirmek yerine, ihtiyacına en uygun uzman ve süreçle buluştururuz.',
+            'Sürdürülebilir Gelişim: Kısa süreli motivasyon yerine, uygulanabilir ve sürdürülebilir gelişim adımlarına odaklanırız.',
+            'Çok Disiplinli Bakış: Farklı mesleki deneyimleri tek bir gelişim çatısı altında birleştiririz.',
+          ],
+          en: [
+            'Clarity: At the start of every process, we focus on understanding the client’s real need and goal.',
+            'Trust: Openness, confidentiality, and ethical boundaries are fundamental to our coaching and consulting process.',
+            'The Right Match: Instead of directing every client to the same service, we connect each one with the expert and process best suited to their need.',
+            'Sustainable Growth: Rather than short-lived motivation, we focus on actionable and sustainable steps for growth.',
+            'A Multidisciplinary View: We bring different professional experiences together under a single framework for growth.',
+          ],
+        },
+      },
+      {
+        heading: { tr: '2. Etik ve Profesyonel Sınırlar', en: '2. Ethical and Professional Boundaries' },
+        body: {
+          tr: 'AURIX’te koçluk ve danışmanlık süreçleri; bireyin veya kurumun gelişim hedeflerine eşlik eden profesyonel süreçlerdir. Bu süreçler psikoterapi, tıbbi tedavi veya klinik müdahalenin yerine geçmez. Danışanın ihtiyacının farklı bir uzmanlık alanına yönlendirme gerektirdiği durumlarda, bu sınırlar açık ve sorumlu biçimde gözetilir. Gizlilik, açıklık ve profesyonel sorumluluk AURIX yaklaşımının ayrılmaz parçalarıdır.',
+          en: 'At AURIX, coaching and consulting processes are professional processes that accompany the growth goals of an individual or organization. These processes do not replace psychotherapy, medical treatment, or clinical intervention. Where a client’s need calls for referral to a different area of expertise, these boundaries are observed openly and responsibly. Confidentiality, openness, and professional accountability are inseparable parts of the AURIX approach.',
+        },
+      },
+    ],
+  },
 } satisfies Record<string, LegalPageContent>
 
 export function getLegalPath(key: keyof typeof LEGAL_PAGES, locale: Locale): string {

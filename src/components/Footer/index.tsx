@@ -102,6 +102,7 @@ export async function Footer({ locale }: { locale: Locale }) {
     { label: copy.kvkk, href: '/kvkk' },
     { label: copy.privacy, href: '/gizlilik-politikasi' },
     { label: copy.cookies, href: '/cerez-politikasi' },
+    { label: copy.ethics, href: '/etik-ilkeler' },
   ]
 
   const logoLight =

@@ -16,6 +16,7 @@ const STATIC_PATHS = [
   '/kvkk',
   '/gizlilik-politikasi',
   '/cerez-politikasi',
+  '/etik-ilkeler',
 ]
 
 function entry(path: string, priority: number): MetadataRoute.Sitemap[number] {
