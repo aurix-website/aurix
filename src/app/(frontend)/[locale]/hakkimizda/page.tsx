@@ -37,7 +37,7 @@ const COPY = {
     profileEyebrow: 'Ekipten Bir Profil',
     profileHeading: 'Kaan Yazıcı’nın yolculuğu',
     profileParagraphs: [
-      'AURIX’in yaklaşımı, insanı yalnızca mesleki başarılarıyla değil; zihinsel, duygusal ve sosyal bütünlüğüyle ele alma fikrine dayanır. Bu bakış açısı, AURIX’teki 6 uzmanın her birinin kendi deneyiminden beslenir.',
+      'AURIX’in yaklaşımı, insanı yalnızca mesleki başarılarıyla değil; zihinsel, duygusal ve sosyal bütünlüğüyle ele alma fikrine dayanır. Bu bakış açısı, AURIX’teki 8 uzmanın her birinin kendi deneyiminden beslenir.',
       'Kaan Yazıcı, diş hekimliği alanındaki deneyimini kamu yönetimi perspektifi ve profesyonel koçluk yaklaşımıyla birleştirerek bireylerin ve takımların potansiyellerini daha bilinçli şekilde ortaya çıkarmalarına eşlik eder.',
     ],
     profileHighlights: [
@@ -105,7 +105,7 @@ const COPY = {
     profileEyebrow: 'From the Team',
     profileHeading: 'Kaan Yazıcı’s journey',
     profileParagraphs: [
-      'AURIX’s approach rests on the idea of seeing a person not only through professional achievement, but through mental, emotional, and social wholeness. This perspective is shaped by the experience each of AURIX’s 6 experts brings to the team.',
+      'AURIX’s approach rests on the idea of seeing a person not only through professional achievement, but through mental, emotional, and social wholeness. This perspective is shaped by the experience each of AURIX’s 8 experts brings to the team.',
       'Kaan Yazıcı combines his experience in dentistry with a public administration perspective and a professional coaching approach, accompanying individuals and teams as they bring out their potential more consciously.',
     ],
     profileHighlights: [
