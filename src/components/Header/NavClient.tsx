@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import { ArrowRight, ChevronDown, Menu, MessageCircle, X } from 'lucide-react'
 import { localizePath } from '@/components/LanguageSwitcher'
 import { SERVICES } from '@/lib/services-data'
-import { getWhatsAppUrl } from '@/lib/contact-channels'
+import { getWhatsAppUrl, WHATSAPP_DISPLAY } from '@/lib/contact-channels'
 import { pick } from '@/lib/i18n/pick'
 import type { Locale } from '@/lib/i18n/types'
 import { dictionary } from '@/lib/i18n/dictionary'
@@ -166,7 +166,7 @@ export function NavClient({ logoDark }: { logoDark: LogoMedia | null }) {
             className="inline-flex items-center gap-2 rounded-sm border border-[#14797C] bg-white px-4 py-2.5 text-sm font-semibold text-[#14797C] transition-colors duration-200 hover:bg-[#14797C]/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1A9CA0]"
           >
             <MessageCircle className="h-4 w-4" aria-hidden="true" />
-            {nav.whatsapp}
+            {nav.whatsapp}: {WHATSAPP_DISPLAY}
           </a>
           <Link
             href={localizePath('/iletisim', isEnglish)}
@@ -266,7 +266,7 @@ export function NavClient({ logoDark }: { logoDark: LogoMedia | null }) {
               onClick={() => setMobileOpen(false)}
             >
               <MessageCircle className="h-4 w-4" aria-hidden="true" />
-              {nav.whatsappWrite}
+              {nav.whatsappWrite}: {WHATSAPP_DISPLAY}
             </a>
           </nav>
         </div>
