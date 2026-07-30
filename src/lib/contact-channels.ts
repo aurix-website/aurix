@@ -1,8 +1,8 @@
 import type { Locale } from './i18n/types'
 
 export const CONTACT_EMAIL = 'info@aurixdanismanlik.com'
-export const WHATSAPP_NUMBER = '905469774480'
-export const WHATSAPP_DISPLAY = '+90 546 977 44 80'
+export const WHATSAPP_NUMBER = '905449783119'
+export const WHATSAPP_DISPLAY = '+90 544 978 31 19'
 
 const WHATSAPP_MESSAGE_BY_LOCALE: Record<Locale, string> = {
   tr: 'Merhaba, AURIX hizmetleri hakkında bilgi almak ve ön görüşme planlamak istiyorum.',
