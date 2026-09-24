@@ -17,15 +17,19 @@ export function getWhatsAppUrl(locale: Locale = 'tr'): string {
 
 export const WHATSAPP_URL = getWhatsAppUrl('tr')
 
-export const CONTACT_ADDRESS =
-  'Ege Üniversitesi Kampüsü, Erzene, Ankara Cd. No:172/67, 35100 Bornova/İzmir'
+export const CONTACT_ADDRESS = [
+  'Ege Üniversitesi Kampüsü Erzene Mah. No: 172/68',
+  'Ege Teknopark TGB Sedef (A) Blok İç Kapı No: 3 Kat: 2 A3/53',
+  'Bornova / İzmir 35040',
+].join('\n')
 
 /**
  * "Ege Üniversitesi Kampüsü" tek başına aratıldığında Google Maps farklı bir
  * noktaya (kampüsün Kızılay/Ankara Cd. girişine) eşleşiyor. Başına "Ege
- * Üniversitesi Teknopark" eklenince doğru bina (Erzene, No:172/67) bulunuyor.
+ * Üniversitesi Teknopark" eklenince doğru bina bulunuyor. Blok/kat/iç kapı
+ * detayları aramayı bozmasın diye sorguya yalnızca bina adresi verilir.
  */
-const MAPS_QUERY = `Ege Üniversitesi Teknopark, ${CONTACT_ADDRESS}`
+const MAPS_QUERY = 'Ege Üniversitesi Teknopark, Erzene Mah. No:172/68, 35040 Bornova/İzmir'
 
 /**
  * Google Maps üzerinden "ideEge Teknoloji Geliştirme Bölgesi" için alınan

@@ -180,7 +180,7 @@ export default async function IletisimPage({ params }: { params: Promise<{ local
                         href={getGoogleMapsUrl()}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm leading-relaxed text-[#1A1C1E] hover:text-[#14797C]"
+                        className="whitespace-pre-line text-sm leading-relaxed text-[#1A1C1E] hover:text-[#14797C]"
                       >
                         {CONTACT_ADDRESS}
                       </a>
@@ -238,7 +238,7 @@ export default async function IletisimPage({ params }: { params: Promise<{ local
                 </p>
                 <div className="mt-6 flex items-start gap-3 rounded-md border border-[#E2E5DE] bg-[#FCFDF9] p-4">
                   <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#14797C]" aria-hidden="true" />
-                  <p className="text-sm leading-relaxed text-[#1A1C1E]">{CONTACT_ADDRESS}</p>
+                  <p className="whitespace-pre-line text-sm leading-relaxed text-[#1A1C1E]">{CONTACT_ADDRESS}</p>
                 </div>
                 <a
                   href={getGoogleMapsUrl()}
