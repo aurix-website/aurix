@@ -6,6 +6,8 @@ import { SERVICES } from '@/lib/services-data'
 import type { Locale } from '@/lib/i18n/types'
 import { dictionary } from '@/lib/i18n/dictionary'
 import { pick, localeHref } from '@/lib/i18n/pick'
+import { isAnalyticsConfigured } from '@/lib/analytics'
+import { CookiePreferencesButton } from '@/components/analytics/CookiePreferencesButton'
 
 const FOOTER_SERVICE_IDS = ['bireysel-kocluk', 'yonetici-koclugu', 'kurumsal-egitim', 'ogrenci-koclugu']
 
@@ -16,6 +18,11 @@ type SiteSettingsData = {
   contactEmail?: string | null
   whatsappNumber?: string | null
   socialLinks?: Array<{ platform?: string | null; url?: string | null }> | null
+}
+
+const COOKIE_PREFERENCES_LABEL: Record<Locale, string> = {
+  tr: 'Çerez tercihleri',
+  en: 'Cookie preferences',
 }
 
 const FALLBACK_LOGO_LIGHT_ALT: Record<Locale, string> = {
@@ -274,6 +281,14 @@ export async function Footer({ locale }: { locale: Locale }) {
                   </Link>
                 </li>
               ))}
+              {isAnalyticsConfigured && (
+                <li>
+                  <CookiePreferencesButton
+                    label={COOKIE_PREFERENCES_LABEL[locale]}
+                    className="hover:text-on-dark transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-accent focus-visible:outline-offset-2 rounded-sm"
+                  />
+                </li>
+              )}
             </ul>
           </nav>
         </div>

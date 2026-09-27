@@ -5,6 +5,7 @@ import '../../globals.css'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { WhatsAppFloatingButton } from '@/components/WhatsAppFloatingButton'
+import { ConsentManager } from '@/components/analytics/ConsentManager'
 import { LOCALES, type Locale } from '@/lib/i18n/types'
 
 const inter = Inter({
@@ -68,6 +69,7 @@ export default async function FrontendLayout({
         <main>{children}</main>
         <WhatsAppFloatingButton locale={locale} />
         <Footer locale={locale} />
+        <ConsentManager locale={locale} />
       </body>
     </html>
   )
