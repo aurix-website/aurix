@@ -206,6 +206,29 @@ export const STATIC_EXPERTS: Expert[] = [
       en: 'I believe knowledge gains its true value only when it becomes practice; I aim to translate my academic background into applications that contribute to individual growth, institutional transformation, and stronger education systems. My vision is an education that does not merely transmit information, but shapes individuals who think, produce, collaborate, and lead change.',
     },
   },
+  {
+    id: 'bektas-sari',
+    name: 'Dr. Bektaş Sarı',
+    slug: 'bektas-sari',
+    title: {
+      tr: 'Yapay Zekâ, Algı ve Eleştirel Düşünme Eğitmeni',
+      en: 'AI, Perception, and Critical Thinking Instructor',
+    },
+    photo: { url: '/media/expert-bektas-sari.png', alt: 'Dr. Bektaş Sarı' },
+    expertiseAreas: {
+      tr: [{ item: 'Yapay zekâyla eleştirel düşünme' }, { item: 'Yapay zekâ ve algı' }, { item: 'Karar verme' }],
+      en: [{ item: 'Critical thinking with AI' }, { item: 'AI and perception' }, { item: 'Decision-making' }],
+    },
+    shortCard: {
+      tr: 'İnsanların yapay zekâyla çalışırken nasıl düşündüğünü, neye inandığını ve nasıl karar verdiğini araştırır; okullara ve kurumlara bu konuda uygulamalı eğitimler tasarlar.',
+      en: 'Researches how people think, what they believe, and how they decide when working with AI, and designs hands-on training on this subject for schools and organizations.',
+    },
+    listingCta: { tr: "Dr. Bektaş Sarı'yı Tanıyın", en: 'Meet Dr. Bektaş Sarı' },
+    vision: {
+      tr: 'Yapay zekâ cevap üretmeyi kolaylaştırdı. Bu yüzden iyi soru sormak, cevabı sınamak ve kararı sahiplenmek her zamankinden daha değerli. Amacım, yapay zekâyı kullanan herkesin bu üç beceriyi kazanması: öğrenciden öğretmene, çalışandan yöneticiye.',
+      en: 'AI has made producing answers easy. That is why asking good questions, testing answers, and owning decisions matter more than ever. My aim is for everyone who uses AI to gain these three skills, from students to teachers and from employees to managers.',
+    },
+  },
 ]
 
 export const EXPERT_PLACEHOLDERS: Record<string, string> = {
@@ -217,6 +240,7 @@ export const EXPERT_PLACEHOLDERS: Record<string, string> = {
   'seda-sen': 'expert-seda-sen.png',
   'ayse-kiremitci': 'expert-ayse-kiremitci.png',
   'iskender-dasdemir': 'expert-iskender-dasdemir.png',
+  'bektas-sari': 'expert-bektas-sari.png',
 }
 
 export function getExpertBySlug(slug: string): Expert | undefined {

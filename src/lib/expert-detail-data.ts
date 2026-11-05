@@ -11,6 +11,25 @@ export interface ExpertTimelineItem {
   description: Localized<string>
 }
 
+export interface ExpertTrainingProgram {
+  themes: Array<{
+    title: Localized<string>
+    description: Localized<string>
+    questions: Localized<string[]>
+    outcome: Localized<string>
+  }>
+  programs: Array<{
+    audience: Localized<string>
+    title: Localized<string>
+    questions: Localized<string>
+    outcome: Localized<string>
+  }>
+  workshops: Array<{ title: Localized<string>; description: Localized<string>; meta: Localized<string> }>
+  howItWorks: Array<{ title: Localized<string>; description: Localized<string> }>
+  limits: Localized<string[]>
+  publications: string[]
+}
+
 export interface ExpertDetail {
   slug: string
   heroShort: Localized<string>
@@ -20,6 +39,8 @@ export interface ExpertDetail {
   expertise: Localized<string[]>
   approach: Localized<string>
   credentials: Localized<string[]>
+  /** Yalnızca eğitim programı olan uzmanlarda gösterilir */
+  trainingProgram?: ExpertTrainingProgram
   relatedServices: ExpertRelatedService[]
   primaryCtaLabel: Localized<string>
   secondaryCta: { label: Localized<string>; href: string }
@@ -969,4 +990,318 @@ export const EXPERT_DETAILS: Record<string, ExpertDetail> = {
     },
   },
 
+  'bektas-sari': {
+    slug: 'bektas-sari',
+    heroShort: {
+      tr: 'İnsanların yapay zekâyla çalışırken nasıl düşündüğünü, neye inandığını ve nasıl karar verdiğini araştırır. Okullara ve kurumlara bu konuda uygulamalı eğitimler tasarlar.',
+      en: 'Researches how people think, what they believe, and how they make decisions when working with AI. Designs hands-on training on this subject for schools and organizations.',
+    },
+    bio: {
+      tr: [
+        'Dr. Bektaş Sarı, Dokuz Eylül Üniversitesi İşletme bölümünü bitirdikten sonra aynı üniversitede pazarlama alanında yüksek lisans yaptı. Doktorasını Ege Üniversitesi Reklamcılık Anabilim Dalı’nda tamamladı. Doktora tezinde, yapay zekâ tarafından üretilen reklamlara insanların nasıl tepki verdiğini iki aşamalı bir deneyle inceledi: göz izleme yöntemiyle görsel dikkati, tutum ölçümleriyle de algıyı ölçtü.',
+        'Tüketici davranışı, algı, ikna ve karar verme üzerine makaleleri ve tüketimin nörobilimsel temellerini ele alan bir kitap bölümü bulunuyor.',
+        'Akademik çalışmasını uygulamayla birleştiriyor. Vestel Dış Ticaret’te küresel tedarik zinciri ve veri yönetiminde, ardından ajanslarda dijital strateji ve marka yönetiminde çalıştı. Bugün kurucusu olduğu Kognitect’te yapay zekâ destekli dijital ürünler geliştiriyor ve yapay zekâyı her gün üretimin içinde kullanıyor.',
+        'AURIX’te okullara ve kurumlara, yapay zekâyı kullanmayı değil, yapay zekâyla doğru düşünmeyi öğreten eğitimler veriyor.',
+      ],
+      en: [
+        'Dr. Bektaş Sarı graduated in Business Administration from Dokuz Eylül University and completed a master’s degree in marketing at the same university, followed by a doctorate at Ege University’s Department of Advertising. The doctoral thesis examined how people respond to AI-generated advertisements through a two-stage experiment, measuring visual attention with eye tracking and perception with attitude measures.',
+        'Dr. Sarı’s publications include articles on consumer behavior, perception, persuasion, and decision-making, as well as a book chapter on the neuroscientific foundations of consumption.',
+        'Academic work and practice go hand in hand. Dr. Sarı worked in global supply chain and data management at Vestel Foreign Trade, then in digital strategy and brand management at agencies. Today, as founder of Kognitect, Dr. Sarı develops AI-supported digital products and uses AI in production every day.',
+        'At AURIX, Dr. Sarı delivers training that teaches schools and organizations not just how to use AI, but how to think well with it.',
+      ],
+    },
+    timeline: [
+      {
+        period: { tr: '1997–2001 · Lisans', en: '1997–2001 · Bachelor’s' },
+        title: { tr: 'Dokuz Eylül Üniversitesi, İşletme', en: 'Dokuz Eylül University, Business Administration' },
+        description: { tr: 'İktisadi ve İdari Bilimler Fakültesi.', en: 'Faculty of Economics and Administrative Sciences.' },
+      },
+      {
+        period: { tr: '2002–2007 · Yüksek lisans', en: '2002–2007 · Master’s' },
+        title: { tr: 'Dokuz Eylül Üniversitesi, Pazarlama', en: 'Dokuz Eylül University, Marketing' },
+        description: { tr: 'İhracat pazarlama stratejileri üzerine tez (Vestel Dış Ticaret uygulaması).', en: 'Thesis on export marketing strategies (Vestel Foreign Trade case).' },
+      },
+      {
+        period: { tr: '2006–2014', en: '2006–2014' },
+        title: { tr: 'Vestel Dış Ticaret A.Ş.', en: 'Vestel Foreign Trade' },
+        description: { tr: 'Küresel tedarik zinciri veri yönetimi, sipariş süreçleri, analitik raporlama.', en: 'Global supply chain data management, order processes, and analytical reporting.' },
+      },
+      {
+        period: { tr: '2015–2017', en: '2015–2017' },
+        title: { tr: 'Anıl Sam Ajans · Dijital Strateji Lideri', en: 'Anıl Sam Agency · Digital Strategy Lead' },
+        description: { tr: 'Web projeleri, arama motoru optimizasyonu, sosyal medya ve dijital süreç yönetimi.', en: 'Web projects, search engine optimization, social media, and digital process management.' },
+      },
+      {
+        period: { tr: '2017–2025', en: '2017–2025' },
+        title: { tr: 'Adamakıllı Ads · Stratejik Marka Yöneticisi ve Veri Analisti', en: 'Adamakıllı Ads · Strategic Brand Manager and Data Analyst' },
+        description: { tr: 'Veri temelli marka stratejileri, pazar ve rakip analizi, dönüşüm optimizasyonu.', en: 'Data-driven brand strategy, market and competitor analysis, and conversion optimization.' },
+      },
+      {
+        period: { tr: '2018–2023 · Doktora', en: '2018–2023 · PhD' },
+        title: { tr: 'Ege Üniversitesi, Reklamcılık', en: 'Ege University, Advertising' },
+        description: { tr: 'Tez: Bir Tasarım Aracı Olarak Yapay Zekâ: Yapay Zekâ Tarafından Üretilen Reklamlara Yönelik Tüketici Tepkileri Üzerine Deneysel Bir Çalışma.', en: 'Thesis: Artificial Intelligence as a Design Tool: An Experimental Study on Consumer Responses to AI-Generated Advertisements.' },
+      },
+      {
+        period: { tr: '2025–güncel', en: '2025–present' },
+        title: { tr: 'Kognitect · Kurucu', en: 'Kognitect · Founder' },
+        description: { tr: 'Yapay zekâ, davranış bilimi ve yazılımı birleştiren dijital ürün ve danışmanlık çalışmaları.', en: 'Digital products and consulting that combine AI, behavioral science, and software.' },
+      },
+    ],
+    audience: {
+      tr: [
+        'Okul yöneticileri ve öğretmenler',
+        'Ortaokul ve lise velileri',
+        'Lise ve üniversite öğrencileri',
+        'Kurum yöneticileri ve karar vericiler',
+        'İnsan kaynakları ve eğitim birimleri',
+        'Yapay zekâyı işinde kullanan çalışanlar',
+        'Yazılım ve teknik ekipler (talebe göre)',
+      ],
+      en: [
+        'School leaders and teachers',
+        'Parents of middle and high school students',
+        'High school and university students',
+        'Organizational leaders and decision-makers',
+        'Human resources and training teams',
+        'Employees who use AI in their work',
+        'Software and technical teams (on request)',
+      ],
+    },
+    expertise: {
+      tr: [
+        'Yapay Zekâyla Eleştirel Düşünme',
+        'Yapay Zekâyla Düşünme ve Karar Verme',
+        'Yapay Zekâ ve Algı',
+        'İkna ve Akıl Yürütme',
+        'Yapay Zekâ Okuryazarlığı',
+        'Güvenli Yapay Zekâ Kullanımı',
+        'Yapay Zekâ Araçları (Claude, Codex)',
+      ],
+      en: [
+        'Critical Thinking with AI',
+        'Thinking and Deciding with AI',
+        'AI and Perception',
+        'Persuasion and Reasoning',
+        'AI Literacy',
+        'Safe Use of AI',
+        'AI Tools (Claude, Codex)',
+      ],
+    },
+    approach: {
+      tr: 'Dr. Bektaş Sarı’nın eğitimleri bir araç kursu değildir. Araçlar her ay değişir; bir cevabı sorgulamak, kaynağıyla sınamak ve kararı sahiplenmek ise kalıcı becerilerdir. Eğitimler bu becerilere odaklanır. Her program kurumun ya da okulun kendi örnekleriyle uyarlanır. Katılımcılar gerçek bir iş sorusu ya da ders konusu üzerinde çalışır. Program, öğrenilen beceriyi gösteren kısa bir uygulamayla biter.',
+      en: 'Dr. Bektaş Sarı’s training is not a tools course. Tools change every month; questioning an answer, testing it against its source, and owning the decision are lasting skills. The training focuses on these skills. Each program is adapted with the organization’s or school’s own examples. Participants work on a real business question or course topic. The program ends with a short exercise that demonstrates the skill learned.',
+    },
+    credentials: {
+      tr: [
+        'Doktora, Ege Üniversitesi, Reklamcılık',
+        'Yüksek lisans, Dokuz Eylül Üniversitesi, Pazarlama',
+        'Lisans, Dokuz Eylül Üniversitesi, İşletme',
+        'Göz izleme ve deneysel araştırma',
+        'Python, bilgisayarlı görü, web teknolojileri',
+      ],
+      en: [
+        'PhD, Ege University, Advertising',
+        'Master’s degree, Dokuz Eylül University, Marketing',
+        'Bachelor’s degree, Dokuz Eylül University, Business Administration',
+        'Eye tracking and experimental research',
+        'Python, computer vision, and web technologies',
+      ],
+    },
+    trainingProgram: {
+      themes: [
+        {
+          title: { tr: 'Yapay Zekâyla Eleştirel Düşünme', en: 'Critical Thinking with AI' },
+          description: {
+            tr: 'Yapay zekâ akıcı ve kendinden emin konuşur, ama her zaman doğruyu söylemez. Bu tema, bir cevabı iddialarına ayırmayı, kaynağıyla sınamayı ve akıl yürütme hatalarını fark etmeyi öğretir.',
+            en: 'AI speaks fluently and confidently, but it does not always tell the truth. This theme teaches how to break an answer into claims, test it against its source, and spot reasoning errors.',
+          },
+          questions: {
+            tr: ['Bu cevaptaki hangi iddia kontrol edilmeli?', 'Kaynak nerede, kaynak gerçekten bunu söylüyor mu?', 'Duyguya başvurma, yanlış ikilem gibi hatalar nasıl fark edilir?', 'Eksik olan bilgi ne?'],
+            en: ['Which claim in this answer should be checked?', 'Where is the source, and does it really say this?', 'How can errors such as appeal to emotion or false dilemma be spotted?', 'What information is missing?'],
+          },
+          outcome: {
+            tr: 'Hatalı ya da uydurma bir yapay zekâ cevabını fark etmek ve bir iddiayı kanıtıyla değerlendirmek.',
+            en: 'Recognizing a wrong or fabricated AI answer and evaluating a claim against its evidence.',
+          },
+        },
+        {
+          title: { tr: 'Yapay Zekâyla Düşünmek', en: 'Thinking with AI' },
+          description: {
+            tr: 'Yapay zekâ düşünmenin yerine geçmez, düşünmeyi derinleştirir. Bu tema, yapay zekâyı bir cevap makinesi gibi değil, bir düşünme ortağı gibi kullanmayı öğretir. Karşı görüş istemek, varsayımları görünür kılmak ve alternatif senaryoları sınamak bu temanın konusu.',
+            en: 'AI does not replace thinking; it deepens it. This theme teaches how to use AI as a thinking partner rather than an answer machine: asking for counterarguments, making assumptions visible, and testing alternative scenarios.',
+          },
+          questions: {
+            tr: ['Problemin sunuluş biçimi kararı nasıl etkiler?', 'Yapay zekâdan karşı görüş ve alternatif nasıl istenir?', 'Güçlü gerekçe ile ikna edici anlatım nasıl ayrılır?', 'Hangi kararda yapay zekâ kullanılır, hangisinde insan karar verir?'],
+            en: ['How does the way a problem is framed affect the decision?', 'How do you ask AI for counterarguments and alternatives?', 'How do you tell strong reasoning from persuasive storytelling?', 'In which decisions is AI used, and in which does a person decide?'],
+          },
+          outcome: {
+            tr: 'Bir kararı varsayım, kanıt, alternatif ve belirsizlik üzerinden incelemek ve kararın sorumluluğunu sahiplenmek.',
+            en: 'Examining a decision through assumptions, evidence, alternatives, and uncertainty, and owning responsibility for it.',
+          },
+        },
+        {
+          title: { tr: 'Yapay Zekâ ve Algı', en: 'AI and Perception' },
+          description: {
+            tr: 'Bir içeriğe neden inanırız? Bu tema, dikkatin, aşinalığın ve kendinden emin anlatımın yargımızı nasıl etkilediğini gösterir. Yapay zekâ ile üretilmiş görsel ve metinlere nasıl tepki verdiğimizi de anlatır. Dr. Bektaş Sarı’nın göz izleme ve tutum araştırmalarına dayanır.',
+            en: 'Why do we believe a piece of content? This theme shows how attention, familiarity, and confident delivery shape our judgment, and how we respond to AI-generated images and text. It draws on Dr. Bektaş Sarı’s eye-tracking and attitude research.',
+          },
+          questions: {
+            tr: ['Gözümüz bir görselde nereye bakıyor, neyi kaçırıyor?', '“Yapay zekâ üretti” bilgisi yargımızı değiştiriyor mu?', 'Akıcı anlatım ve popülerlik neden inandırıcı gelir?', 'Sentetik görsel ve sesle karşılaştığımızda neye bakmalıyız?'],
+            en: ['Where do our eyes go in an image, and what do they miss?', 'Does knowing “AI made this” change our judgment?', 'Why do fluent delivery and popularity feel convincing?', 'What should we look for when we encounter synthetic images and audio?'],
+          },
+          outcome: {
+            tr: 'Emin hissetmek ile kanıtla desteklemek arasındaki farkı açıklamak ve kendi algı yanılgılarını fark etmek.',
+            en: 'Explaining the difference between feeling sure and having evidence, and recognizing one’s own perceptual biases.',
+          },
+        },
+      ],
+      programs: [
+        {
+          audience: { tr: 'Öğretmenler', en: 'Teachers' },
+          title: { tr: 'Yapay Zekâ Çağında Düşünmeyi Öğretmek', en: 'Teaching Thinking in the Age of AI' },
+          questions: {
+            tr: 'Yapay zekâ ders hazırlığında nasıl kullanılır? Ödev nasıl sürece odaklı kurulur? Öğrencinin akıl yürütmesi nasıl görünür hâle gelir? İkna edici ama hatalı cevaplar sınıfta nasıl incelenir?',
+            en: 'How is AI used in lesson preparation? How can assignments focus on process? How does a student’s reasoning become visible? How can persuasive but wrong answers be examined in class?',
+          },
+          outcome: {
+            tr: 'Yapay zekâyla iki ders materyali hazırlamak; gerekçe üretmeyi ve karşı görüşü değerlendirmeyi sağlayan bir etkinlik tasarlamak.',
+            en: 'Preparing two lesson materials with AI; designing an activity that builds reasoning and the evaluation of opposing views.',
+          },
+        },
+        {
+          audience: { tr: 'Veliler', en: 'Parents' },
+          title: { tr: 'Yapay Zekâ Çağında Çocukların Eleştirel Düşünmesini Desteklemek', en: 'Supporting Children’s Critical Thinking in the Age of AI' },
+          questions: {
+            tr: 'Çocuklar bir cevaba neden inanır? Kendinden emin anlatım ve popülerlik yargıyı nasıl etkiler? Çocuğun gizliliği nasıl korunur? Evde nasıl konuşulur?',
+            en: 'Why do children believe an answer? How do confident delivery and popularity affect judgment? How is a child’s privacy protected? How should this be discussed at home?',
+          },
+          outcome: {
+            tr: 'Evde sorulacak beş soru ve aile için basit kullanım kuralları.',
+            en: 'Five questions to ask at home and simple usage rules for the family.',
+          },
+        },
+        {
+          audience: { tr: 'Öğrenciler', en: 'Students' },
+          title: { tr: 'Bir Cevaba Neden İnanırız? Algı, İkna ve Eleştirel Düşünme', en: 'Why Do We Believe an Answer? Perception, Persuasion, and Critical Thinking' },
+          questions: {
+            tr: 'Bir iddiayı ikna edici bulmamızı ne etkiler? Akıl yürütme hataları nasıl fark edilir? Yapay zekâ cevabı kaynakla nasıl sınanır?',
+            en: 'What makes a claim convincing to us? How are reasoning errors spotted? How is an AI answer tested against a source?',
+          },
+          outcome: {
+            tr: 'İddiayı kanıtıyla değerlendirmek, akıl yürütme hatasını fark etmek, eksik bilgiyi belirlemek.',
+            en: 'Evaluating a claim against its evidence, spotting a reasoning error, and identifying missing information.',
+          },
+        },
+        {
+          audience: { tr: 'Yöneticiler', en: 'Managers' },
+          title: { tr: 'Yapay Zekâyla Düşünmek ve Karar Vermek', en: 'Thinking and Deciding with AI' },
+          questions: {
+            tr: 'Problemin sunuluş biçimi kararı nasıl etkiler? Güçlü gerekçe ile ikna edici anlatım nasıl ayrılır? Alternatif senaryolar nasıl sınanır?',
+            en: 'How does the way a problem is framed affect the decision? How do you tell strong reasoning from persuasive storytelling? How are alternative scenarios tested?',
+          },
+          outcome: {
+            tr: 'Bir kararı varsayım, kanıt, alternatif ve belirsizlik üzerinden incelemek; yapay zekâyı bu incelemeyi derinleştirmek için kullanmak.',
+            en: 'Examining a decision through assumptions, evidence, alternatives, and uncertainty; using AI to deepen that examination.',
+          },
+        },
+        {
+          audience: { tr: 'Çalışanlar', en: 'Employees' },
+          title: { tr: 'İş Hayatında Eleştirel Düşünme ve Yapay Zekâyla Problem Çözme', en: 'Critical Thinking at Work and Problem Solving with AI' },
+          questions: {
+            tr: 'Asıl problem nasıl belirlenir? Veri ile yorum nasıl ayrılır? Yapay zekânın önerisi hangi ölçütle değerlendirilir? Hangi bilgi araçlara girilmez?',
+            en: 'How is the real problem identified? How are data and interpretation separated? By what criteria is an AI suggestion evaluated? What information should not go into the tools?',
+          },
+          outcome: {
+            tr: 'Kendi işinden problemleri yapay zekâyla güvenli biçimde çözmek; önerilerin dayanağını sorgulamak.',
+            en: 'Safely solving problems from one’s own work with AI; questioning the basis of its suggestions.',
+          },
+        },
+      ],
+      workshops: [
+        {
+          title: { tr: 'Yapay Zekâ Araçlarıyla Verimli ve Güvenli Çalışma', en: 'Working Efficiently and Safely with AI Tools' },
+          description: {
+            tr: 'İyi talimat yazmak (bağlam, rol, örnek, biçim), e-posta, rapor, toplantı özeti ve veri özetleme gibi günlük işler, kişisel ve gizli veri kuralları. Ekip bir sayfalık kullanım ilkeleri taslağıyla çıkar.',
+            en: 'Writing good instructions (context, role, example, format), daily tasks such as email, reports, meeting notes, and data summaries, and rules for personal and confidential data. The team leaves with a one-page draft of usage principles.',
+          },
+          meta: { tr: 'Kime: tüm çalışanlar, öğretmenler', en: 'For: all employees, teachers' },
+        },
+        {
+          title: { tr: 'Claude ile Çalışmak', en: 'Working with Claude' },
+          description: {
+            tr: 'Uzun belgeleri okutmak ve özetletmek, projelerde kalıcı bağlam kurmak, araştırma ve analiz, sunum ve görsel taslakları hazırlamak. Katılımcı kendi işinden bir görevi baştan sona Claude ile yapar.',
+            en: 'Reading and summarizing long documents, building lasting context in projects, research and analysis, and preparing presentation and visual drafts. Participants complete a task from their own work with Claude from start to finish.',
+          },
+          meta: { tr: 'Kime: yöneticiler, uzmanlar, öğretmenler', en: 'For: managers, specialists, teachers' },
+        },
+        {
+          title: { tr: 'Codex ve Claude Code ile Yapay Zekâ Destekli Yazılım Geliştirme', en: 'AI-Assisted Software Development with Codex and Claude Code' },
+          description: {
+            tr: 'Kod yazdırmaktan çok kodu yönetmek: görevi doğru tarif etmek, üretilen kodu okumak ve test etmek, sürüm kontrolü (git) ile güvenli çalışmak, hataların nerede saklandığını bilmek.',
+            en: 'Managing code rather than merely generating it: describing the task correctly, reading and testing the output, working safely with version control (git), and knowing where errors hide.',
+          },
+          meta: { tr: 'Kime: yazılım ekipleri, bilişim öğretmenleri, üniversite öğrencileri', en: 'For: software teams, IT teachers, university students' },
+        },
+        {
+          title: { tr: 'Yapay Zekâyla İçerik, Görsel ve Sunum Üretimi', en: 'Creating Content, Visuals, and Presentations with AI' },
+          description: {
+            tr: 'Marka dilini korumak, metin ve görsel üretimini bir iş akışına bağlamak, sunum tasarlatmak ve çıktıyı kontrol etmek. Gerçek bir kurumun sosyal medya ve sunum üretiminden alınan örneklerle anlatılır.',
+            en: 'Protecting brand voice, connecting text and visual production into a workflow, generating presentations, and checking the output. Taught with examples from a real organization’s social media and presentation production.',
+          },
+          meta: { tr: 'Kime: pazarlama ve iletişim ekipleri, okul iletişim birimleri', en: 'For: marketing and communication teams, school communication units' },
+        },
+      ],
+      howItWorks: [
+        {
+          title: { tr: 'İhtiyacı dinlemek', en: 'Listening to the need' },
+          description: { tr: 'Kurumla kısa bir görüşme yapılır. Kitle, araçlar ve veri kuralları birlikte belirlenir.', en: 'A short call is held with the organization. The audience, tools, and data rules are defined together.' },
+        },
+        {
+          title: { tr: 'Kuruma özel örnekler', en: 'Organization-specific examples' },
+          description: { tr: 'Örnekler kurumun sektöründen ya da okulun derslerinden seçilir. İş vakasını kurum getirir.', en: 'Examples are chosen from the organization’s sector or the school’s courses. The organization brings the business case.' },
+        },
+        {
+          title: { tr: 'Başta ve sonda aynı soru', en: 'The same question at the start and end' },
+          description: { tr: 'Memnuniyet değil, öğrenilen beceri ölçülür. Örneğin: “Bu cevaptaki hangi iddiayı nasıl kontrol edersiniz?”', en: 'The skill learned is measured, not satisfaction. For example: “Which claim in this answer would you check, and how?”' },
+        },
+      ],
+      limits: {
+        tr: [
+          'Yapay zekâ stratejisi, yazılım kurulumu ya da model eğitimi danışmanlığı bu programların kapsamında değildir.',
+          'KVKK ve yapay zekâ düzenlemeleri farkındalık düzeyinde anlatılır. Bu anlatım hukuki danışmanlık yerine geçmez.',
+          'Verimlilik ya da performans artışı vaat edilmez. Hedef, ölçülebilir becerilerdir: hatayı fark etmek, doğrulamak ve güvenli kullanmak.',
+          'Belirli bir ürünün satışı yapılmaz.',
+          'Okul programlarında öğrencilerden hesap açması ya da kişisel bilgi girmesi istenmez. Gösterimler eğitmen bilgisayarından yapılır.',
+          'Bu programlar eğitimdir. Kişisel ya da psikolojik danışmanlık içermez.',
+        ],
+        en: [
+          'AI strategy, software installation, and model training consulting are outside the scope of these programs.',
+          'Data protection (KVKK) and AI regulations are covered at awareness level. This does not replace legal advice.',
+          'No increase in productivity or performance is promised. The goal is measurable skills: spotting errors, verifying, and using tools safely.',
+          'No specific product is sold.',
+          'In school programs, students are not asked to open accounts or enter personal information. Demonstrations run on the instructor’s computer.',
+          'These programs are training. They do not include personal or psychological counseling.',
+        ],
+      },
+      publications: [
+        'Sarı, B. (2022). Uluslararası Reklamların Adaptasyonu (Yerelleştirilmesi) Üzerine Bir İnceleme. İzmir Yönetim Dergisi, 2(2), 89–105.',
+        'Sarı, B. (2020). Nöro Davranışsal Ekonomi Perspektifinden Tüketim: Tüketme Dürtüsünün Nörobilimsel Temelleri. U. Bakır (Ed.), Pazarlama İletişimi Odağında Tüketim Psikolojisi (ss. 157–182). Nobel Akademik Yayıncılık.',
+        'Yılmaz, B., & Sarı, B. (2019). Marka Kişiliği Oluşumunda ve Yansıtılmasında Reklamlarda Arketip Kullanımı. Akdeniz Üniversitesi İletişim Fakültesi Dergisi, 32, 90–116.',
+        'Sarı, B., Yılmaz, B., & Ferik, A. O. (2019). Pazarlama Araştırmalarında Yeni Bir Eğilim Olarak Nöropazarlama. Selçuk İletişim, 12(2), 1127–1168.',
+      ],
+    },
+    relatedServices: [
+      { label: { tr: 'Kurumsal Eğitimler', en: 'Corporate Training' }, href: '/hizmetler/kurumsal-egitim' },
+      { label: { tr: 'Yönetici Koçluğu', en: 'Executive Coaching' }, href: '/hizmetler/yonetici-koclugu' },
+      { label: { tr: 'Gençler için Kariyer Farkındalığı', en: 'Career Awareness for Young People' }, href: '/hizmetler/genclerde-kariyer-farkindaligi' },
+      { label: { tr: 'Öğrenci Koçluğu', en: 'Student Coaching' }, href: '/hizmetler/ogrenci-koclugu' },
+    ],
+    primaryCtaLabel: { tr: 'Dr. Bektaş Sarı ile Ön Görüşme Talep Et', en: 'Request an Introductory Call with Dr. Bektaş Sarı' },
+    secondaryCta: { label: { tr: 'Kurumsal Eğitimleri İncele', en: 'Explore Corporate Training' }, href: '/hizmetler/kurumsal-egitim' },
+    seoTitle: { tr: 'Dr. Bektaş Sarı | Yapay Zekâ, Algı ve Eleştirel Düşünme Eğitmeni', en: 'Dr. Bektaş Sarı | AI, Perception, and Critical Thinking Instructor' },
+    seoDescription: {
+      tr: 'Dr. Bektaş Sarı; okullara ve kurumlara yapay zekâyla eleştirel düşünme, karar verme ve algı üzerine uygulamalı eğitimler tasarlayan AURIX uzmanıdır.',
+      en: 'Dr. Bektaş Sarı is an AURIX expert who designs hands-on training for schools and organizations on critical thinking, decision-making, and perception with AI.',
+    },
+  },
 }

@@ -30,6 +30,7 @@ const VISION_ORDER = [
   'iskender-dasdemir',
   'cigdem-karavelioglu',
   'ayse-kiremitci',
+  'bektas-sari',
 ]
 
 export function VisionSection({ locale = DEFAULT_LOCALE }: { locale?: Locale }) {
