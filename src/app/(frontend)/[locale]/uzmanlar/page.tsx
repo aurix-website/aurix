@@ -241,9 +241,9 @@ export default async function UzmanlarPage({
               <div className="pointer-events-none absolute -right-8 top-8 h-48 w-48 border border-[#C5A059]/10 transition-transform duration-500 group-hover:translate-x-2 group-hover:-translate-y-2" aria-hidden="true" />
               <div className="pointer-events-none absolute -left-5 bottom-8 h-28 w-28 border border-[#14797C]/10 transition-transform duration-500 group-hover:-translate-x-2 group-hover:translate-y-2" aria-hidden="true" />
 
-              <div className="relative aspect-[4/3] overflow-hidden border border-[#E2E5DE] bg-[#F4F0E7] shadow-[0_28px_80px_rgba(26,28,30,0.08)]">
+              <div className="relative aspect-[3/2] overflow-hidden border border-[#E2E5DE] bg-[#F4F0E7] shadow-[0_28px_80px_rgba(26,28,30,0.08)]">
                 <Image
-                  src="/media/expert-team.png"
+                  src="/media/expert-team.webp"
                   alt={copy.teamPhotoAlt}
                   fill
                   priority
