@@ -26,7 +26,7 @@ export const STATIC_EXPERTS: Expert[] = [
       tr: 'Profesyonel Koç & Takım Koçu',
       en: 'Professional Coach & Team Coach',
     },
-    photo: { url: '/media/expert-kaan-yazici.jpg', alt: 'Kaan Yazıcı' },
+    photo: { url: '/media/expert-kaan-yazici.webp', alt: 'Kaan Yazıcı' },
     expertiseAreas: {
       tr: [{ item: 'Bireysel koçluk' }, { item: 'Takım koçluğu' }, { item: 'Kariyer netliği' }],
       en: [{ item: 'Personal coaching' }, { item: 'Team coaching' }, { item: 'Career clarity' }],
@@ -49,7 +49,7 @@ export const STATIC_EXPERTS: Expert[] = [
       tr: 'Eğitim Yöneticisi, Liderlik ve Dönüşüm Koçu',
       en: 'Education Manager, Leadership and Transformation Coach',
     },
-    photo: { url: '/media/expert-hatice-yildirim.png', alt: 'Hatice Yıldırım' },
+    photo: { url: '/media/expert-hatice-yildirim.webp', alt: 'Hatice Yıldırım' },
     expertiseAreas: {
       tr: [{ item: 'Liderlik akademisi' }, { item: 'Kuşaklar arası uyum' }, { item: 'Kurumsal dönüşüm' }],
       en: [
@@ -76,7 +76,7 @@ export const STATIC_EXPERTS: Expert[] = [
       tr: 'Liderlik, Kariyer ve Siyaset İletişimi Koçu',
       en: 'Leadership, Career, and Political Communication Coach',
     },
-    photo: { url: '/media/expert-hulya-aksu-spizuoco.png', alt: 'Hülya Aksu Spizuoco' },
+    photo: { url: '/media/expert-hulya-aksu-spizuoco.webp', alt: 'Hülya Aksu Spizuoco' },
     expertiseAreas: {
       tr: [{ item: 'Liderlik' }, { item: 'Kariyer' }, { item: 'Global perspektif' }],
       en: [{ item: 'Leadership' }, { item: 'Career' }, { item: 'Global perspective' }],
@@ -99,7 +99,7 @@ export const STATIC_EXPERTS: Expert[] = [
       tr: 'Profesyonel Koç, Takım Koçu & Eğitmen',
       en: 'Professional Coach, Team Coach & Trainer',
     },
-    photo: { url: '/media/expert-cigdem-karavelioglu.jpg', alt: 'Çiğdem Karavelioğlu' },
+    photo: { url: '/media/expert-cigdem-karavelioglu.webp', alt: 'Çiğdem Karavelioğlu' },
     expertiseAreas: {
       tr: [{ item: 'Profesyonel koçluk' }, { item: 'Takım koçluğu' }, { item: 'Psych-K®' }],
       en: [{ item: 'Professional coaching' }, { item: 'Team coaching' }, { item: 'Psych-K®' }],
@@ -122,7 +122,7 @@ export const STATIC_EXPERTS: Expert[] = [
       tr: 'Dönüşüm ve Kariyer Koçu, HR & Wellbeing Uzmanı',
       en: 'Transformation and Career Coach, HR & Wellbeing Specialist',
     },
-    photo: { url: '/media/expert-secil-ozbayir.png', alt: 'Seçil Özbayır' },
+    photo: { url: '/media/expert-secil-ozbayir.webp', alt: 'Seçil Özbayır' },
     expertiseAreas: {
       tr: [{ item: 'Kariyer' }, { item: 'Kurumsal dönüşüm' }, { item: 'Wellbeing' }],
       en: [{ item: 'Career' }, { item: 'Organizational transformation' }, { item: 'Wellbeing' }],
@@ -145,7 +145,7 @@ export const STATIC_EXPERTS: Expert[] = [
       tr: 'Kariyer & Yönetici Koçu, Kurumsal Eğitmen',
       en: 'Career & Executive Coach, Corporate Trainer',
     },
-    photo: { url: '/media/expert-seda-sen.png', alt: 'Seda Şen' },
+    photo: { url: '/media/expert-seda-sen.webp', alt: 'Seda Şen' },
     expertiseAreas: {
       tr: [{ item: 'Kariyer' }, { item: 'Yönetici koçluğu' }, { item: 'Global uyum' }],
       en: [{ item: 'Career' }, { item: 'Executive coaching' }, { item: 'Global adaptation' }],
@@ -168,7 +168,7 @@ export const STATIC_EXPERTS: Expert[] = [
       tr: 'Eğitim Uzmanı, Kariyer Danışmanı',
       en: 'Education Specialist, Career Consultant',
     },
-    photo: { url: '/media/expert-ayse-kiremitci.png', alt: 'Ayşe Kiremitçi' },
+    photo: { url: '/media/expert-ayse-kiremitci.webp', alt: 'Ayşe Kiremitçi' },
     expertiseAreas: {
       tr: [{ item: 'Kariyer danışmanlığı' }, { item: 'Mesleki eğilim analizi' }, { item: 'YKS rehberlik' }],
       en: [{ item: 'Career counseling' }, { item: 'Vocational tendency analysis' }, { item: 'Exam-year mentoring' }],
@@ -191,7 +191,7 @@ export const STATIC_EXPERTS: Expert[] = [
       tr: 'Eğitim Stratejisti, Akademisyen ve Organizasyonel Gelişim Danışmanı',
       en: 'Education Strategist, Academic and Organizational Development Consultant',
     },
-    photo: { url: '/media/expert-iskender-dasdemir.png', alt: 'İskender Daşdemir' },
+    photo: { url: '/media/expert-iskender-dasdemir.webp', alt: 'İskender Daşdemir' },
     expertiseAreas: {
       tr: [{ item: 'Eğitim liderliği' }, { item: 'Öğrenci koçluğu' }, { item: 'Eğitim psikolojisi' }],
       en: [{ item: 'Education leadership' }, { item: 'Student coaching' }, { item: 'Education psychology' }],
@@ -214,7 +214,7 @@ export const STATIC_EXPERTS: Expert[] = [
       tr: 'Yapay Zekâ, Algı ve Eleştirel Düşünme Eğitmeni',
       en: 'AI, Perception, and Critical Thinking Instructor',
     },
-    photo: { url: '/media/expert-bektas-sari.png', alt: 'Dr. Bektaş Sarı' },
+    photo: { url: '/media/expert-bektas-sari.webp', alt: 'Dr. Bektaş Sarı' },
     expertiseAreas: {
       tr: [{ item: 'Yapay zekâyla eleştirel düşünme' }, { item: 'Yapay zekâ ve algı' }, { item: 'Karar verme' }],
       en: [{ item: 'Critical thinking with AI' }, { item: 'AI and perception' }, { item: 'Decision-making' }],
@@ -232,15 +232,15 @@ export const STATIC_EXPERTS: Expert[] = [
 ]
 
 export const EXPERT_PLACEHOLDERS: Record<string, string> = {
-  'kaan-yazici': 'expert-kaan-yazici.jpg',
-  'hatice-yildirim': 'expert-hatice-yildirim.png',
-  'hulya-aksu-spizuoco': 'expert-hulya-aksu-spizuoco.png',
-  'cigdem-karavelioglu': 'expert-cigdem-karavelioglu.jpg',
-  'secil-ozbayir': 'expert-secil-ozbayir.png',
-  'seda-sen': 'expert-seda-sen.png',
-  'ayse-kiremitci': 'expert-ayse-kiremitci.png',
-  'iskender-dasdemir': 'expert-iskender-dasdemir.png',
-  'bektas-sari': 'expert-bektas-sari.png',
+  'kaan-yazici': 'expert-kaan-yazici.webp',
+  'hatice-yildirim': 'expert-hatice-yildirim.webp',
+  'hulya-aksu-spizuoco': 'expert-hulya-aksu-spizuoco.webp',
+  'cigdem-karavelioglu': 'expert-cigdem-karavelioglu.webp',
+  'secil-ozbayir': 'expert-secil-ozbayir.webp',
+  'seda-sen': 'expert-seda-sen.webp',
+  'ayse-kiremitci': 'expert-ayse-kiremitci.webp',
+  'iskender-dasdemir': 'expert-iskender-dasdemir.webp',
+  'bektas-sari': 'expert-bektas-sari.webp',
 }
 
 export function getExpertBySlug(slug: string): Expert | undefined {
