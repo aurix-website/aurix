@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight, Check, Quote } from 'lucide-react'
+import { ExpertTrainingProgram } from '@/components/ExpertTrainingProgram'
 import { ExpertVisual } from '@/components/ExpertVisual'
 import { FadeIn } from '@/components/ui/FadeIn'
 import { FinalCTA } from '@/components/sections/FinalCTA'
@@ -246,6 +247,8 @@ export function ExpertDetailTemplate({
           </FadeIn>
         </div>
       </section>
+
+      {detail.trainingProgram && <ExpertTrainingProgram program={detail.trainingProgram} locale={locale} />}
 
       {/* Ön görüşme CTA + ilgili hizmetler */}
       <section aria-labelledby="expert-cta-heading" className="py-section bg-canvas">

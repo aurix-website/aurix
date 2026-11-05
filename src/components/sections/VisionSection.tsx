@@ -30,6 +30,7 @@ const VISION_ORDER = [
   'iskender-dasdemir',
   'cigdem-karavelioglu',
   'ayse-kiremitci',
+  'bektas-sari',
 ]
 
 export function VisionSection({ locale = DEFAULT_LOCALE }: { locale?: Locale }) {
@@ -77,7 +78,7 @@ export function VisionSection({ locale = DEFAULT_LOCALE }: { locale?: Locale }) 
                     {pick(expert.vision!, locale)}
                   </p>
                   <div className="flex items-center gap-3 pt-4 border-t border-white/10">
-                    <div className="relative h-10 w-10 rounded-full overflow-hidden border border-white/15 shrink-0 bg-white/5">
+                    <div className="relative h-10 w-10 rounded-full overflow-hidden border border-white/15 shrink-0 bg-white">
                       <ExpertVisual
                         expert={expert}
                         alt={copy.photoAlt(expert.name)}
