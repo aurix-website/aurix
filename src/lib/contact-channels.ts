@@ -17,7 +17,11 @@ export function getWhatsAppUrl(locale: Locale = 'tr'): string {
 
 export const WHATSAPP_URL = getWhatsAppUrl('tr')
 
+/** AURIX, Ege Teknopark'ta bu şirket bünyesinde yer alır; Teknopark'a bu unvanla sorulur. */
+export const CONTACT_COMPANY = 'AURIXTECH Bilimsel Araştırma A.Ş.'
+
 export const CONTACT_ADDRESS = [
+  CONTACT_COMPANY,
   'Ege Üniversitesi Kampüsü Erzene Mah. No: 172/68',
   'Ege Teknopark TGB Sedef (A) Blok İç Kapı No: 3 Kat: 2 A3/53',
   'Bornova / İzmir 35040',
