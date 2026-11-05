@@ -165,8 +165,8 @@ export const STATIC_EXPERTS: Expert[] = [
     name: 'Ayşe Kiremitçi',
     slug: 'ayse-kiremitci',
     title: {
-      tr: 'Eğitim ve Kariyer Danışmanı, Profesyonel Koç',
-      en: 'Education and Career Consultant, Professional Coach',
+      tr: 'Eğitim Uzmanı, Kariyer Danışmanı',
+      en: 'Education Specialist, Career Consultant',
     },
     photo: { url: '/media/expert-ayse-kiremitci.png', alt: 'Ayşe Kiremitçi' },
     expertiseAreas: {
@@ -174,8 +174,8 @@ export const STATIC_EXPERTS: Expert[] = [
       en: [{ item: 'Career counseling' }, { item: 'Vocational tendency analysis' }, { item: 'Exam-year mentoring' }],
     },
     shortCard: {
-      tr: '30 yılı aşkın eğitim ve kurumsal deneyimini profesyonel koçluk ve Erickson koçluk yaklaşımıyla birleştirerek öğrencilere kariyer danışmanlığı, mesleki eğilim analizi ve sınav sürecinde rehberlik sunar.',
-      en: 'Combines more than 30 years of education and corporate experience with professional coaching and the Erickson coaching approach, offering students career counseling, vocational tendency analysis, and exam-year guidance.',
+      tr: '30 yılı aşkın eğitim ve kurumsal deneyimiyle öğrencilere kariyer danışmanlığı, mesleki eğilim analizi ve sınav sürecinde rehberlik sunar.',
+      en: 'Draws on more than 30 years of education and corporate experience to offer students career counseling, vocational tendency analysis, and exam-year guidance.',
     },
     listingCta: { tr: "Ayşe Kiremitçi'yi Tanıyın", en: 'Meet Ayşe Kiremitçi' },
     vision: {

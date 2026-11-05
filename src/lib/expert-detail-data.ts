@@ -764,8 +764,8 @@ export const EXPERT_DETAILS: Record<string, ExpertDetail> = {
   'ayse-kiremitci': {
     slug: 'ayse-kiremitci',
     heroShort: {
-      tr: 'Eğitim yönetimi ve kurumsal insan kaynakları deneyimini profesyonel koçluk ve Erickson yaklaşımıyla birleştiren Ayşe Kiremitçi; öğrencilere kariyer danışmanlığı, mesleki eğilim analizi ve sınav sürecinde rehberlik sunar.',
-      en: 'Combining education management and corporate human resources experience with professional coaching and the Erickson approach, Ayşe Kiremitçi offers students career counseling, vocational tendency analysis, and exam-year guidance.',
+      tr: 'Eğitim yönetimi ve kurumsal insan kaynakları deneyimine sahip Ayşe Kiremitçi; öğrencilere kariyer danışmanlığı, mesleki eğilim analizi ve sınav sürecinde rehberlik sunar.',
+      en: 'With experience in education management and corporate human resources, Ayşe Kiremitçi offers students career counseling, vocational tendency analysis, and exam-year guidance.',
     },
     bio: {
       tr: [
@@ -825,8 +825,8 @@ export const EXPERT_DETAILS: Record<string, ExpertDetail> = {
       ],
     },
     expertise: {
-      tr: ['Kariyer Danışmanlığı', 'Mesleki Eğilim Analizi', 'YKS Rehberlik ve Mentörlük', 'Eğitim Koçluğu', 'Öğrenci Gelişimi'],
-      en: ['Career Counseling', 'Vocational Tendency Analysis', 'Exam-Year Guidance and Mentoring', 'Education Coaching', 'Student Development'],
+      tr: ['Kariyer Danışmanlığı', 'Mesleki Eğilim Analizi', 'YKS Rehberlik ve Mentörlük', 'Yurt Dışında Eğitime Hazırlık', 'Öğrenci Gelişimi'],
+      en: ['Career Counseling', 'Vocational Tendency Analysis', 'Exam-Year Guidance and Mentoring', 'Preparing for Education Abroad', 'Student Development'],
     },
     approach: {
       tr: 'Ayşe Kiremitçi’nin yaklaşımı, kariyerin lise yıllarında şekillendiği fikrine dayanır. Öğrencilerin akademik başarılarının yanında ilgi alanlarını, güçlü yönlerini ve motivasyon kaynaklarını fark etmelerine eşlik ederek, uzun vadeli hedeflerine uygun bir yol haritası oluşturmalarına destek olur.',
@@ -851,15 +851,13 @@ export const EXPERT_DETAILS: Record<string, ExpertDetail> = {
     relatedServices: [
       { label: { tr: 'Öğrenci Mentörlüğü ve Sınav Stratejisi', en: 'Student Mentoring and Exam Strategy' }, href: '/hizmetler/ogrenci-mentorlugu-sinav-stratejisi' },
       { label: { tr: 'Gençler için Kariyer Farkındalığı', en: 'Career Awareness for Young People' }, href: '/hizmetler/genclerde-kariyer-farkindaligi' },
-      { label: { tr: 'Öğrenci Koçluğu', en: 'Student Coaching' }, href: '/hizmetler/ogrenci-koclugu' },
-      { label: { tr: 'Kariyer Koçluğu', en: 'Career Coaching' }, href: '/hizmetler/kariyer-koclugu' },
     ],
     primaryCtaLabel: { tr: 'Ayşe Kiremitçi ile Ön Görüşme Talep Et', en: 'Request an Introductory Call with Ayşe Kiremitçi' },
     secondaryCta: { label: { tr: 'Öğrenci Mentörlüğünü İncele', en: 'Explore Student Mentoring' }, href: '/hizmetler/ogrenci-mentorlugu-sinav-stratejisi' },
-    seoTitle: { tr: 'Ayşe Kiremitçi | Eğitim ve Kariyer Danışmanı, Profesyonel Koç', en: 'Ayşe Kiremitçi | Education and Career Consultant, Professional Coach' },
+    seoTitle: { tr: 'Ayşe Kiremitçi | Eğitim Uzmanı, Kariyer Danışmanı', en: 'Ayşe Kiremitçi | Education Specialist, Career Consultant' },
     seoDescription: {
-      tr: 'Ayşe Kiremitçi; kariyer danışmanlığı, mesleki eğilim analizi ve YKS sınav sürecinde rehberlik sunan eğitim uzmanı ve profesyonel koçtur.',
-      en: 'Ayşe Kiremitçi is an education specialist and professional coach offering career counseling, vocational tendency analysis, and guidance through the national university exam process.',
+      tr: 'Ayşe Kiremitçi; kariyer danışmanlığı, mesleki eğilim analizi ve YKS sınav sürecinde rehberlik sunan eğitim uzmanı ve kariyer danışmanıdır.',
+      en: 'Ayşe Kiremitçi is an education specialist and career consultant offering career counseling, vocational tendency analysis, and guidance through the national university exam process.',
     },
   },
 
