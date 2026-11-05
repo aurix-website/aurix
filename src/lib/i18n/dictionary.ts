@@ -67,7 +67,7 @@ export const dictionary = {
       accordionPanels: ['Bireysel Koçluk', 'Liderlik', 'Kurumsal', 'Gençler', 'Global Uyum'],
       stats: [
         { text: 'Ege Üniversitesi Teknopark', logo: '/media/ege-universitesi-teknopark-logo.png', label: 'Konum' },
-        { value: 8, suffix: '', label: 'Uzman', duration: 800 },
+        { value: 9, suffix: '', label: 'Uzman', duration: 800 },
         { value: 100, suffix: '%', label: 'Alanında Uzman', duration: 1400 },
       ],
     },
@@ -254,7 +254,7 @@ export const dictionary = {
       accordionPanels: ['Personal Coaching', 'Leadership', 'Corporate', 'Youth', 'Global Adaptation'],
       stats: [
         { text: 'Ege University Technopark', logo: '/media/ege-universitesi-teknopark-logo.png', label: 'Location' },
-        { value: 8, suffix: '', label: 'Experts', duration: 800 },
+        { value: 9, suffix: '', label: 'Experts', duration: 800 },
         { value: 100, suffix: '%', label: 'Field Experts', duration: 1400 },
       ],
     },
