@@ -73,8 +73,8 @@ export const STATIC_EXPERTS: Expert[] = [
     name: 'Hülya Aksu Spizuoco',
     slug: 'hulya-aksu-spizuoco',
     title: {
-      tr: 'Liderlik, Kariyer ve Siyaset İletişimi Koçu',
-      en: 'Leadership, Career, and Political Communication Coach',
+      tr: 'Liderlik, Kariyer ve Siyaset İletişimi Koçu, PCC',
+      en: 'Leadership, Career, and Political Communication Coach, PCC',
     },
     photo: { url: '/media/expert-hulya-aksu-spizuoco.webp', alt: 'Hülya Aksu Spizuoco' },
     expertiseAreas: {
@@ -87,8 +87,8 @@ export const STATIC_EXPERTS: Expert[] = [
     },
     listingCta: { tr: "Hülya Aksu Spizuoco'yu Tanıyın", en: 'Meet Hülya Aksu Spizuoco' },
     vision: {
-      tr: 'Hülya Aksu Academy’nin özünde cesur bir hedef yatar: değerlerine derinden bağlı, eşitliğe adanmış ve sürdürülebilir, uyumlu bir geleceği şekillendirebilecek vizyoner liderler yetiştirmek. Bunun yanında, kişisel gelişim alanıyla sınırlı kalmayan “Koçluk Disiplini ve Yaklaşımı”nın; devlet yönetiminden siyasete, akademiden iş dünyasına, bilimden sanata kadar yaşamın tüm alanlarına entegre olduğu bir geleceği hayal ediyoruz.',
-      en: 'At the heart of Hulya Aksu Academy lies a bold aspiration: to nurture visionary leaders who are deeply grounded in their values, committed to equity, and capable of shaping a sustainable and harmonious future. Additionally, we envision a future where the highly valued “Coaching Discipline and Approach” is no longer confined to the realm of personal development but is integrated into all areas of life, including government, politics, academia, business, science, and the arts.',
+      tr: '“Dünyayı anlamak, kendini anlamak ve etki yaratmak.” Değişimin ve belirsizliğin hayatımızın doğal bir parçası olduğu bir dünyada, insanların ve kurumların yalnızca gelişmelere uyum sağlayan değil, onları anlamlandırarak kendi yönünü belirleyen bir yaklaşım geliştirmesini önemsiyorum. Amacım; liderlik, koçluk, hikâye anlatımı, politik iletişim ve jeopolitik bakış açısını bir araya getirerek daha bilinçli kararlar, daha güçlü iletişim ve sürdürülebilir etki için alan açmak.',
+      en: '“Understanding the world, understanding oneself, and creating impact.” In a world where change and uncertainty are a natural part of life, I care about helping people and organizations develop an approach that does not merely adapt to developments, but makes sense of them and sets its own direction. My aim is to bring together leadership, coaching, storytelling, political communication, and a geopolitical perspective to create space for more conscious decisions, stronger communication, and sustainable impact.',
     },
   },
   {
@@ -119,8 +119,8 @@ export const STATIC_EXPERTS: Expert[] = [
     name: 'Seçil Özbayır',
     slug: 'secil-ozbayir',
     title: {
-      tr: 'Dönüşüm ve Kariyer Koçu, HR & Wellbeing Uzmanı',
-      en: 'Transformation and Career Coach, HR & Wellbeing Specialist',
+      tr: 'Dönüşüm ve Kariyer Koçu, PCC, HR & Wellbeing Uzmanı',
+      en: 'Transformation and Career Coach, PCC, HR & Wellbeing Specialist',
     },
     photo: { url: '/media/expert-secil-ozbayir.webp', alt: 'Seçil Özbayır' },
     expertiseAreas: {

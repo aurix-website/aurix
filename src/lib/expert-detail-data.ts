@@ -237,12 +237,14 @@ export const EXPERT_DETAILS: Record<string, ExpertDetail> = {
     },
     credentials: {
       tr: [
+        'ICF PCC (Professional Certified Coach) unvanı',
         'Marmara Üniversitesi, İngilizce İktisat',
         'University of San Diego, yüksek lisans',
         'Harvard Kennedy School eğitimi',
         'Koçbank, Dow Jones Telerate ve ISI Emerging Markets New York — üst düzey yöneticilik deneyimi',
       ],
       en: [
+        'ICF PCC (Professional Certified Coach) credential',
         'Marmara University, Economics (English)',
         'University of San Diego, graduate degree',
         'Harvard Kennedy School executive education',
@@ -257,7 +259,7 @@ export const EXPERT_DETAILS: Record<string, ExpertDetail> = {
     ],
     primaryCtaLabel: { tr: 'Hülya Aksu Spizuoco ile Ön Görüşme Talep Et', en: 'Request an Introductory Call with Hülya Aksu Spizuoco' },
     secondaryCta: { label: { tr: 'Global Kariyer Desteğini İncele', en: 'Explore Global Career Support' }, href: '/hizmetler/ogrenci-koclugu' },
-    seoTitle: { tr: 'Hülya Aksu Spizuoco | Liderlik, Kariyer ve Global Perspektif', en: 'Hülya Aksu Spizuoco | Leadership, Career, and Global Perspective' },
+    seoTitle: { tr: 'Hülya Aksu Spizuoco, PCC | Liderlik, Kariyer ve Global Perspektif', en: 'Hülya Aksu Spizuoco, PCC | Leadership, Career, and Global Perspective' },
     seoDescription: {
       tr: 'Hülya Aksu Spizuoco; uluslararası eğitim, üst düzey yöneticilik ve global yaşam deneyimini liderlik, kariyer ve siyaset iletişimi alanlarında sunar.',
       en: 'Hülya Aksu Spizuoco brings an international education, senior executive experience, and a global life abroad to leadership, career, and political communication.',
@@ -594,6 +596,7 @@ export const EXPERT_DETAILS: Record<string, ExpertDetail> = {
     },
     credentials: {
       tr: [
+        'ICF PCC (Professional Certified Coach) unvanı',
         'Yıldız Teknik Üniversitesi — Endüstri Mühendisliği',
         'İstanbul Üniversitesi — MBA, İngilizce',
         'Boğaziçi Üniversitesi — İnsan Kaynakları Yönetimi',
@@ -609,6 +612,7 @@ export const EXPERT_DETAILS: Record<string, ExpertDetail> = {
         'Colaborix — AI Champion Accelerator',
       ],
       en: [
+        'ICF PCC (Professional Certified Coach) credential',
         'Yıldız Technical University — Industrial Engineering',
         'Istanbul University — MBA in English',
         'Boğaziçi University — Human Resources Management',
@@ -633,7 +637,7 @@ export const EXPERT_DETAILS: Record<string, ExpertDetail> = {
     ],
     primaryCtaLabel: { tr: 'Seçil Özbayır ile Ön Görüşme Talep Et', en: 'Request an Introductory Call with Seçil Özbayır' },
     secondaryCta: { label: { tr: 'Kariyer Koçluğunu İncele', en: 'Explore Career Coaching' }, href: '/hizmetler/bireysel-kocluk' },
-    seoTitle: { tr: 'Seçil Özbayır | Dönüşüm ve Kariyer Koçu, HR & Wellbeing Uzmanı', en: 'Seçil Özbayır | Transformation and Career Coach, HR & Wellbeing Specialist' },
+    seoTitle: { tr: 'Seçil Özbayır, PCC | Dönüşüm ve Kariyer Koçu, HR & Wellbeing Uzmanı', en: 'Seçil Özbayır, PCC | Transformation and Career Coach, HR & Wellbeing Specialist' },
     seoDescription: {
       tr: 'Seçil Özbayır; insan kaynakları, liderlik gelişimi, organizasyonel dönüşüm, kariyer koçluğu, wellbeing ve Transitional Intelligence alanlarında çalışır.',
       en: 'Seçil Özbayır works in human resources, leadership development, organizational transformation, career coaching, wellbeing, and Transitional Intelligence.',
